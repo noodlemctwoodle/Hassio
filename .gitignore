@@ -14,6 +14,7 @@ known_devices.yaml
 appdaemon.yaml
 # Ignore Python Cache
 __pycache__
+__init__
 # Ignore Log Files
 home-assistant.log
 access.log
