@@ -1,0 +1,6 @@
+# Office Hue Group
+  - platform: group
+    name: Office Spotlights
+    entities:
+      - light.office_spot_1
+      - light.office_spot_2

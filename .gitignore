@@ -1,0 +1,30 @@
+secrets.yaml
+# Ignore folders.
+.storage
+.cloud
+.google.token
+.google_maps_location_sharing.cookies
+.HA_VERSION
+.uuid
+deps
+tts
+# Ignore yaml
+ip_bans.yaml
+known_devices.yaml
+appdaemon.yaml
+# Ignore Python Cache
+__pycache__
+# Ignore Log Files
+home-assistant.log
+access.log
+# Pictures Ignore
+upstairs.svg
+upstairs.png
+downstairs.png
+downstairs.svg
+floor_plan.svg
+# Ignore Configs
+harmony_harmony_hub.conf
+plex.conf
+# Ignore Database
+home-assistant_v2.db

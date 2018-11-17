@@ -1,0 +1,22 @@
+# Server On/Off Switch
+  - platform: wake_on_lan
+    mac_address: !secret server_mac_address
+    name: !secret server_service_name
+    host: !secret server_ip_address
+    broadcast_address: !secret server_broadcast
+    turn_off:
+      service: shell_command.server_off
+
+# Desktop On/Off Switch
+  - platform: wake_on_lan
+    mac_address: !secret desktop_mac_address
+    name: !secret desktop_service_name
+    host: !secret desktop_ip_address
+    broadcast_address: !secret server_broadcast
+    turn_off:
+      service: shell_command.pc_off
+
+# TPLink Smart Plug Software Switch
+#  - platform: tplink
+#    host: !secret living_room_networking
+#    name: Living Room Networking

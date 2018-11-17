@@ -1,0 +1,3 @@
+# Wake on LAN Shell Commands
+server_off: !secret server_off_cmd
+pc_off: !secret pc_off_cmd

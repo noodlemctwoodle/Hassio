@@ -1,0 +1,6 @@
+# Office Hue Group
+  - platform: group
+    name: Hall Spotlights
+    entities:
+      - light.hallway_spot_1
+      - light.hallway_spot_2

@@ -1,0 +1,55 @@
+widget_type: basemedia
+entity: {{entity}}
+post_service_next:
+    service: media_player/media_next_track
+    entity_id: {{entity}}
+post_service_previous:
+    service: media_player/media_previous_track
+    entity_id: {{entity}}
+post_service_play_pause:
+    service: media_player/media_play_pause
+    entity_id: {{entity}}
+post_service_pause:
+    service: media_player/media_pause
+    entity_id: {{entity}}
+post_service_stop:
+    service: media_player/media_stop
+    entity_id: {{entity}}
+post_service_level:
+    service: media_player/volume_set
+    entity_id: {{entity}}
+fields:
+  title: {{title}}
+  artist: ""
+  media_title: ""
+  album: ""
+  play_icon_style: ""
+  pause_icon_style: ""
+  previous_icon_style: ""
+  next_icon_style: ""
+  state_text: ""
+  level: ""
+icons:
+  play_icon: $media_player_icon_play
+  pause_icon: $media_player_icon_pause
+static_icons:
+  previous_icon: $media_player_icon_previous
+  next_icon: $media_player_icon_next
+  icon_up: $media_player_icon_up
+  icon_down: $media_player_icon_down
+static_css:
+  previous_icon_style: $media_player_icon_style_previous
+  next_icon_style: $media_player_icon_style_next
+  title_style: $media_player_title_style
+  artist_style: $media_player_artist_style
+  album_style: $media_player_album_style
+  media_title_style: $media_player_media_title_style
+  state_text_style: $media_player_state_text_style
+  level_style: $media_player_level_style
+  level_up_style: $media_player_level_up_style
+  level_down_style: $media_player_level_down_style
+  widget_style: $media_player_widget_style
+  units_style: $media_player_units_style
+css:
+  icon_style_active: $media_player_icon_style_active
+  icon_style_inactive: $media_player_icon_style_inactive

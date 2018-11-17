@@ -1,0 +1,3 @@
+# Plex Media Player Component
+  - platform: samsungtv
+    host: 10.0.20.58

@@ -1,0 +1,6 @@
+# Office Hue Group
+  - platform: group
+    name: Bedroom Spotlights
+    entities:
+      - light.bedroom_pendant_1
+      - light.bedroom_pendant_2

@@ -1,0 +1,72 @@
+#
+# Main arguments, all optional
+#
+title: 26 Bath Road
+widget_dimensions: [120, 120]
+widget_margins: [5, 5]
+columns: 8
+
+clock:
+    widget_type: clock
+
+
+livingroom_climate:
+    widget_type: climate
+    title: Livingroom Climate
+    units: "&deg;C"
+    precision: 1
+    entity: climate.living_room
+
+bathroom_temperature:
+    widget_type: sensor
+    title: Bathroom Temp
+    units: "&deg;C"
+    precision: 0
+    entity: sensor.bathroom_temperature
+
+bathroom_light_level:
+    widget_type: sensor
+    title: Bathroom Light Level
+    units: "lux"
+    precision: 0
+    shorten: 1
+    entity: sensor.bathroom_light_level
+
+bathroom_automation_switch:
+    widget_type: switch
+    title: Bathroom Lights Timer
+    entity: switch.bathroom_automation
+
+landing_temperature:
+    widget_type: sensor
+    title: Landing Temp
+    units: "&deg;C"
+    precision: 0
+    entity: sensor.landing_temperature
+
+landing_light_level:
+    widget_type: sensor
+    title: Landing Light Level
+    units: "lux"
+    precision: 0
+    shorten: 1
+    entity: sensor.landing_light_level
+
+downstairs_lights:
+    widget_type: light
+    title: Ground Floor Lights
+    entity: switch.downstairs_lights
+
+upstairs_lights:
+    widget_type: light
+    title: First Floor Lights
+    entity: switch.upstairs_lights
+
+bathroom_light:
+    widget_type: light
+    title: Bathroom Light
+    entity: light.bathroom_spot
+
+layout:
+    - clock(2x2), livingroom_climate(2x2), bathroom_temperature(1x1), bathroom_light_level(1x1), landing_temperature(1x1), landing_light_level(1x1)
+    - downstairs_lights(1x1), upstairs_lights(1x1), bathroom_light(1x1), bathroom_automation_switch(1x1)

@@ -1,0 +1,9 @@
+#  - platform: template
+#    sensors:
+#      pixel_unifi_rssi:
+#        value_template: >
+#          {% if is_state_attr("device_tracker.google_pixel_xl_toby", "rssi") | float < 1 %} 
+#            Away
+#          {% else %}
+#            Home
+#          {% endif %}

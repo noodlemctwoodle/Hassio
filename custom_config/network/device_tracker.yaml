@@ -1,0 +1,26 @@
+# Unifi Device Tracker Component
+  - platform: unifi
+    username: !secret unifi_username
+    password: !secret unifi_password
+    host: !secret unifi_host
+    port: !secret unifi_port
+    verify_ssl: !secret unifi_ssl
+    detection_time: 60
+    monitored_conditions:
+    - hostname
+    - rx_rate
+    - tx_rate
+    - rssi
+    - signal
+    - noise
+    - radio_proto
+    - is_wired
+    - ap_mac
+    - last_seen
+    - uptime
+    - ip
+    - oui
+
+#  - platform: google_maps
+#    username: !secret google_username
+#    password: !secret google_password

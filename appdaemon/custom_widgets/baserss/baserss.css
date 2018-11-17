@@ -1,0 +1,11 @@
+.widget-baserss-{{id}} .title {
+	position: absolute;
+	top: 5px;
+	width: 100%;
+}
+
+.widget-baserss-{{id}} .title2 {
+	position: absolute;
+	top: 23px;
+	width: 100%;
+}

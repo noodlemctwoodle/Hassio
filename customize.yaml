@@ -1,0 +1,106 @@
+##########################
+switch.downstairs_lights:
+  friendly_name: Downstairs Lights
+  icon: mdi:mdi:dip-switch
+switch.kitchen_lights:
+  friendly_name: Kitchen Lights
+  icon: mdi:mdi:light-switch
+switch.diningroom_lights:
+  friendly_name: Dining Room Lights
+  icon: mdi:mdi:light-switch
+switch.backdoor_lights:
+  friendly_name: Back Door Lights
+  icon: mdi:mdi:light-switch
+switch.livingroom_lights:
+  friendly_name: Livingroom Lights
+  icon: mdi:mdi:light-switch
+switch.hall_lights:
+  friendly_name: Hall Lights
+  icon: mdi:mdi:light-switch
+switch.bathroom_lights:
+  friendly_name: Bathroom Lights
+  icon: mdi:mdi:light-switch
+##########################
+switch.upstairs_lights:
+  friendly_name: Upstairs Lights
+  icon: mdi:mdi:dip-switch
+switch.bedroom_lights:
+  friendly_name: Bedroom Lights
+  icon: mdi:mdi:light-switch
+switch.office_lights:
+  friendly_name: Office Lights
+  icon: mdi:mdi:light-switch
+switch.landing_lights:
+  friendly_name: Landing Lights
+  icon: mdi:mdi:light-switch
+switch.craftroom_lights:
+  friendly_name: Craft Room Lights
+  icon: mdi:mdi:light-switch
+##########################
+switch.home_desktop:
+  friendly_name: Desktop
+  icon: mdi:mdi:desktop-classic
+switch.home_server:
+  friendly_name: Server
+  icon: mdi:mdi:server
+switch.bedroom_smart_plug_switch:
+  icon: mdi:mdi:power-socket-uk
+switch.living_room_networking:
+  icon: mdi:mdi:power-socket-uk
+switch.bedroom_networking:
+  icon: mdi:mdi:power-socket-uk
+switch.living_room_media:
+  icon: mdi:mdi:power-socket-uk
+###########################
+switch.office_lock:
+  icon: mdi:lock
+sensor.internet_time:
+  hidden: true
+sensor.kitchen_nest_protect_co_status:
+  icon: mdi:skull-crossbones
+sensor.kitchen_nest_protect_smoke_status:
+  icon: mdi:fire
+sensor.kitchen_nest_protect_battery_health:
+  icon: mdi:battery
+sensor.kitchen_nest_protect_color_status:
+  icon: mdi:traffic-light
+binary_sensor.kitchen_nest_protect_online:
+  icon: mdi:smoke-detector
+
+sensor.hallway_nest_protect_co_status:
+  icon: mdi:skull-crossbones
+sensor.hallway_nest_protect_smoke_status:
+  icon: mdi:fire
+sensor.hallway_nest_protect_battery_health:
+  icon: mdi:battery
+sensor.hallway_nest_protect_color_status:
+  icon: mdi:traffic-light
+binary_sensor.hallway_nest_protect_online:
+  icon: mdi:smoke-detector
+
+sensor.toby_presence:
+  icon: mdi:home-automation
+sensor.abi_presence:
+  icon: mdi:home-automation
+history_graph.gr_daily_temperature:
+  friendly_name: Daily Temperature
+history_graph.gr_apparent_temperature:
+  friendly_name: Apparent Temperature
+history_graph.gr_cloud_coverage:
+  friendly_name: Cloud Coverage
+history_graph.gr_cpu_speed:
+  friendly_name: CPU Speed
+history_graph.gr_mem_usage:
+  friendly_name: RAM Usage
+history_graph.gr_processor_use:
+  friendly_name: CPU Usage
+history_graph.gr_mem_free:
+  friendly_name: Memory Free
+sensor.bedroom_sensor_battery:
+  friendly_name: Bathroom Sensor Battery
+sensor.bedroom_luminance:
+  friendly_name: Bathroom Luminance
+sensor.bedroom_motion:
+  friendly_name: Bathroom Motion
+sensor.bedroom_temperature:
+  friendly_name: Bathroom Temperature

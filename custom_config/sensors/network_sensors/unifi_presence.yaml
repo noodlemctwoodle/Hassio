@@ -1,0 +1,42 @@
+  - platform: template
+    sensors:
+      toby_connected_ap:
+        friendly_name: 'Tobys Phone'
+        value_template: >
+          {% if is_state_attr("device_tracker.google_pixel_xl_toby", "ap_mac", "b4:fb:e4:21:79:1c") %} 
+            OFFICE_WIFI
+          {% elif is_state_attr("device_tracker.google_pixel_xl_toby", "ap_mac", "78:8a:20:4b:09:83") %}
+            LIVING_ROOM_WIFI
+          {% else %}
+            Offline
+          {% endif %}
+      abi_connected_ap:
+        friendly_name: 'Abis Phone'
+        value_template: >
+          {% if is_state_attr("device_tracker.google_pixel_abi", "ap_mac", "b4:fb:e4:21:79:1c") %} 
+            OFFICE_WIFI
+          {% elif is_state_attr("device_tracker.google_pixel_abi", "ap_mac", "78:8a:20:4b:09:83") %}
+            LIVING_ROOM_WIFI
+          {% else %}
+            Offline
+          {% endif %}
+      toby_unifi_rssi:
+        value_template: '{{states.device_tracker.google_pixel_xl_toby.attributes.rssi}}'
+      abi_unifi_rssi:
+        value_template: '{{states.device_tracker.google_pixel_abi.attributes.rssi}}'
+
+
+
+  - platform: min_max
+    name: "Toby Presence"
+    type: mean
+    round_digits: 0
+    entity_ids:
+    - sensor.toby_unifi_rssi
+
+  - platform: min_max
+    name: "Abi Presence"
+    type: mean
+    round_digits: 0
+    entity_ids:
+    - sensor.abi_unifi_rssi

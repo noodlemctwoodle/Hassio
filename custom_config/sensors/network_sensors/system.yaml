@@ -1,0 +1,18 @@
+# Linux System Monitor Component
+  - platform: systemmonitor
+    resources:
+      - type: memory_free
+      - type: last_boot
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_use_percent
+      - type: processor_use
+      - type: since_last_boot
+      - type: network_in
+        arg:  eno1
+      - type: network_out
+        arg:  eno1
+
+# Linux Current CPU Speed
+  - platform: cpuspeed
+

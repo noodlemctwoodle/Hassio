@@ -1,0 +1,12 @@
+---
+hello_world:
+  module: hello
+  class: HelloWorld
+
+battery:
+  module: battey
+  class: battery
+
+SmartHeat:
+  module: smart_heat
+  class: smartheat

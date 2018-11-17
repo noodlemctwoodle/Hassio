@@ -1,0 +1,21 @@
+# All Lights Software Switch
+  - platform: template
+    switches:
+      kitchen_lights:
+        value_template: "{{ is_state('light.kitchen_spotlights', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.kitchen_spotlights
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.kitchen_spotlights
+
+
+
+
+
+
+
+
+
+

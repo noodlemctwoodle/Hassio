@@ -1,0 +1,7 @@
+  watch_netflix:
+    alias: 'Lets watch Netflix'
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: 'homeassistant/shieldtv/run'
+          payload: 'Netflix'
