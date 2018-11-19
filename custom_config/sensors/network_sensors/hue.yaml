@@ -1,4 +1,5 @@
-# Philips Hue Motion Sensor - RestAPI
+# Philips Hue Motion Sensor - RestAPI (Custom-Component)
+## https://github.com/robmarkcole/Hue-sensors-HASS ##
 
 - platform: hue
   ip_address: !secret hue_bridge_ip
