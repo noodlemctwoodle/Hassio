@@ -431,15 +431,8 @@ views:
             - script.watch_netflix
       - type: vertical-stack
         cards:      
-        - type: custom:thermostat-card
-          title: Living Room
+        - type: thermostat
           entity: climate.living_room
-          chevron_size: 100
-          hvac:
-            states:
-              'Off': 'off'
-              'Heaing': 'heat'
-            attribute: operation_mode    
         - type: entities
           title: Living Room Nest Thermostat
           show_header_toggle: true
@@ -448,7 +441,6 @@ views:
           - binary_sensor.living_room_thermostat_has_leaf
           - binary_sensor.living_room_thermostat_is_using_emergency_heat
           - binary_sensor.living_room_thermostat_is_locked
-          - binary_sensor.living_room_thermostat_fan    
       - type: vertical-stack
         cards:
         - type: media-control
