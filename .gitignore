@@ -8,6 +8,7 @@ secrets.yaml
 .uuid
 deps
 tts
+assets
 # Ignore yaml
 ip_bans.yaml
 known_devices.yaml

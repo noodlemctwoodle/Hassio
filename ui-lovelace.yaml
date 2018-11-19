@@ -375,9 +375,14 @@ views:
     cards:
       - type: vertical-stack
         cards:  
-        - type: entities
-          title: Hall Lights
-          show_header_toggle: false
+        - type: light
+          entity: light.hall_spotlights
+      - type: conditional
+        conditions:
+          - entity: light.hall_spotlights
+            state: "on"
+        card:
+          type: entities
           entities:
             - light.hall_spotlights
       - type: vertical-stack
@@ -390,6 +395,8 @@ views:
             - sensor.toby_presence
             - sensor.abi_connected_ap
             - sensor.toby_connected_ap
+      - type: vertical-stack
+        cards:
         - type: picture-glance
           title: Front Door
           entities:
@@ -451,11 +458,27 @@ views:
   - title: kitchen
     icon: mdi:pot
     cards:
-      - type: entities
-        title: Kitchen Lights
-        show_header_toggle: false
-        entities:
-          - light.kitchen_spotlights
+      - type: vertical-stack
+        cards:  
+        - type: horizontal-stack
+          cards: 
+          - type: light
+            entity: light.kitchen_spotlights
+          - type: light
+            entity: light.kitchen_spot_1
+        - type: horizontal-stack
+          cards: 
+          - type: light
+            entity: light.kitchen_spot_2
+          - type: light
+            entity: light.kitchen_spot_3
+        - type: horizontal-stack
+          cards: 
+          - type: light
+            entity: light.kitchen_spot_4
+          - type: light
+            entity: light.kitchen_spot_5
+
       - type: entities
         title: Kitchen Remote
         show_header_toggle: true
@@ -503,15 +526,17 @@ views:
         entities:
           - light.bathroom
           - switch.bathroom_automation
-      - type: entities
+      - type: glance
         title: Bathroom Sensor
-        show_header_toggle: true
         entities:
-          - sensor.bathroom_motion_sensor
-          - sensor.bathroom_light_level
-          - sensor.bathroom_temperature
-          - sensor.bathroom_battery_level
-
+          - entity: sensor.bathroom_motion_sensor
+            name: Motion
+          - entity: sensor.bathroom_light_level
+            name: Light
+          - entity: sensor.bathroom_temperature
+            name: Temp
+          - entity: sensor.bathroom_battery_level
+            name: Battery
   - title: landing
     icon: mdi:stairs
     cards:

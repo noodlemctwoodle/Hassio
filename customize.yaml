@@ -78,6 +78,8 @@ sensor.hallway_nest_protect_color_status:
 binary_sensor.hallway_nest_protect_online:
   icon: mdi:smoke-detector
 
+sensor.bathroom_battery_level:
+  icon: mdi:battery
 sensor.toby_presence:
   icon: mdi:home-automation
 sensor.abi_presence:
