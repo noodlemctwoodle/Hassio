@@ -86,19 +86,15 @@ frontend:
       google-green-500: '#39E949'
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
-  base_url: 10.0.20.6:8123
+  base_url: !secret base_url_ip
 
 websocket_api:
 
 panel_iframe:
-  ide:
-    title: IDE
-    icon: mdi:code-braces
-    url: http://10.0.20.6:8321
   dash:
     title: Grafana
     icon: mdi:graphql
-    url: http://10.0.20.6:3000
+    url: !secret grafana_ip
 
 # Checks for available updates
 # Note: This component will send some information about your system to
