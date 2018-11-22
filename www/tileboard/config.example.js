@@ -8,13 +8,13 @@
 
 
 var CONFIG = {
-   customTheme: null, // CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
+   customTheme: CUSTOM_THEMES.TRANSPARENT, // CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
    transition: TRANSITIONS.ANIMATED_GPU, //ANIMATED or SIMPLE (better perfomance)
    entitySize: ENTITY_SIZES.NORMAL, //SMALL, BIG are available
    tileSize: 150,
    tileMargin: 6,
-   serverUrl: "http://localhost:8123",
-   wsUrl: "ws://localhost:8123/api/websocket",
+   serverUrl: "http://hassio.local:8123",
+   wsUrl: "ws://hassio.local:8123/api/websocket",
    authToken: null, // optional: make an long live token and put it here
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
    debug: false, // Prints entities and state change info to the console.
@@ -28,17 +28,18 @@ var CONFIG = {
 
    header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
       styles: {
-         padding: '30px 130px 0',
-         fontSize: '28px'
+         padding: '10px 130px 0',
+         fontSize: '15px'
       },
       right: [],
       left: [
-         {
-            type: HEADER_ITEMS.DATETIME,
-            dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
-         }
+//         {
+//            type: HEADER_ITEMS.DATETIME,
+//            dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+//         }
       ]
    },
+
 
    /*screensaver: {// optional. https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
       timeout: 300, // after 5 mins of inactive
@@ -64,189 +65,937 @@ var CONFIG = {
    pages: [
       {
          title: 'Main page',
-         bg: 'images/bg1.jpeg',
-         icon: 'mdi-home-outline', // home icon
+         bg: 'images/bg4.jpg',
+         icon: 'mdi-thermostat', // home icon
          groups: [
             {
-               title: 'First group',
-               width: 2,
+               title: 'House Climate',
+               width: 3,
                height: 3,
                items: [
                   {
                      position: [0, 0],
-                     width: 2,
-                     type: TYPES.TEXT_LIST,
-                     id: {}, // using empty object for an unknown id
-                     state: false, // disable state element
-                     list: [
-                        {
-                           title: 'Sun.sun state',
-                           icon: 'mdi-weather-sunny',
-                           value: '&sun.sun.state'
-                        },
-                        {
-                           title: 'Custom',
-                           icon: 'mdi-clock-outline',
-                           value: 'value'
-                        }
-                     ]
+                     id: "climate.living_room",
+                     type: TYPES.CLIMATE,
+                     unit: 'C',
+                     state: function (item, entity) {
+                        return 'Current '
+                           + entity.attributes.current_temperature;
+ //                          + entity.attributes.unit_of_measurement;
+                     }
+                  }, 
+                  {
+                     position: [1, 0],
+                     type: TYPES.SENSOR,
+                     title: 'Living Room',
+                     id: 'sensor.living_room_thermostat_temperature',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
                   },
                   {
-                     position: [0, 1], // [x, y]
-                     width: 1,
+                     position: [1, 1],
                      type: TYPES.SENSOR,
-                     id: 'updater.updater',
-                     state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
-                  }
+                     title: 'Bathroom',
+                     id: 'sensor.bathroom_temperature',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 2],
+                     type: TYPES.SENSOR,
+                     title: 'Landing',
+                     id: 'sensor.landing_temperature',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 1],
+                     type: TYPES.SENSOR,
+                     title: 'Hall',
+                     id: 'sensor.hall_temperature',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [2, 0],
+                     height: 2,
+                     //classes: ['-compact'], // enable this if you want a little square tile (1x1)
+                     type: TYPES.WEATHER,
+                     id: 'group.weather',
+                     state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
+                     icon: '&sensor.dark_sky_icon.state',
+                     //iconImage: '&sensor.dark_sky_icon.state', // use this one if you want to replace icon with image
+                     icons: {
+                        'clear-day': 'clear',
+                        'clear-night': 'nt-clear',
+                        'cloudy': 'cloudy',
+                        'rain': 'rain',
+                        'sleet': 'sleet',
+                        'snow': 'snow',
+                        'wind': 'hazy',
+                        'fog': 'fog',
+                        'partly-cloudy-day': 'partlycloudy',
+                        'partly-cloudy-night': 'nt-partlycloudy'
+                     },
+                     fields: { // most of that fields are optional
+                        summary: '&sensor.dark_sky_summary.state',
+                        temperature: '&sensor.dark_sky_temperature.state',
+                        temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
+                        windSpeed: '&sensor.dark_sky_wind_speed.state',
+                        windSpeedUnit: '&sensor.dark_sky_wind_speed.attributes.unit_of_measurement',
+                        humidity: '&sensor.dark_sky_humidity.state',
+                        humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
+                  
+                        list: [
+                           // custom line
+                           'Feels like '
+                              + '&sensor.dark_sky_apparent_temperature.state'
+                              + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
+                  
+                           // another custom line
+                           'Pressure '
+                              + '&sensor.dark_sky_pressure.state'
+                              + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
+                  
+                           // yet another custom line
+                           '&sensor.dark_sky_precip_probability.state'
+                              + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
+                              + ' chance of rain'
+                        ]
+                     }
+                  },
+//                  {
+//                     position: [0, 1], // [x, y]
+//                     width: 1,
+//                     type: TYPES.SENSOR,
+//                     id: 'updater.updater',
+//                     state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
+//                  }
                ]
             },
-
             {
-               title: 'Second group',
+               title: 'Cameras',
                width: 2,
                height: 3,
                items: [
                   {
                      position: [0, 0],
-                     width: 1,
-                     type: TYPES.SLIDER,
-                     //id: "input_number.volume",
-                     id: {state: 50}, // replace it with real string id
+                     id: 'camera.front_door',
+                     type: TYPES.CAMERA,
+                     bgSize: 'cover',
+                     width: 2,
                      state: false,
-                     title: 'Custom slider',
-                     subtitle: 'Example of subtitle',
-                     slider: {
-                        min: 0,
-                        max: 100,
-                        step: 2,
-                        request: {
-                           type: "call_service",
-                           domain: "input_number",
-                           service: "set_value",
-                           field: "value"
-                        }
+                     fullscreen: {
+                        type: TYPES.CAMERA,
+                        refresh: 1500, // can be number in milliseconds
+                        bgSize: 'contain'
+                     },
+                     refresh: function () { // can also be a function
+                        return 3000 + Math.random() * 1000
+                     }
+                  },
+                  {
+                     position: [0, 1],
+                     id: 'camera.backyard_back_garden',
+                     type: TYPES.CAMERA,
+                     bgSize: 'cover',
+                     width: 2,
+                     state: false,
+                     fullscreen: {
+                        type: TYPES.CAMERA,
+                        refresh: 1500, // can be number in milliseconds
+                        bgSize: 'contain'
+                     },
+                     refresh: function () { // can also be a function
+                        return 3000 + Math.random() * 1000
+                     }
+                  }
+               ]
+            }
+
+         ]
+      },
+      {
+         title: 'Second page',
+         bg: 'images/bg4.jpg',
+         icon: 'mdi-home-outline',
+         groups: [
+            {
+               title: 'House Lighting',
+               width: 2,
+               height: 3,
+               items: [
+                  {
+                     position: [0, 0],
+                     type: TYPES.SWITCH,
+                     id: 'switch.downstairs_lights',
+                     title: 'Downstairs',
+                     subtitle: 'Lights',
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
                      }
                   },
                   {
                      position: [1, 0],
-                     width: 1,
                      type: TYPES.SWITCH,
-                     //id: "switch.lights",
-                     id: {state: 'off'}, // replace it with real string id (e.g. "switch.lights")
-                     state: false,
-                     title: 'Custom switch',
-                     icons: {'off': 'mdi-volume-off', 'on': 'mdi-volume-high'}
-                  },
-                  {
-                     position: [0, 1],
-                     type: TYPES.ALARM,
-                     //id: "alarm_control_panel.home_alarm",
-                     id: { state: 'disarmed' }, // replace it with real string id
-                     title: 'Home Alarm',
-                     icons: {
-                        disarmed: 'mdi-bell-off',
-                        pending: 'mdi-bell',
-                        armed_home: 'mdi-bell-plus',
-                        armed_away: 'mdi-bell',
-                        triggered: 'mdi-bell-ring'
-                     },
+                     id: 'switch.upstairs_lights',
+                     title: 'Upstairs',
+                     subtitle: 'Lights',
                      states: {
-                        disarmed: 'Disarmed',
-                        pending: 'Pending',
-                        armed_home: 'Armed home',
-                        armed_away: 'Armed away',
-                        triggered: 'Triggered'
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
                      }
                   }
-
                ]
             },
-
             {
-               title: '',
-               width: 1,
+               title: 'Motion Sensors',
+               width: 3,
                height: 3,
                items: [
                   {
-                     // please read README.md for more information
-                     // this is just an example
                      position: [0, 0],
-                     height: 2, // 1 for compact
-                     //classes: ['-compact'],
-                     type: TYPES.WEATHER,
-                     id: {},
-                     state: function () {return 'Sunny'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
-                     icon: 'clear-day',
-                     icons: { 'clear-day': 'clear'},
-                     fields: {
-                        summary: 'Sunny',
-                        temperature: '18',
-                        temperatureUnit: 'C',
-                        windSpeed: '5',
-                        windSpeedUnit: 'kmh',
-                        humidity: '50',
-                        humidityUnit: '%',
-                        list: [
-                           'Feels like 16 C'
-                           /*
-                           'Feels like '
-                              + '&sensor.dark_sky_apparent_temperature.state'
-                              + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
-
-                           'Pressure '
-                              + '&sensor.dark_sky_pressure.state'
-                              + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
-
-                           '&sensor.dark_sky_precip_probability.state'
-                              + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
-                              + ' chance of rain'
-                           */
-                        ]
-                     }
+                     type: TYPES.SENSOR_ICON,
+                     title: 'Landing',
+                     id: 'sensor.landing_motion_sensor',
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: 'mdi-account-alert',
+                        off: 'mdi-account'
+                     },
+                  },
+                  {
+                     position: [1, 0],
+                     type: TYPES.SENSOR_ICON,
+                     title: 'Hall',
+                     id: 'sensor.hall_motion_sensor',
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: 'mdi-account-alert',
+                        off: 'mdi-account'
+                     },
+                  },
+                  {
+                     position: [0, 1],
+                     type: TYPES.SENSOR_ICON,
+                     title: 'Bathroom',
+                     id: 'sensor.landing_motion_sensor',
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: 'mdi-account-alert',
+                        off: 'mdi-account'
+                     },
                   }
-
                ]
             }
          ]
       },
       {
-         title: 'Second page',
-         bg: 'images/bg2.png',
-         icon: 'mdi-numeric-2-box-outline',
+         title: 'Third page',
+         bg: 'images/bg4.jpg',
+         icon: 'mdi-numeric-1-box-outline',
          groups: [
             {
-               title: '',
-               width: 2,
-               height: 3,
+               title: 'Ground Floor Lights',
+               width: 3,
+               height: 5,
                items: [
                   {
                      position: [0, 0],
-                     width: 2,
-                     title: 'Short instruction',
-                     type: TYPES.TEXT_LIST,
-                     id: {}, // using empty object for an unknown id
-                     state: false, // disable state element
-                     list: [
+                     title: 'Living Room',
+                     subtitle: 'Pendant',
+                     id: 'light.living_room_pendant',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
                         {
-                           title: 'Read',
-                           icon: 'mdi-numeric-1-box-outline',
-                           value: 'README.md'
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
                         },
                         {
-                           title: 'Ask on forum',
-                           icon: 'mdi-numeric-2-box-outline',
-                           value: 'home-assistant.io'
-                        },
-                        {
-                           title: 'Open an issue',
-                           icon: 'mdi-numeric-3-box-outline',
-                           value: 'github.com'
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
                         }
                      ]
-                  }
+                  },
+                  {
+                     position: [1, 0],
+                     title: 'Living Room',
+                     subtitle: 'Lamp',
+                     id: 'light.living_room_lamp',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [0, 1],
+                     title: 'Kitchen',
+                     subtitle: 'Spotlights',
+                     id: 'light.kitchen_spotlights',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [1, 1],
+                     title: 'Dining Room',
+                     subtitle: 'Spotlights',
+                     id: 'light.dining_room_spot_1',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [2, 1],
+                     title: 'Back Door',
+                     subtitle: 'Pendant',
+                     id: 'light.back_door',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [0, 2],
+                     title: 'Hall ',
+                     subtitle: 'Spotlights',
+                     id: 'light.hall_spotlights',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [0, 3],
+                     title: 'Bathroom ',
+                     subtitle: 'Pendant',
+                     id: 'light.bathroom',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
                ]
             },
          ]
-      }
-   ],
+      },
+      {
+         title: 'Forth page',
+         bg: 'images/bg4.jpg',
+         icon: 'mdi-numeric-2-box-outline',
+         groups: [
+            {
+               title: 'Second Floor Lights',
+               width: 3,
+               height: 5,
+               items: [
+                  {
+                     position: [0, 0],
+                     title: 'Landing',
+                     subtitle: 'Spotlights',
+                     id: 'light.landing_spot',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [1, 0],
+                     title: 'Bedroom',
+                     subtitle: 'Pendants',
+                     id: 'light.bedroom_spotlights',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [0, 1],
+                     title: 'Bedroom',
+                     subtitle: 'Lamp',
+                     id: 'light.bedroom_lamp',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [1, 1],
+                     title: 'Craft Room',
+                     subtitle: 'Pendant',
+                     id: 'light.craft_room_2',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [2, 1],
+                     title: 'Office',
+                     subtitle: 'Spotlights',
+                     id: 'light.office_spotlights',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [0, 2],
+                     title: 'Office ',
+                     subtitle: 'Shadow',
+                     id: 'light.office_shadow',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [0, 3],
+                     title: 'Office ',
+                     subtitle: 'Bloom',
+                     id: 'light.office_bloom',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     position: [0, 3],
+                     title: 'Office ',
+                     subtitle: 'Desk',
+                     id: 'light.office_desk',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 254,
+                           min: 1,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                        {
+                           title: 'Color temp',
+                           field: 'color_temp',
+                           max: 500,
+                           min: 153,
+                           step: 15,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "color_temp"
+                           }
+                        }
+                     ]
+                  },
+               ]
+            },
+         ]
+      }      
+   ]
 }

@@ -490,6 +490,7 @@ views:
         show_header_toggle: false
         entities:
           - light.dining_room
+          - media_player.kitchen_home
       - type: entities
         title: Kitchen Nest Protect
         show_header_toggle: true

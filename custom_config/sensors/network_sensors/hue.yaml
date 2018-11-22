@@ -20,6 +20,19 @@
       friendly_name: 'Bathroom battery level'
       value_template: '{{states.sensor.bathroom_motion_sensor.attributes.battery}}'
       unit_of_measurement: '%'   
+# Hall Sensor
+    hall_temperature:
+      friendly_name: 'Landing temperature'
+      value_template: '{{states.sensor.hall_motion_sensor.attributes.temperature}}'
+      unit_of_measurement: °C
+    hall_light_level:
+      friendly_name: 'Landing light level'
+      value_template: '{{states.sensor.hall_motion_sensor.attributes.lx}}'
+      unit_of_measurement: lux
+    hall_battery_level:
+      friendly_name: 'Landing battery level'
+      value_template: '{{states.sensor.hall_motion_sensor.attributes.battery}}'
+      unit_of_measurement: '%' 
 # Landing Sensor
     landing_temperature:
       friendly_name: 'Landing temperature'
