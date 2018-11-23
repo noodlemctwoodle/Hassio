@@ -115,6 +115,11 @@ views:
             style:
               top: 74%
               left: 24% 
+          - type: state-label
+            entity: sensor.hall_temperature
+            style:
+              top: 87%
+              left: 34% 
           - type: state-icon
             tap_action: toggle
             title: Kitchen Lights
@@ -181,6 +186,18 @@ views:
           - type: image
             entity: sensor.bathroom_motion_sensor
             title: Bathroom Motion
+            tap_action: toggle
+            image: /local/phue_sensor.png
+            filter: brightness(50%)
+            state_filter:
+              on: brightness(100%)
+            style:
+              top: 87%
+              left: 28%
+              width: 3%
+          - type: image
+            entity: sensor.hall_motion_sensor
+            title: Hall Motion
             tap_action: toggle
             image: /local/phue_sensor.png
             filter: brightness(50%)
