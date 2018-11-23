@@ -141,10 +141,10 @@ history:
 
 # View all events in a logbook
 logbook:
-  exclude:
-    domains:
-      - sensor
-      - media_player
+#  exclude:
+#    domains:
+#      - sensor
+#      - media_player
 
 
 # Enables a map showing the location of tracked devices
@@ -157,6 +157,37 @@ sun:
 recorder:
   purge_interval: 2
   purge_keep_days: 5
+
+notify:
+  - name: noodlemctwoodle
+    platform: hangouts
+    default_conversations:
+      - id: !secret notifier_noodlemctwoodle
+      - name: HA Main
+
+hangouts:
+  intents:
+    HassLightSet:
+      sentences:
+        - Toggle {name}.
+      conversations:
+        - id: !secret notifier_noodlemctwoodle
+    heating_status:
+      sentences:
+        - What is the status of the heating
+    lounge_temp:
+      sentences:
+        - What is the temperature in the living room
+  error_suppressed_conversations:
+    - id: !secret notifier_noodlemctwoodle
+
+intent_script:
+  heating_status:
+    speech:
+      text: The heating is {{ states.sensor.living_room_thermostat_hvac_state.state }} 
+  lounge_temp:
+    speech:
+      text: The living room temperature is {{ states.sensor.living_room_thermostat_temperature.state }} °C
 
 
 influxdb:
@@ -196,6 +227,8 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
+#hangouts: !include_dir_merge_list custom_config/hangouts
+#### Hue Lights Config ####
 light: !include_dir_merge_list custom_config/hue_lights
 #### /custom_config/media_player/ ####
 media_player: !include_dir_merge_list custom_config/media_player
@@ -203,8 +236,6 @@ media_player: !include_dir_merge_list custom_config/media_player
 device_tracker: !include custom_config/network/device_tracker.yaml
 shell_command: !include custom_config/network/shell_commands.yaml
 zone: !include custom_config/network/zones.yaml
-#### /custom_config/notify/ ####
-notify: !include_dir_list custom_config/notify
 #### /custom_config/sensors/ ####
 sensor: !include_dir_merge_list custom_config/sensors
 #### /custom_config/switch/ ####

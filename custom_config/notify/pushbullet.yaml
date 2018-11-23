@@ -1,4 +1,0 @@
-# Push Bullet Notifications
-  platform: pushbullet
-  name: HomeAutomation
-  api_key: !secret push_api_key

@@ -408,8 +408,6 @@ views:
           title: Home Presence
           show_header_toggle: true
           entities:
-            - sensor.abi_presence
-            - sensor.toby_presence
             - sensor.abi_connected_ap
             - sensor.toby_connected_ap
       - type: vertical-stack
@@ -549,12 +547,6 @@ views:
   - title: bathroom
     icon: mdi:human-male-female
     cards:
-      - type: entities
-        title: Bathroom Lights
-        show_header_toggle: false
-        entities:
-          - light.bathroom
-          - switch.bathroom_automation
       - type: glance
         title: Bathroom Sensor
         entities:
@@ -566,17 +558,26 @@ views:
             name: Temp
           - entity: sensor.bathroom_battery_level
             name: Battery
+      - type: entities
+        title: Bathroom Lights
+        show_header_toggle: false
+        entities:
+          - light.bathroom
+          - switch.bathroom_automation
   - title: landing
     icon: mdi:stairs
     cards:
-      - type: entities
-        title: Landing Sensor
-        show_header_toggle: true
+      - type: glance
+        title: Hall Sensor
         entities:
-          - sensor.landing_motion_sensor
-          - sensor.landing_light_level
-          - sensor.landing_temperature
-          - sensor.landing_battery_level
+          - entity: sensor.landing_motion_sensor
+            name: Motion
+          - entity: sensor.landing_light_level
+            name: Light
+          - entity: sensor.landing_temperature
+            name: Temp
+          - entity: sensor.landing_battery_level
+            name: Battery
       - type: entities
         title: Landing Lights
         show_header_toggle: false

@@ -27,16 +27,16 @@
 
 
 
-  - platform: min_max
-    name: "Toby Presence"
-    type: mean
-    round_digits: 0
-    entity_ids:
-    - sensor.toby_unifi_rssi
+#  - platform: min_max
+#    name: "Toby Presence"
+#    type: mean
+#    round_digits: 0
+#    entity_ids:
+#    - sensor.toby_unifi_rssi
 
-  - platform: min_max
-    name: "Abi Presence"
-    type: mean
-    round_digits: 0
-    entity_ids:
-    - sensor.abi_unifi_rssi
+#  - platform: min_max
+#    name: "Abi Presence"
+#    type: mean
+#    round_digits: 0
+#    entity_ids:
+#    - sensor.abi_unifi_rssi

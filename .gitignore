@@ -34,3 +34,4 @@ home-assistant_v2.db
 appdaemon/access.log.1
 appdaemon/access.log.2
 appdaemon/access.log.3
+appdaemon/error.log

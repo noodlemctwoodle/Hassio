@@ -280,6 +280,36 @@
     data:
       message: 'Welcome Home.'
 
+
+- alias: Heating on notification
+  trigger:
+    platform: state
+    entity_id: sensor.living_room_thermostat_hvac_state
+    to: heating
+  action:
+    service: hangouts.send_message
+    data_template:
+      target: 
+      - id: !secret notifier_noodlemctwoodle
+      message: 
+        - text: "The heating is on"
+      
+- alias: Abi is home notification
+  trigger:
+    platform: state
+    entity_id: device_tracker.google_pixel_abi
+    to: home
+  action:
+    service: hangouts.send_message
+    data_template:
+      target: 
+      - id: !secret notifier_noodlemctwoodle
+      message: 
+        - text: "Abi is home"
+
+    
+      
+
 #- alias: Toby Is Home
 #  trigger:
 #    platform: numeric_state
