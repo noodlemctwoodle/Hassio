@@ -18,6 +18,7 @@ homeassistant:
 
 # Enables the frontend
 frontend:
+# Theme Based from @marcelhoffs https://community.home-assistant.io/t/midnight-theme/28598
   themes:
     midnight:
       # Main colors
@@ -84,12 +85,14 @@ frontend:
       # Google colors
       google-red-500: '#E45E65'
       google-green-500: '#39E949'
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+
+# Additional IP Address outside of Docker Container Used for Hassio 
 http:
   base_url: !secret base_url_ip
 
 websocket_api:
 
+# iFrame Panels > Possible removal from Hassio
 panel_iframe:
   dash:
     title: Grafana
@@ -105,7 +108,7 @@ updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
 
-# Cloud
+# Nabu Casa Cloud Component $5 per month
 cloud:
   google_actions:
     filter:
@@ -158,6 +161,7 @@ recorder:
   purge_interval: 2
   purge_keep_days: 5
 
+# Google Hangouts Notify Platform
 notify:
   - name: noodlemctwoodle
     platform: hangouts
@@ -165,6 +169,7 @@ notify:
       - id: !secret notifier_noodlemctwoodle
       - name: HA Main
 
+# Google Hangout Chat bot
 hangouts:
   intents:
     HassLightSet:
@@ -181,6 +186,7 @@ hangouts:
   error_suppressed_conversations:
     - id: !secret notifier_noodlemctwoodle
 
+# Intent scripts 
 intent_script:
   heating_status:
     speech:
@@ -189,7 +195,7 @@ intent_script:
     speech:
       text: The living room temperature is {{ states.sensor.living_room_thermostat_temperature.state }} °C
 
-
+# Influx DB Configuration
 influxdb:
   host: !secret influx_host
   port: !secret influx_port
@@ -199,6 +205,7 @@ influxdb:
   max_retries: 3
   default_measurement: state
 
+# Climate > to be removed
 climate:
   - platform: generic_thermostat
     name: Landing Temperature 
@@ -209,25 +216,30 @@ climate:
     heater: switch.demo1
     target_sensor: sensor.bathroom_temperature
 
+# Dark Sky Weather API for LoveLaceUI
 weather:
   - platform: darksky
     api_key: !secret dark_sky_api
 
-#image_processing:
+# Azure Image Processing > testing
+# image_processing:
 #  - platform: microsoft_face_detect
 #    source:
 #      - entity_id: camera.front_door
 
+# Azure Image Processing > testing
 #microsoft_face:
 #  api_key: !secret microsoft_face_api
 #  azure_region: !secret microsoft_face_region
   
 
+# Single File Configs
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
-#hangouts: !include_dir_merge_list custom_config/hangouts
+
+# Custom Config Directory
 #### Hue Lights Config ####
 light: !include_dir_merge_list custom_config/hue_lights
 #### /custom_config/media_player/ ####
