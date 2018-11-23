@@ -108,7 +108,7 @@ updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
 
-# Nabu Casa Cloud Component $5 per month
+# Nabu Casa Cloud Component $5 per month - https://www.nabucasa.com/
 cloud:
   google_actions:
     filter:
@@ -121,6 +121,7 @@ cloud:
         - switch.downstairs_light
         - switch.upstairs_lights
 
+# Nest Integration 
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
@@ -205,7 +206,7 @@ influxdb:
   max_retries: 3
   default_measurement: state
 
-# Climate > to be removed
+# Climate > To be removed
 climate:
   - platform: generic_thermostat
     name: Landing Temperature 
@@ -221,13 +222,13 @@ weather:
   - platform: darksky
     api_key: !secret dark_sky_api
 
-# Azure Image Processing > testing
+# Azure Image Processing > In Testing
 # image_processing:
 #  - platform: microsoft_face_detect
 #    source:
 #      - entity_id: camera.front_door
 
-# Azure Image Processing > testing
+# Azure Image Processing > In Testing
 #microsoft_face:
 #  api_key: !secret microsoft_face_api
 #  azure_region: !secret microsoft_face_region
