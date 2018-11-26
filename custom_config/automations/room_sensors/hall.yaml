@@ -1,0 +1,105 @@
+# Hall Sensor Automations
+- alias: Turn on hall lights morning
+  trigger:
+    platform: state
+    entity_id: sensor.hall_motion_sensor
+    to: 'on'
+  condition:
+  - below: '3'
+    condition: numeric_state
+    entity_id: sensor.hall_light_level
+  - condition: state
+    entity_id: light.hallway_spot_1
+    state: 'off'
+  - condition: state
+    entity_id: light.hallway_spot_2
+    state: 'off'
+  - condition: time
+    after: '07:00:00'
+    before: '09:59:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.hallway_spot_1, light.hallway_spot_2
+    data_template:
+      brightness: 130
+      color_temp: 318
+      transition: 5
+
+- alias: Turn on hall lights day
+  trigger:
+    platform: state
+    entity_id: sensor.hall_motion_sensor
+    to: 'on'
+  condition:
+  - below: '5'
+    condition: numeric_state
+    entity_id: sensor.hall_light_level
+  - condition: state
+    entity_id: light.hallway_spot_1
+    state: 'off'
+  - condition: state
+    entity_id: light.hallway_spot_2
+    state: 'off'    
+  - condition: time
+    after: '09:00:00'
+    before: '23:29:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.hallway_spot_1, light.hallway_spot_2
+    data_template:
+      brightness: 254
+      color_temp: 318
+      transition: 5
+
+- alias: Turn on hall lights night
+  trigger:
+    platform: state
+    entity_id: sensor.hall_motion_sensor
+    to: 'on'
+  condition:
+  - below: '2'
+    condition: numeric_state
+    entity_id: sensor.hall_light_level
+  - condition: state
+    entity_id: light.hallway_spot_1
+    state: 'off'
+  - condition: state
+    entity_id: light.hallway_spot_2
+    state: 'off'
+  - condition: time
+    after: '23:30:00'
+    before: '06:59:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.hallway_spot_1, light.hallway_spot_2
+    data_template:
+      brightness: 10
+      rgb_color: [255, 0, 0]
+      transition: 5
+
+- alias: Turn off hall lights
+  trigger:
+    - platform: state
+      entity_id: sensor.hall_motion_sensor
+      to: 'off'
+      for:
+        minutes: '1'
+    - platform: state
+      entity_id: sensor.hall_motion_sensor
+      to: 'off'
+      for:
+        minutes: '2'
+    - platform: state
+      entity_id: sensor.hall_motion_sensor
+      to: 'off'
+      for:
+        minutes: '5'
+  condition:
+    - condition: state
+      entity_id: sensor.hall_motion_sensor
+      state: 'off'
+  action:
+    service: homeassistant.turn_off
+    entity_id: light.hall_spotlights
+    data_template:
+      transition: 30

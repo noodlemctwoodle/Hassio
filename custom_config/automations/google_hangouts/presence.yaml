@@ -1,0 +1,26 @@
+# Wife Status Hangouts Bot Notifications 
+- alias: Abi home notification
+  trigger:
+    platform: state
+    entity_id: device_tracker.google_pixel_abi
+    to: home
+  action:
+    service: hangouts.send_message
+    data_template:
+      target: 
+      - id: !secret notifier_noodlemctwoodle
+      message: 
+        - text: "Abi has arrived home"
+
+- alias: Abi away notification
+  trigger:
+    platform: state
+    entity_id: device_tracker.google_pixel_abi
+    to: not_home
+  action:
+    service: hangouts.send_message
+    data_template:
+      target: 
+      - id: !secret notifier_noodlemctwoodle
+      message: 
+        - text: "Abi has left home"

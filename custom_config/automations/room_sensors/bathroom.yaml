@@ -1,0 +1,101 @@
+# Bathroom Sensor Automations
+- alias: Turn on bathroom light morning
+  trigger:
+    platform: state
+    entity_id: sensor.bathroom_motion_sensor
+    to: 'on'
+  condition:
+  - below: '3'
+    condition: numeric_state
+    entity_id: sensor.bathroom_light_level
+  - condition: state
+    entity_id: light.bathroom
+    state: 'off'
+  - condition: time
+    after: '07:00:00'
+    before: '08:59:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.bathroom
+    data_template:
+      brightness: 130
+      color_temp: 318
+      transition: 5
+
+- alias: Turn on bathroom light day
+  trigger:
+    platform: state
+    entity_id: sensor.bathroom_motion_sensor
+    to: 'on'
+  condition:
+  - below: '6'
+    condition: numeric_state
+    entity_id: sensor.bathroom_light_level
+  - condition: state
+    entity_id: light.bathroom
+    state: 'off'
+  - condition: time
+    after: '09:00:00'
+    before: '23:29:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.bathroom
+    data_template:
+      brightness: 254
+      color_temp: 318
+      transition: 5
+
+- alias: Turn on bathroom light night
+  trigger:
+    platform: state
+    entity_id: sensor.bathroom_motion_sensor
+    to: 'on'
+  condition:
+  - below: '2'
+    condition: numeric_state
+    entity_id: sensor.bathroom_light_level
+  - condition: state
+    entity_id: light.bathroom
+    state: 'off'
+  - condition: time
+    after: '23:30:00'
+    before: '06:59:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.bathroom
+    data_template:
+      brightness: 40
+      color_temp: 318
+      transition: 30
+
+- alias: Turn off bathroom lights
+  trigger:
+    - platform: state
+      entity_id: sensor.bathroom_motion_sensor
+      to: 'off'
+      for:
+        minutes: '2'
+    - platform: state
+      entity_id: sensor.bathroom_motion_sensor
+      to: 'off'
+      for:
+        minutes: '5'
+    - platform: state
+      entity_id: sensor.bathroom_motion_sensor
+      to: 'off'
+      for:
+        minutes: '10'
+    - platform: state
+      entity_id: sensor.bathroom_motion_sensor
+      to: 'off'
+      for:
+        minutes: '15'
+  condition:
+    - condition: state
+      entity_id: sensor.bathroom_motion_sensor
+      state: 'off'
+  action:
+    service: homeassistant.turn_off
+    entity_id: light.bathroom
+    data_template:
+      transition: 30

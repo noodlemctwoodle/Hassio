@@ -94,10 +94,22 @@ websocket_api:
 
 # iFrame Panels > Possible removal from Hassio
 panel_iframe:
-  dash:
+  grafana:
     title: Grafana
     icon: mdi:graphql
-    url: !secret grafana_ip
+    url: !secret grafana_url
+  sonarr:
+    title: Sonarr
+    icon: mdi:television-box
+    url: !secret sonarr_url
+  radarr:
+    title: Radarr
+    icon: mdi:filmstrip
+    url: !secret radarr_url
+  nzbget:
+    title: NZBGet
+    icon: mdi:download
+    url: !secret nzbget_url
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -181,11 +193,31 @@ hangouts:
     heating_status:
       sentences:
         - What is the status of the heating
+    off_mode:
+      sentences:
+        - Turn off heating
+        - Turn of the heating
+        - Heating off
+    eco_mode:
+      sentences:
+        - Turn on eco mode
+        - Set eco mode
+    heat_mode:
+      sentences:
+        - Turn on heating mode
+        - Heating on
+        - Set mode to heating
     lounge_temp:
       sentences:
         - What is the temperature in the living room
+        - Whats the living room temp
+        - Living room temp
+    set_nest_temp:
+      sentences:
+        - Set the nest temp to 20
+        - Turn it up to 20
   error_suppressed_conversations:
-    - id: !secret notifier_noodlemctwoodle
+   - id: !secret notifier_noodlemctwoodle
 
 # Intent scripts 
 intent_script:
@@ -195,6 +227,40 @@ intent_script:
   lounge_temp:
     speech:
       text: The living room temperature is {{ states.sensor.living_room_thermostat_temperature.state }} °C
+  off_mode:
+    speech:
+      text: I have set the heating to off.
+    action:
+      service: climate.set_operation_mode
+      data:
+        entity_id: climate.living_room
+        operation_mode: 'off'
+  eco_mode:
+    speech:
+      text: I have set the heating to eco mode.
+    action:
+      service: climate.set_operation_mode
+      data:
+        entity_id: climate.living_room
+        operation_mode: 'eco'
+  heat_mode:
+    speech:
+      text: I have set the heating to heat mode.
+    action:
+      service: climate.set_operation_mode
+      data:
+        entity_id: climate.living_room
+        operation_mode: 'heat'
+  set_nest_temp:
+    speech:
+      text: I have set nest to 20 degrees
+    action:
+      service: climate.set_temperature
+      data:
+        entity_id: climate.living_room
+        temperature: 20
+        operation_mode: Heat
+
 
 # Influx DB Configuration
 influxdb:
@@ -236,7 +302,7 @@ weather:
 
 # Single File Configs
 group: !include groups.yaml
-automation: !include automations.yaml
+automation: !include_dir_merge_list custom_config/automations
 script: !include scripts.yaml
 
 

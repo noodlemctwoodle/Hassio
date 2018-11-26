@@ -1,0 +1,24 @@
+- alias: Turn off the heating when away
+  trigger:
+    - platform: state
+      entity_id: sensor.abi_connected_ap
+      to: 'Offline'
+      for:
+        minutes: '5'
+    - platform: state
+      entity_id: sensor.toby_connected_ap
+      to: 'Offline'
+      for:
+        minutes: '5'
+  condition:
+    - condition: state
+      entity_id: sensor.abi_connected_ap
+      state: 'Offline'
+    - condition: state
+      entity_id: sensor.toby_connected_ap
+      state: 'Offline'
+  action:
+    service: climate.set_operation_mode
+    data:
+      entity_id: climate.living_room
+      operation_mode: 'off'

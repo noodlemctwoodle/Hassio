@@ -1,4 +1,3 @@
-##########################
 switch.downstairs_lights:
   friendly_name: Downstairs Lights
   icon: mdi:mdi:dip-switch
@@ -20,7 +19,6 @@ switch.hall_lights:
 switch.bathroom_lights:
   friendly_name: Bathroom Lights
   icon: mdi:mdi:light-switch
-##########################
 switch.upstairs_lights:
   friendly_name: Upstairs Lights
   icon: mdi:mdi:dip-switch
@@ -36,7 +34,6 @@ switch.landing_lights:
 switch.craftroom_lights:
   friendly_name: Craft Room Lights
   icon: mdi:mdi:light-switch
-##########################
 switch.home_desktop:
   friendly_name: Desktop
   icon: mdi:mdi:desktop-classic
@@ -51,7 +48,6 @@ switch.bedroom_networking:
   icon: mdi:mdi:power-socket-uk
 switch.living_room_media:
   icon: mdi:mdi:power-socket-uk
-###########################
 switch.office_lock:
   icon: mdi:lock
 sensor.internet_time:
@@ -66,20 +62,16 @@ sensor.kitchen_nest_protect_color_status:
   icon: mdi:traffic-light
 binary_sensor.kitchen_nest_protect_online:
   icon: mdi:smoke-detector
-
-sensor.hallway_nest_protect_co_status:
+sensor.upstairs_nest_protect_co_status:
   icon: mdi:skull-crossbones
-sensor.hallway_nest_protect_smoke_status:
+sensor.upstairs_nest_protect_smoke_status:
   icon: mdi:fire
-sensor.hallway_nest_protect_battery_health:
+sensor.upstairs_nest_protect_battery_health:
   icon: mdi:battery
-sensor.hallway_nest_protect_color_status:
+sensor.upstairs_nest_protect_color_status:
   icon: mdi:traffic-light
-binary_sensor.hallway_nest_protect_online:
+binary_sensor.upstairs_nest_protect_online:
   icon: mdi:smoke-detector
-
-sensor.bathroom_battery_level:
-  icon: mdi:battery
 sensor.toby_presence:
   icon: mdi:home-automation
 sensor.abi_presence:
@@ -106,3 +98,9 @@ sensor.bedroom_motion:
   friendly_name: Bathroom Motion
 sensor.bedroom_temperature:
   friendly_name: Bathroom Temperature
+sensor.hall_battery_level:
+  icon: mdi:battery
+sensor.landing_battery_level:
+  icon: mdi:battery
+sensor.bathroom_battery_level:
+  icon: mdi:battery
