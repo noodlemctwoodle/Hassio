@@ -8,6 +8,7 @@ resources:
 title: home.cleverhomes.app
 background: content-box radial-gradient(grey, black)
 views:
+# Default View - Sytem Monitoring
   - title: default_view
     icon: mdi:home
     cards:
@@ -125,22 +126,37 @@ views:
             entity: sensor.network_out_eno1
             name: Eth0 Upload
             height: 40
-
+# Room - Hall/Front Door
   - title: hall
     icon: mdi:door
     cards:
       - type: vertical-stack
-        cards:  
-        - type: light
-          entity: light.hall_spotlights
-      - type: conditional
-        conditions:
-          - entity: light.hall_spotlights
-            state: "on"
-        card:
-          type: entities
+        cards:
+        - type: glance
+          title: Hall Sensor
+          entities:
+            - entity: sensor.hall_motion_sensor
+              name: Motion
+            - entity: sensor.hall_light_level
+              name: Light
+            - entity: sensor.hall_temperature
+              name: Temp
+            - entity: sensor.hall_battery_level
+              name: Battery
+        - type: entities
+          title: Hall Lights
+          show_header_toggle: false
           entities:
             - light.hall_spotlights
+        - type: conditional
+          conditions:
+            - entity: light.hall_spotlights
+              state: "on"
+          card:
+            type: entities
+            entities:
+              - light.hallway_spot_1
+              - light.hallway_spot_2
       - type: vertical-stack
         cards:
         - type: picture-glance
@@ -156,18 +172,7 @@ views:
           camera_image: camera.front_door
           show_info: true
           tap_action: dialog
-      - type: glance
-        title: Hall Sensor
-        entities:
-          - entity: sensor.hall_motion_sensor
-            name: Motion
-          - entity: sensor.hall_light_level
-            name: Light
-          - entity: sensor.hall_temperature
-            name: Temp
-          - entity: sensor.hall_battery_level
-            name: Battery
-
+# Room - Living Room
   - title: lounge
     icon: mdi:sofa
     cards:
@@ -203,31 +208,30 @@ views:
           entity: media_player.shieldtv
         - type: media-control
           entity: media_player.denon_avrx2300w
-
+# Room - Kitchen
   - title: kitchen
     icon: mdi:pot
     cards:
       - type: vertical-stack
-        cards:  
-        - type: horizontal-stack
-          cards: 
-          - type: light
-            entity: light.kitchen_spotlights
-          - type: light
-            entity: light.kitchen_spot_1
-        - type: horizontal-stack
-          cards: 
-          - type: light
-            entity: light.kitchen_spot_2
-          - type: light
-            entity: light.kitchen_spot_3
-        - type: horizontal-stack
-          cards: 
-          - type: light
-            entity: light.kitchen_spot_4
-          - type: light
-            entity: light.kitchen_spot_5
-
+        cards:
+        - type: entities
+          title: Kitchen Lights
+          show_header_toggle: false
+          entities:
+            - light.kitchen_spotlights
+        - type: conditional
+          conditions:
+            - entity: light.kitchen_spotlights
+              state: "on"
+          card:
+            type: entities
+            name: Kitchen Lights
+            entities:
+              - light.kitchen_spot_1
+              - light.kitchen_spot_2
+              - light.kitchen_spot_3
+              - light.kitchen_spot_4
+              - light.kitchen_spot_5
       - type: entities
         title: Kitchen Remote
         show_header_toggle: true
@@ -248,7 +252,7 @@ views:
           - sensor.kitchen_nest_protect_battery_health
           - sensor.kitchen_nest_protect_smoke_status
           - sensor.kitchen_nest_protect_co_status
-
+# Room - Utility Area/Back Door
   - title: backdoor
     icon: mdi:tree
     cards:
@@ -266,7 +270,7 @@ views:
           - binary_sensor.backyard_camera_back_garden_motion_detected
           - binary_sensor.backyard_camera_back_garden_sound_detected
         camera_image: camera.backyard_back_garden
-
+# Room - Bathroom
   - title: bathroom
     icon: mdi:human-male-female
     cards:
@@ -287,7 +291,7 @@ views:
         entities:
           - light.bathroom
           - switch.bathroom_automation
-
+# Room - Stairs/Landing
   - title: landing
     icon: mdi:stairs
     cards:
@@ -318,7 +322,7 @@ views:
             name: CO Status
           - entity: sensor.upstairs_nest_protect_battery_health
             name: Battery
-
+# Room Bedroom
   - title: bedroom
     icon: mdi:hotel
     cards:
@@ -334,7 +338,7 @@ views:
         entities:
           - sensor.bedroom_remote
           - sensor.bedroom_switch_battery_level
-
+# Room - Office
   - title: office
     icon: mdi:office-building
     cards:
@@ -359,7 +363,7 @@ views:
             - switch.home_desktop
         - type: media-control
           entity: media_player.office_chromecast_audio
-
+# Network Devices 
   - title: network_devices
     icon: mdi:network
     cards:
@@ -402,10 +406,14 @@ views:
           - device_tracker.xboxone
       - type: vertical-stack
         cards:  
-        - type: entities
-          title: NZBGet
-          show_header_toggle: true
-          entities:
+        - type: conditional
+          conditions:
+            - entity: switch.home_server
+              state: "on"
+          card:
+            type: entities
+            title: NZBGet
+            entities:
             - sensor.nzbget_article_cache
             - sensor.nzbget_average_speed
             - sensor.nzbget_disk_free
@@ -414,17 +422,25 @@ views:
             - sensor.nzbget_size
             - sensor.nzbget_speed
             - sensor.nzbget_uptime
-        - type: entities
-          title: Sonarr
-          show_header_toggle: true
-          entities:
+        - type: conditional
+          conditions:
+            - entity: switch.home_server
+              state: "on"
+          card:
+            type: entities
+            title: Sonarr
+            entities:
             - sensor.sonarr_upcoming
             - sensor.sonarr_queue
             - sensor.sonarr_disk_space
-        - type: entities
-          title: Radarr
-          show_header_toggle: true
-          entities:
+        - type: conditional
+          conditions:
+            - entity: switch.home_server
+              state: "on"
+          card:
+            type: entities
+            title: Radarr
+            entities:
             - sensor.radarr_upcoming
             - sensor.radarr_status
             - sensor.radarr_disk_space
@@ -435,7 +451,7 @@ views:
             - sensor.speedtest_download
             - sensor.speedtest_upload
             - sensor.speedtest_ping
-
+# Settings Page
   - title: device_settings
     icon: mdi:settings
     cards:
@@ -465,6 +481,7 @@ views:
               - automation.turn_on_landing_lights_day
               - automation.turn_on_landing_lights_night
               - automation.turn_off_landing_lights
+# FloorPlan
   - title: floorplan
     icon: mdi:floor-plan
     panel: true
