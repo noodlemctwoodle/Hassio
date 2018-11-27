@@ -5,7 +5,7 @@ resources:
   - url: /local/custom-lovelace/monster-card/monster-card.js?v=1
     type: js
 
-title: home.cleverhomes.app
+title: Hassio
 background: content-box radial-gradient(grey, black)
 views:
 # Default View - Sytem Monitoring
