@@ -20,6 +20,7 @@ Open source home automation that puts local control and privacy first. Powered b
 - [Hue White and color ambiance Single bulb B22](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-b22/8718696593073)
 - [Hue White and color ambiance Single bulb E27](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-e27/8718696592984)
 - [Hue White and color ambiance White and color ambiance LightStrip Plus](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-white-and-color-ambiance-lightstrip-plus/7190155PH)
+- [Hue White and color ambiance Bloom table lamp](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-bloom-table-lamp/7299760PU)
 - [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)
 
 ![Nest](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/nest-logo.png)
