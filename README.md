@@ -31,6 +31,6 @@ Open source home automation that puts local control and privacy first. Powered b
 
 
 # TPLink Kasa
-![TpLink Kasa](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/tplink-kasa.png)
+![TpLink Kasa](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/tplink-logo.png)
 - [TPLink Smart Plugs](https://www.tp-link.com/uk/products/details/cat-5258_HS110.html)
 
