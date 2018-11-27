@@ -26,13 +26,11 @@ Open source home automation that puts local control and privacy first. Powered b
 
 
 # Wemo
+![WeMo](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/wemo-logo.png)
 - [WeMo Insight Switch](https://www.belkin.com/uk/p/P-F7C029)
 
 
 # TPLink Kasa
+![TpLink Kasa](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/tplink-kasa.png)
 - [TPLink Smart Plugs](https://www.tp-link.com/uk/products/details/cat-5258_HS110.html)
 
-
-
-
-#<img align="right" width="305" height="162" src="">
