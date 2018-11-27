@@ -15,8 +15,7 @@ Open source home automation that puts local control and privacy first. Powered b
     - B22 Pendant Lights
     - E27 Pendant and Lamps
     - Smart Motion Sensors
-
-![screen](https://www2.meethue.com/en-gb/b-dam/b2c/meethue/philips-hue_shield.png)
+![screen](https://www.google.co.uk/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi80uGWo_TeAhUEUBoKHadfA-wQjRx6BAgBEAU&url=https%3A%2F%2Ftwitter.com%2Ftweethue&psig=AOvVaw2VPTVQ058fsLXhqCNxsorv&ust=1543397840880621)
 
 - Sonoff SV Switches
 - WEMO Smart Plugs
