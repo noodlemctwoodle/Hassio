@@ -6,7 +6,7 @@ Open source home automation that puts local control and privacy first. Powered b
 ![hassio2](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/grafana-home-assistant.png)
 
 ![PFSense](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/PfSense-Logo.png)
-- 1u PFSense Firewall
+- 1u  Custom Built PFSense Firewall
 
 ![Unifi](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/unifi-logo.png)
 - [Unifi 8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)
@@ -21,6 +21,16 @@ Open source home automation that puts local control and privacy first. Powered b
 - [Hue White and color ambiance Single bulb E27](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-e27/8718696592984)
 - [Hue White and color ambiance White and color ambiance LightStrip Plus](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-white-and-color-ambiance-lightstrip-plus/7190155PH)
 - [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)
+
+![Nest](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/nest-logo.png)
+- [Nest Hello](https://nest.com/uk/doorbell/nest-hello/overview/)
+- [Nest Cam Outdoor](https://nest.com/uk/cameras/nest-cam-outdoor/overview/)
+- [Nest Protect](https://nest.com/uk/smoke-co-alarm/overview/)
+- [Nest Learning Thermostat](https://nest.com/uk/thermostats/nest-learning-thermostat/overview/)
+
+![Google Home](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/google-logo.png)
+- [Google Home](https://store.google.com/gb/product/google_home)
+- [Google Home Mini](https://store.google.com/gb/product/google_home_mini?hl=en-GB)
 
 ![Sonoff](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo.png)
 - [Sonoff SV Switches](https://www.itead.cc/sonoff-sv.html)
