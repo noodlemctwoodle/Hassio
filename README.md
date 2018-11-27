@@ -2,6 +2,9 @@
 
 Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts. This configuration is running on an i3 7th Generation Intel NUC using Docker
 
+![hassio1](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/home-assistant.png)
+![hassio2](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/grafana-home-assistant.png)
+
 ![PFSense](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/PfSense-Logo.png)
 - 1u PFSense Firewall
 
@@ -16,6 +19,7 @@ Open source home automation that puts local control and privacy first. Powered b
 - [Hue White ambiance Single bulb GU10](https://www2.meethue.com/en-gb/p/hue-white-ambiance-single-bulb-gu10/8718696598283) 
 - [Hue White and color ambiance Single bulb B22](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-b22/8718696593073)
 - [Hue White and color ambiance Single bulb E27](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-e27/8718696592984)
+- [Hue White and color ambiance White and color ambiance LightStrip Plus](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-white-and-color-ambiance-lightstrip-plus/7190155PH)
 - [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)
 
 ![Sonoff](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo.png)
