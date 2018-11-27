@@ -10,21 +10,13 @@ Open source home automation that puts local control and privacy first. Powered b
 - Unifi UAC-NANO-HD Access Point
 
 
-
-# Philips Hue
-<img align="right" width="305" height="162" src="https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/logo-hue.png">
-
-Philips Hue offers a wide range of smart light bulbs, lamps, fixtures and accessories. Whether it’s for your living room, your kitchen, your bathroom or your garden, Philips Hue has the perfect light. Control your lights in many different ways with the smart accessories. They are easy to use and fully customisable to your needs. Make your home even smarter by connecting your smart lights with compatible smart home devices and voice assistants like Amazon Alexa, Apple HomeKit, the Google Assistant and many others.
-
+![Sonoff](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/logo-hue.png)
 - GU10 Spotlights
 - B22 Pendant Lights
 - E27 Pendant and Lamps
 - Smart Motion Sensors
 
-
-# Sonoff 
-
-![Sonoff SV low voltage wireless remote switch makes all home appliances smart. As long as the mobile has network, customers can remotely control the appliances by turning them on off from anywhere at any time. Another feature available is to set timing schedules for the appliances, which can include countdown, scheduled on/off, and can thus, help customers maintain an easy life. The mobile application eWeLink enables customers to control the appliances easily. The iOS version of the application can be downloaded in App Store while the Android version in Google Play](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo-600x315.png)
+![Sonoff](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo.png)
 
 - [Sonoff SV Switches](https://www.itead.cc/sonoff-sv.html)
 
@@ -36,3 +28,7 @@ Philips Hue offers a wide range of smart light bulbs, lamps, fixtures and access
 # TPLink Kasa
 - [TPLink Smart Plugs](https://www.tp-link.com/uk/products/details/cat-5258_HS110.html)
 
+
+
+
+#<img align="right" width="305" height="162" src="">
