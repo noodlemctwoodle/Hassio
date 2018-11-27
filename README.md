@@ -9,30 +9,32 @@ Open source home automation that puts local control and privacy first. Powered b
 - Unifi UAC-AP-Pro Access Point
 - Unifi UAC-NANO-HD Access Point
 
-# IOT Devices
+
+
+# Philips Hue
 <img align="right" width="305" height="162" src="https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/logo-hue.png">
 
-Philips Hue
+Philips Hue offers a wide range of smart light bulbs, lamps, fixtures and accessories. Whether it’s for your living room, your kitchen, your bathroom or your garden, Philips Hue has the perfect light. Control your lights in many different ways with the smart accessories. They are easy to use and fully customisable to your needs. Make your home even smarter by connecting your smart lights with compatible smart home devices and voice assistants like Amazon Alexa, Apple HomeKit, the Google Assistant and many others.
+
 - GU10 Spotlights
 - B22 Pendant Lights
 - E27 Pendant and Lamps
 - Smart Motion Sensors
 
 
-Blurb about Phulips Hue
+# Sonoff 
+![Sonoff SV low voltage wireless remote switch makes all home appliances smart. As long as the mobile has network, customers can remotely control the appliances by turning them on off from anywhere at any time. Another feature available is to set timing schedules for the appliances, which can include countdown, scheduled on/off, and can thus, help customers maintain an easy life. The mobile application eWeLink enables customers to control the appliances easily. The iOS version of the application can be downloaded in App Store while the Android version in Google Play][https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo-600x315.png]
 
 
 
 
+- [Sonoff SV Switches](https://www.itead.cc/sonoff-sv.html)
 
-<img align="right" width="260" height="165" src="https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo-600x315.png">
 
-Sonoff
-- Sonoff SV Switches
+# Wemo
+- [WeMo Insight Switch](https://www.belkin.com/uk/p/P-F7C029)
 
-Smart Plugs/Switches
-Wemo
-- WEMO Smart Plugs
-TPLink 
-- TPLink Smart Plugs 
+
+# TPLink Kasa
+- [TPLink Smart Plugs](https://www.tp-link.com/uk/products/details/cat-5258_HS110.html)
 
