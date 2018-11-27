@@ -23,10 +23,7 @@ Philips Hue offers a wide range of smart light bulbs, lamps, fixtures and access
 
 
 # Sonoff 
-![Sonoff SV low voltage wireless remote switch makes all home appliances smart. As long as the mobile has network, customers can remotely control the appliances by turning them on off from anywhere at any time. Another feature available is to set timing schedules for the appliances, which can include countdown, scheduled on/off, and can thus, help customers maintain an easy life. The mobile application eWeLink enables customers to control the appliances easily. The iOS version of the application can be downloaded in App Store while the Android version in Google Play][https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo-600x315.png]
-
-
-
+[logo]: https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo-600x315.png "Sonoff SV low voltage wireless remote switch makes all home appliances smart. As long as the mobile has network, customers can remotely control the appliances by turning them on off from anywhere at any time. Another feature available is to set timing schedules for the appliances, which can include countdown, scheduled on/off, and can thus, help customers maintain an easy life. The mobile application eWeLink enables customers to control the appliances easily. The iOS version of the application can be downloaded in App Store while the Android version in Google Play"
 
 - [Sonoff SV Switches](https://www.itead.cc/sonoff-sv.html)
 
