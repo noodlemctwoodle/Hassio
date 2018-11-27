@@ -10,7 +10,7 @@ Open source home automation that puts local control and privacy first. Powered b
 - Unifi UAC-NANO-HD Access Point
 
 # IOT Devices
-<img align="right" width="350" height="240" src="https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/logo-hue.png">
+<img align="right" width="305" height="162" src="https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/logo-hue.png">
 
 Philips Hue
 - GU10 Spotlights
