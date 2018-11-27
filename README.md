@@ -18,6 +18,8 @@ Philips Hue
 - E27 Pendant and Lamps
 - Smart Motion Sensors
 
+<img align="right" width="200" height="105" src="https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/sonofflogo-600x315.png">
+
 Sonoff
 - Sonoff SV Switches
 
