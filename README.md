@@ -10,15 +10,18 @@ Open source home automation that puts local control and privacy first. Powered b
 - Unifi UAC-NANO-HD Access Point
 
 # IOT Devices
-![screen](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/logo-hue.png)
-- Philips Hue
-    - GU10 Spotlights
-    - B22 Pendant Lights
-    - E27 Pendant and Lamps
-    - Smart Motion Sensors
+<img align="right" width="250" height="140" src="https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/logo-hue.png">
 
+Philips Hue
+- GU10 Spotlights
+- B22 Pendant Lights
+- E27 Pendant and Lamps
+- Smart Motion Sensors
 
+Sonoff
 - Sonoff SV Switches
+
+Smart Plugs/Switches
 - WEMO Smart Plugs
 - TPLink Smart Plugs 
 
