@@ -1,3 +1,5 @@
+### Livingroom Automations ###
+
 # Livingroom Sensor Automations
 - alias: Turn on livingroom lights morning
   trigger:
@@ -77,6 +79,7 @@
       color_temp: 318
       transition: 30
 
+# Livingroom Away Mode
 - alias: Turn on livingroom lights away mode
   trigger:
     platform: state
