@@ -261,20 +261,9 @@ intent_script:
         temperature: 20
         operation_mode: Heat
 
-
-# Influx DB Configuration
-influxdb:
-  host: !secret influx_host
-  port: !secret influx_port
-  database: !secret influx_db
-  username: !secret influx_db_user
-  password: !secret influx_db_pass
-  max_retries: 3
-  default_measurement: state
-
 # Prometheus DB Comfiguration
 prometheus:
-  namespace: hassio
+  namespace: !secret prometheus_scrape_name
 
 # Climate > To be removed
 climate:

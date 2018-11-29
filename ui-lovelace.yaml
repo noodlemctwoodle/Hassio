@@ -178,6 +178,17 @@ views:
     cards:
       - type: vertical-stack
         cards:  
+        - type: glance
+          title: Living Room Sensor
+          entities:
+            - entity: sensor.living_room_motion_sensor
+              name: Motion
+            - entity: sensor.living_room_light_level
+              name: Light
+            - entity: sensor.living_room_temperature
+              name: Temp
+            - entity: sensor.living_room_battery_level
+              name: Battery
         - type: entities
           title: Living Room Lights
           show_header_toggle: false
@@ -214,6 +225,17 @@ views:
     cards:
       - type: vertical-stack
         cards:
+        - type: glance
+          title: Kitchen Sensor
+          entities:
+            - entity: sensor.kitchen_motion_sensor
+              name: Motion
+            - entity: sensor.kitchen_light_level
+              name: Light
+            - entity: sensor.kitchen_temperature
+              name: Temp
+            - entity: sensor.kitchen_battery_level
+              name: Battery
         - type: entities
           title: Kitchen Lights
           show_header_toggle: false
@@ -326,24 +348,48 @@ views:
   - title: bedroom
     icon: mdi:hotel
     cards:
-      - type: entities
-        title: Bedroom Lights
-        show_header_toggle: false
-        entities:
-          - light.bedroom_spotlights
-          - light.bedroom_lamp
-      - type: entities
-        title: Bedroom Remote
-        show_header_toggle: true
-        entities:
-          - sensor.bedroom_remote
-          - sensor.bedroom_switch_battery_level
+      - type: vertical-stack
+        cards:  
+        - type: glance
+          title: Bedroom Sensor
+          entities:
+            - entity: sensor.bedroom_motion_sensor
+              name: Motion
+            - entity: sensor.bedroom_light_level
+              name: Light
+            - entity: sensor.bedroom_temperature
+              name: Temp
+            - entity: sensor.bedroom_battery_level
+              name: Battery
+        - type: entities
+          title: Bedroom Lights
+          show_header_toggle: false
+          entities:
+            - light.bedroom_spotlights
+            - light.bedroom_lamp
+        - type: entities
+          title: Bedroom Remote
+          show_header_toggle: true
+          entities:
+            - sensor.bedroom_remote
+            - sensor.bedroom_switch_battery_level
 # Room - Office
   - title: office
     icon: mdi:office-building
     cards:
       - type: vertical-stack
         cards:  
+        - type: glance
+          title: Office Sensor
+          entities:
+            - entity: sensor.office_motion_sensor
+              name: Motion
+            - entity: sensor.office_light_level
+              name: Light
+            - entity: sensor.office_temperature
+              name: Temp
+            - entity: sensor.office_battery_level
+              name: Battery
         - type: entities
           title: Office Lights
           show_header_toggle: false

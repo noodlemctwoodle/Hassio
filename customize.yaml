@@ -104,3 +104,11 @@ sensor.landing_battery_level:
   icon: mdi:battery
 sensor.bathroom_battery_level:
   icon: mdi:battery
+sensor.living_room_battery_level:
+  icon: mdi:battery
+sensor.kitchen_battery_level:
+  icon: mdi:battery
+sensor.office_battery_level:
+  icon: mdi:battery
+sensor.bedroom_battery_level:
+  icon: mdi:battery
