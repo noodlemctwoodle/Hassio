@@ -8,6 +8,5 @@
       - temperature_low
       - wind_speed
       - humidity
-      - apparent_temperature
       - pressure
       - precip_probability

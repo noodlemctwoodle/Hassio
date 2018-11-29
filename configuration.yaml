@@ -272,6 +272,10 @@ influxdb:
   max_retries: 3
   default_measurement: state
 
+# Prometheus DB Comfiguration
+prometheus:
+  namespace: hassio
+
 # Climate > To be removed
 climate:
   - platform: generic_thermostat
