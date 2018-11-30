@@ -21,6 +21,12 @@
     - ip
     - oui
 
-  - platform: google_maps
-    username: !secret google_username
-    password: !secret google_password
+#  - platform: google_maps
+#    username: !secret google_username
+#    password: !secret google_password
+
+  - platform: googlehome
+    host: 10.0.20.36
+  
+  - platform: googlehome
+    host: 10.0.20.28

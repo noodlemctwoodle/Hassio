@@ -16,3 +16,5 @@
 # Linux Current CPU Speed
   - platform: cpuspeed
 
+# Hassio Verison
+  - platform: version
