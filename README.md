@@ -1,11 +1,20 @@
 # Home Asssistant Configuration
 
-Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts. This configuration is running on an i3 7th Generation Intel NUC using Docker
+Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts. 
 
+## Hassio Hardware Configuration
+- Intel NUC i3 Gen 7 
+- Ubunbu Server 18.04
+- Docker CE. 
+
+## Screenshots of my front end
 ![hassio1](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/screenshots/lounge.png)
 ![hassio2](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/screenshots/kitchen.png)
 ![hassio3](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/screenshots/grafana.png)
 
+
+
+## Some of the components that I use
 ![PFSense](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/PfSense-Logo.png)
 - 1u  Custom Built PFSense Firewall
 
