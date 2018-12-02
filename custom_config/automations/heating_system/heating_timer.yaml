@@ -1,0 +1,31 @@
+# Bathroom Sensor Automations
+- alias: Turn on heating
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_temperature
+    below: '19'
+  condition:
+  - condition: state
+    entity_id: sensor.living_room_thermostat_hvac_state
+    state: 'off'
+  action:
+    service: climate.set_operation_mode
+    data:
+      entity_id: climate.living_room
+      temperature: '21'
+      operation_mode: 'heating'
+
+- alias: Turn off heating
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_temperature
+    below: '21.5'
+  condition:
+  - condition: state
+    entity_id: sensor.living_room_thermostat_hvac_state
+    state: 'heating'
+  action:
+    service: climate.set_operation_mode
+    data:
+      entity_id: climate.living_room
+      operation_mode: 'off'

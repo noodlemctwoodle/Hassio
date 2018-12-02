@@ -64,8 +64,8 @@ binary_sensor.kitchen_nest_protect_online:
   icon: mdi:smoke-detector
 sensor.upstairs_nest_protect_co_status:
   icon: mdi:skull-crossbones
-sensor.upstairs_nest_protect_smoke_status:
-  icon: mdi:fire
+#sensor.upstairs_nest_protect_smoke_status:
+#  icon: mdi:fire
 sensor.upstairs_nest_protect_battery_health:
   icon: mdi:battery
 sensor.upstairs_nest_protect_color_status:

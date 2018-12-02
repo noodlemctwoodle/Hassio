@@ -278,6 +278,8 @@
       - group.landing_sensors
       - group.landing_lights
 
+      
+
 #############################
 # Front End Landing View No #
 #############################
@@ -325,7 +327,8 @@
     view: no
     control: hidden
     entities:
-      - light.bedroom_spotlights
+      - light.bedroom_pendant_1
+      - light.bedroom_pendant_2
       - light.bedroom_lamp
 # Bedroom Hue Remote
   bedroom_hue_remote:

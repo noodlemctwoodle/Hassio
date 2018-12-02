@@ -1,0 +1,20 @@
+  - platform: template
+    sensors:
+      nest_protect_upstairs_smoke:
+        friendly_name: 'Smoke'
+        value_template: >
+          {% if is_state('sensor.upstairs_nest_protect_smoke_status', 'Ok') %}
+            OK
+          {% elif is_state('sensor.upstairs_nest_protect_smoke_status', 'Warning') %}
+            Warning Smoke     
+          {%elif is_state('sensor.upstairs_nest_protect_smoke_status', 'Emergency') %}
+            Smoke Emergency
+          {% endif %}
+        entity_picture_template: >
+          {% if is_state('sensor.upstairs_nest_protect_smoke_status', 'OK') %}
+            /local/nest-icons/nest-protect-green.png
+          {% elif is_state('sensor.upstairs_nest_protect_smoke_status', 'Warning Smoke') %}
+            /local/nest-icons/nest-protect-yellow.png
+          {%elif is_state('sensor.upstairs_nest_protect_smoke_status', 'Smoke Emergency') %}
+            /local/nest-icons/nest-protect-red.png
+          {% endif %}

@@ -1,3 +1,10 @@
 # Plex Media Player Component
   - platform: samsungtv
     host: 10.0.20.58
+
+  - platform: denonavr
+    host: 10.0.20.51
+    name: Denon AVRX2300w
+    show_all_sources: True
+    zones:
+      - zone: Zone2
