@@ -24,7 +24,7 @@ Open source home automation that puts local control and privacy first. Powered b
 - [Hue White and color ambiance Bloom table lamp](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-bloom-table-lamp/7299760PU)
 - [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)
 
-![Nest](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/nest-icons/nest-logo.png)
+![Nest](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/nest-logo.png)
 - [Nest Hello](https://nest.com/uk/doorbell/nest-hello/overview/)
 - [Nest Cam Outdoor](https://nest.com/uk/cameras/nest-cam-outdoor/overview/)
 - [Nest Protect](https://nest.com/uk/smoke-co-alarm/overview/)
