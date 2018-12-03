@@ -17,6 +17,6 @@
       service: shell_command.pc_off
 
 # TPLink Smart Plug Software Switch
-#  - platform: tplink
-#    host: !secret living_room_networking
-#    name: Living Room Networking
+  - platform: tplink
+    host: !secret tp_link_host
+    name: Christmas Lights

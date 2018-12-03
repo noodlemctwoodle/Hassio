@@ -73,9 +73,9 @@
     service: homeassistant.turn_on
     entity_id: light.hallway_spot_1, light.hallway_spot_2
     data_template:
-      brightness: 10
-      rgb_color: [255, 0, 0]
-      transition: 5
+      brightness: 2
+      color_temp: 318
+      transition: 30
 
 - alias: Turn off hall lights
   trigger:

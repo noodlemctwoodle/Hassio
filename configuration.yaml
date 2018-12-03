@@ -128,16 +128,14 @@ cloud:
         - switch.home_server
         - switch.home_desktop
         - switch.office_lock
+        - switch.christmas_lights
         - climate.landing_temperature
         - climate.bathroom_temperatur
-        - switch.downstairs_light
-        - switch.upstairs_lights
 
 # Nest Integration 
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
-
 
 # Enables configuration UI
 config:
@@ -157,14 +155,10 @@ history:
 
 # View all events in a logbook
 logbook:
-#  exclude:
-#    domains:
-#      - sensor
-#      - media_player
-
-
-# Enables a map showing the location of tracked devices
-#map:
+  exclude:
+    domains:
+      - sensor
+      - media_player
 
 # Track the sun
 sun:
@@ -181,85 +175,6 @@ notify:
     default_conversations:
       - id: !secret notifier_noodlemctwoodle
       - name: HA Main
-
-# Google Hangout Chat bot
-hangouts:
-  intents:
-    HassLightSet:
-      sentences:
-        - Toggle {name}.
-      conversations:
-        - id: !secret notifier_noodlemctwoodle
-    heating_status:
-      sentences:
-        - What is the status of the heating
-    off_mode:
-      sentences:
-        - Turn off heating
-        - Turn of the heating
-        - Heating off
-    eco_mode:
-      sentences:
-        - Turn on eco mode
-        - Set eco mode
-    heat_mode:
-      sentences:
-        - Turn on heating mode
-        - Heating on
-        - Set mode to heating
-    lounge_temp:
-      sentences:
-        - What is the temperature in the living room
-        - Whats the living room temp
-        - Living room temp
-    set_nest_temp:
-      sentences:
-        - Set the nest temp to 20
-        - Turn it up to 20
-  error_suppressed_conversations:
-   - id: !secret notifier_noodlemctwoodle
-
-# Intent scripts 
-intent_script:
-  heating_status:
-    speech:
-      text: The heating is {{ states.sensor.living_room_thermostat_hvac_state.state }} 
-  lounge_temp:
-    speech:
-      text: The living room temperature is {{ states.sensor.living_room_thermostat_temperature.state }} °C
-  off_mode:
-    speech:
-      text: I have set the heating to off.
-    action:
-      service: climate.set_operation_mode
-      data:
-        entity_id: climate.living_room
-        operation_mode: 'off'
-  eco_mode:
-    speech:
-      text: I have set the heating to eco mode.
-    action:
-      service: climate.set_operation_mode
-      data:
-        entity_id: climate.living_room
-        operation_mode: 'eco'
-  heat_mode:
-    speech:
-      text: I have set the heating to heat mode.
-    action:
-      service: climate.set_operation_mode
-      data:
-        entity_id: climate.living_room
-        operation_mode: 'heat'
-  set_nest_temp:
-    speech:
-      text: I have set nest to 20 degrees
-    action:
-      service: climate.set_temperature
-      data:
-        entity_id: climate.living_room
-        temperature: 20
-        operation_mode: Heat
 
 # Prometheus DB Comfiguration
 prometheus:
@@ -295,19 +210,28 @@ weather:
 
 # Single File Configs
 group: !include groups.yaml
-automation: !include_dir_merge_list custom_config/automations
 script: !include scripts.yaml
 
+## Custom Includes ##
 
-# Custom Config Directory
-#### Hue Lights Config ####
-light: !include_dir_merge_list custom_config/hue_lights
-#### /custom_config/media_player/ ####
-media_player: !include_dir_merge_list custom_config/media_player
+#### /custom_config/notify/ ####
+hangouts: !include custom_config/notify/hangouts.yaml
 #### /custom_config/network/ ####
 device_tracker: !include custom_config/network/device_tracker.yaml
 shell_command: !include custom_config/network/shell_commands.yaml
 zone: !include custom_config/network/zones.yaml
+
+
+## Custom Include Directories ## 
+
+#### /custom_config/automations/ ####
+automation: !include_dir_merge_list custom_config/automations
+#### /custom_config/hue_lights/ ####
+light: !include_dir_merge_list custom_config/hue_lights
+#### /custom_config/media_player/ ####
+media_player: !include_dir_merge_list custom_config/media_player
+#### /custom_config/intents/ ####
+intent_script: !include_dir_merge_list custom_config/intents
 #### /custom_config/sensors/ ####
 sensor: !include_dir_merge_list custom_config/sensors
 #### /custom_config/switch/ ####

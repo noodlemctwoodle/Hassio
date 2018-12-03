@@ -1,3 +1,4 @@
+# Switch
 switch.downstairs_lights:
   friendly_name: Downstairs Lights
   icon: mdi:mdi:dip-switch
@@ -50,46 +51,11 @@ switch.living_room_media:
   icon: mdi:mdi:power-socket-uk
 switch.office_lock:
   icon: mdi:lock
-sensor.internet_time:
-  hidden: true
-sensor.kitchen_nest_protect_co_status:
-  icon: mdi:skull-crossbones
-sensor.kitchen_nest_protect_smoke_status:
-  icon: mdi:fire
-sensor.kitchen_nest_protect_battery_health:
-  icon: mdi:battery
-sensor.kitchen_nest_protect_color_status:
-  icon: mdi:traffic-light
-binary_sensor.kitchen_nest_protect_online:
-  icon: mdi:smoke-detector
-sensor.upstairs_nest_protect_co_status:
-  icon: mdi:skull-crossbones
-#sensor.upstairs_nest_protect_smoke_status:
-#  icon: mdi:fire
-sensor.upstairs_nest_protect_battery_health:
-  icon: mdi:battery
-sensor.upstairs_nest_protect_color_status:
-  icon: mdi:traffic-light
-binary_sensor.upstairs_nest_protect_online:
-  icon: mdi:smoke-detector
-sensor.toby_presence:
-  icon: mdi:home-automation
-sensor.abi_presence:
-  icon: mdi:home-automation
-history_graph.gr_daily_temperature:
-  friendly_name: Daily Temperature
-history_graph.gr_apparent_temperature:
-  friendly_name: Apparent Temperature
-history_graph.gr_cloud_coverage:
-  friendly_name: Cloud Coverage
-history_graph.gr_cpu_speed:
-  friendly_name: CPU Speed
-history_graph.gr_mem_usage:
-  friendly_name: RAM Usage
-history_graph.gr_processor_use:
-  friendly_name: CPU Usage
-history_graph.gr_mem_free:
-  friendly_name: Memory Free
+switch.christmas_lights:
+  icon: mdi:power-socket-uk
+
+
+# Sensors
 sensor.bedroom_sensor_battery:
   friendly_name: Bathroom Sensor Battery
 sensor.bedroom_luminance:
@@ -112,3 +78,29 @@ sensor.office_battery_level:
   icon: mdi:battery
 sensor.bedroom_battery_level:
   icon: mdi:battery
+sensor.toby_presence:
+  icon: mdi:home-automation
+sensor.abi_presence:
+  icon: mdi:home-automation
+sensor.internet_time:
+  hidden: true
+sensor.kitchen_nest_protect_co_status:
+  icon: mdi:skull-crossbones
+sensor.kitchen_nest_protect_smoke_status:
+  icon: mdi:fire
+sensor.kitchen_nest_protect_battery_health:
+  icon: mdi:battery
+sensor.kitchen_nest_protect_color_status:
+  icon: mdi:traffic-light
+binary_sensor.kitchen_nest_protect_online:
+  icon: mdi:smoke-detector
+sensor.upstairs_nest_protect_co_status:
+  icon: mdi:skull-crossbones
+sensor.upstairs_nest_protect_smoke_status:
+  icon: mdi:fire
+sensor.upstairs_nest_protect_battery_health:
+  icon: mdi:battery
+sensor.upstairs_nest_protect_color_status:
+  icon: mdi:traffic-light
+binary_sensor.upstairs_nest_protect_online:
+  icon: mdi:smoke-detector

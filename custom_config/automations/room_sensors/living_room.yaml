@@ -42,6 +42,9 @@
   - condition: state
     entity_id: light.living_room_pendant
     state: 'off'    
+  - condition: state
+    entity_id: switch.christmas_lights
+    state: 'off' 
   - condition: time
     after: '09:00:00'
     before: '23:29:00'
