@@ -782,13 +782,13 @@ views:
             tap_action: toggle
             entity: light.kitchen_spot_1
             style:
-              top: 24%
+              top: 26%
               left: 41%  
           - type: state-icon
             tap_action: toggle
             entity: light.kitchen_spot_2
             style:
-              top: 24%
+              top: 26%
               left: 50%  
           - type: state-icon
             tap_action: toggle
