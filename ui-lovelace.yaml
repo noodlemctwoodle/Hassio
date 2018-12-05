@@ -261,7 +261,7 @@ views:
           show_header_toggle: false
           entities:
             - entity: switch.christmas_lights
-              name: Christmas Colour
+              name: Living Room Christmas
       - type: vertical-stack
         cards:      
   # Nest Thermostat
@@ -278,8 +278,15 @@ views:
       - type: vertical-stack
         cards:
   # Media Player
-        - type: media-control
-          entity: media_player.shield_tv
+        - type: conditional
+          conditions:
+            - entity: media_player.shield_tv
+              state: "on"
+          card:
+            type: media-control
+            name: Shield TV Plex
+            entities:
+              - media_player.shield_tv
         - type: media-control
           entity: media_player.denon_avrx2300w
         - type: media-control
