@@ -961,8 +961,8 @@ views:
           - type: state-label
             entity: sensor.hall_temperature
             style:
-              top: 87%
-              left: 34% 
+              top: 89%
+              left: 26% 
           - type: image
             entity: sensor.hall_motion_sensor
             title: Hall Motion
@@ -972,8 +972,8 @@ views:
             state_filter:
               on: brightness(100%)
             style:
-              top: 65%
-              left: 25%
+              top: 87%
+              left: 26%
               width: 3%
           - type: image
             entity: camera.front_door
@@ -1011,8 +1011,8 @@ views:
             state_filter:
               on: brightness(100%)
             style:
-              top: 87%
-              left: 28%
+              top: 72%
+              left: 24%
               width: 3%
 ### Upstairs
         - type: picture-elements
