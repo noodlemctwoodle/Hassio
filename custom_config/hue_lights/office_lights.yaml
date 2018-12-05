@@ -4,3 +4,17 @@
     entities:
       - light.office_spot_1
       - light.office_spot_2
+
+  - platform: group
+    name: Office Desk
+    entities:
+      - light.office_desk_w
+      - light.office_desk_rgb
+
+  - platform: group
+    name: Office Lights
+    entities:
+      - light.office_spotlights
+      - light.office_desk
+      - light.office_bloom
+      - light.office_shadow

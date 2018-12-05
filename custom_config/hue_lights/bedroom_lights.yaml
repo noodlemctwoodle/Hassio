@@ -1,4 +1,4 @@
-# Office Hue Group
+# Bedroom Hue Group
   - platform: group
     name: Bedroom Lights
     entities:
