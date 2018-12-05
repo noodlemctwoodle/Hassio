@@ -18,14 +18,14 @@ views:
   - title: default_view
     icon: mdi:home
     cards:
-  # Time
-   # Weather
      - type: vertical-stack
        cards:
+   # Time
         - type: glance
           entities:
           - sensor.time_utc
           - sensor.last_boot
+    # Weather
         - type: weather-forecast
           entity: weather.dark_sky
         - type: horizontal-stack
