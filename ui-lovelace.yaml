@@ -1,13 +1,13 @@
 
 # Custom Card Resources
 resources:
-  - url: /local/custom-lovelace/tracker-card/tracker-card.js?v=0.1.5
+  - url: /local/custom_ui/tracker-card/tracker-card.js?v=0.1.5
     type: js
-  - url: /local/custom-lovelace/monster-card/monster-card.js?v=0.2.3
+  - url: /local/custom_ui/monster-card/monster-card.js?v=0.2.3
     type: js
   - url: https://unpkg.com/moment@2.22.2/moment.js
     type: js
-  - url: /local/custom-lovelace/calendar-card/calendar-card.js?v=1.0.1
+  - url: /local/custom_ui/calendar-card/calendar-card.js?v=1.0.1
     type: module
 
 # Love Lace UI FrontEnd
