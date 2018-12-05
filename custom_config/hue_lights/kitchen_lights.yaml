@@ -1,9 +1,0 @@
-# Kitchen Hue Group
-  - platform: group
-    name: Kitchen Spotlights
-    entities:
-      - light.kitchen_spot_1
-      - light.kitchen_spot_2
-      - light.kitchen_spot_3
-      - light.kitchen_spot_4
-      - light.kitchen_spot_5

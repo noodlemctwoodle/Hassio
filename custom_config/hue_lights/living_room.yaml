@@ -1,6 +1,0 @@
-# Living Room Hue Group
-  - platform: group
-    name: Living Room Lights
-    entities:
-      - llight.living_room_lamp
-      - light.living_room_pendant
