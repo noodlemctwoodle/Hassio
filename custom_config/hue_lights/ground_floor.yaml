@@ -21,3 +21,5 @@
     entities:
       - llight.living_room_lamp
       - light.living_room_pendant
+
+# Hall Hue Group
