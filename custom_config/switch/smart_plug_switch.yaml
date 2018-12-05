@@ -1,0 +1,4 @@
+# TPLink Smart Plug Software Switch
+  - platform: tplink
+    host: !secret tp_link_host
+    name: Christmas Lights

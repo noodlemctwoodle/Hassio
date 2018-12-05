@@ -170,3 +170,29 @@
         {% else %}
           Off
         {% endif %}'
+
+# Hue Average Temp
+- platform: min_max
+  type: mean
+  name: average_room_temp
+  entity_ids:
+    - sensor.kitchen_temperature
+    - sensor.living_room_temperature
+    - sensor.bathroom_temperature
+    - sensor.hall_temperature
+    - sensor.landing_temperature
+    - sensor.office_temperature
+    - sensor.bedroom_temperature
+
+# Hue Average LUX
+- platform: min_max
+  type: mean
+  name: average_room_lux
+  entity_ids:
+    - sensor.kitchen_light_level
+    - sensor.living_room_light_level
+    - sensor.bathroom_light_level
+    - sensor.hall_light_level
+    - sensor.landing_light_level
+    - sensor.office_light_level
+    - sensor.bedroom_light_level

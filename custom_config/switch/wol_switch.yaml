@@ -15,8 +15,3 @@
     broadcast_address: !secret server_broadcast
     turn_off:
       service: shell_command.pc_off
-
-# TPLink Smart Plug Software Switch
-  - platform: tplink
-    host: !secret tp_link_host
-    name: Christmas Lights

@@ -13,9 +13,6 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-# Show links to resources in log and frontend
-#introduction:
-
 # Enables the frontend
 frontend:
 # Theme Based from @marcelhoffs https://community.home-assistant.io/t/midnight-theme/28598
@@ -112,13 +109,18 @@ panel_iframe:
     url: !secret nzbget_url
 
 # Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
 updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
+
+ # Checks for available custom card updates 
+custom_updater:
+  track:
+    - cards
+    - components
+  card_urls:
+    - https://raw.githubusercontent.com/rdehuyss/homeassistant-lovelace-google-calendar-card/master/custom_updater.json
+  component_urls:
+    - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
+
 
 # Nabu Casa Cloud Component $5 per month - https://www.nabucasa.com/
 cloud:
@@ -195,6 +197,10 @@ climate:
 weather:
   - platform: darksky
     api_key: !secret dark_sky_api
+
+google:
+  client_id: !secret google_calendar_id 
+  client_secret: !secret google_calendar_secret
 
 # Azure Image Processing > In Testing
 # image_processing:

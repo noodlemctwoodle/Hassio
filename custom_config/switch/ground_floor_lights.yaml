@@ -1,0 +1,112 @@
+# Backdoor Light Switch
+  - platform: template
+    switches:
+      backdoor_lights:
+        value_template: "{{ is_state('light.back_door', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.back_door
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.back_door
+
+# Kitchen Light Switch
+  - platform: template
+    switches:
+      kitchen_lights:
+        value_template: "{{ is_state('light.kitchen_spotlights', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.kitchen_spotlights
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.kitchen_spotlights
+
+# Dining Room Light Switch
+  - platform: template
+    switches:
+      diningroom_lights:
+        value_template: "{{ is_state('light.dining_room', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.dining_room
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.dining_room
+
+# Living Room Light Switch
+  - platform: template
+    switches:
+      livingroom_lights:
+        value_template: "{{ is_state('group.lounge_lights', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.living_room_pendant
+          - service: light.turn_on
+            entity_id: light.living_room_lamp
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.living_room_pendant
+          - service: light.turn_off
+            entity_id: light.living_room_lamp
+
+# Hall Light Switch
+  - platform: template
+    switches:
+      hall_lights:
+        value_template: "{{ is_state('light.hall_spotlights', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.hall_spotlights
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.hall_spotlights
+
+# Bathroom Light Switch
+  - platform: template
+    switches:
+      bathroom_lights:
+        value_template: "{{ is_state('light.bathroom', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.bathroom
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.bathroom
+
+
+# All Ground Floor Light Switch
+  - platform: template
+    switches:
+      downstairs_lights:
+        value_template: "{{ is_state('group.downstairs_lights', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.hall_spotlights
+          - service: light.turn_on
+            entity_id: light.living_room_pendant
+          - service: light.turn_on
+            entity_id: light.living_room_lamp
+          - service: light.turn_on
+            entity_id: light.kitchen_spotlights
+          - service: light.turn_on
+            entity_id: light.dining_room
+          - service: light.turn_on
+            entity_id: light.back_door
+          - service: light.turn_on
+            entity_id: light.bathroom_spot
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.hall_spotlights
+          - service: light.turn_off
+            entity_id: light.living_room_pendant
+          - service: light.turn_off
+            entity_id: light.living_room_lamp
+          - service: light.turn_off
+            entity_id: light.kitchen_spotlights
+          - service: light.turn_off
+            entity_id: light.dining_room
+          - service: light.turn_off
+            entity_id: light.back_door
+          - service: light.turn_off
+            entity_id: light.bathroom_spot

@@ -52,17 +52,3 @@
         value_template: '{{states.device_tracker.nest_hello.attributes.signal}}'
       outdoor_unifi_noise:
         value_template: '{{states.device_tracker.nest_outdoor_cam.attributes.signal}}'
-
-#  - platform: min_max
-#    name: "Toby Presence"
-#    type: mean
-#    round_digits: 0
-#    entity_ids:
-#    - sensor.toby_unifi_rssi
-
-#  - platform: min_max
-#    name: "Abi Presence"
-#    type: mean
-#    round_digits: 0
-#    entity_ids:
-#    - sensor.abi_unifi_rssi

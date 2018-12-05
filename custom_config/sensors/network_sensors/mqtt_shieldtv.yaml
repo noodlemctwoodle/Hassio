@@ -1,3 +1,0 @@
-- platform: mqtt
-  name: 'ShieldTV Activity'
-  state_topic: 'homeassistant/sensor/shieldtv-activity'

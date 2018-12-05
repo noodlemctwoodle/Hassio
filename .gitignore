@@ -13,6 +13,7 @@ assets
 ip_bans.yaml
 known_devices.yaml
 appdaemon.yaml
+google_calendars.yaml
 # Ignore Python Cache
 __pycache__
 __init__
@@ -35,3 +36,4 @@ appdaemon/access.log.1
 appdaemon/access.log.2
 appdaemon/access.log.3
 appdaemon/error.log
+
