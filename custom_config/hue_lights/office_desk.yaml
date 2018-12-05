@@ -1,6 +1,0 @@
-# Office Hue Group
-  - platform: group
-    name: Office Desk
-    entities:
-      - light.office_desk_w
-      - light.office_desk_rgb
