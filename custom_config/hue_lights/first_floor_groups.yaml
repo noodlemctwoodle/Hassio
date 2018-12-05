@@ -1,12 +1,18 @@
+# Landing Hue Group
+  - platform: group
+    name: Landing Group
+    entities:
+      - light.landing_spot
+
 # Bedroom Hue Group
   - platform: group
-    name: Bedroom Lights
+    name: Bedroom Group
     entities:
       - light.bedroom_pendant_1
       - light.bedroom_pendant_2
       - light.bedroom_lamp
 
-# Office Hue Group
+# Office Hue Groups
   - platform: group
     name: Office Spotlights
     entities:
@@ -20,7 +26,7 @@
       - light.office_desk_rgb
 
   - platform: group
-    name: Office Lights
+    name: Office Group
     entities:
       - light.office_spotlights
       - light.office_desk
@@ -28,3 +34,16 @@
       - light.office_shadow
 
 # Craft Room Hue
+  - platform: group
+    name: Craft Room Group
+    entities:
+      - light.craft_room
+
+# First Floor Group
+  - platform: group
+    name: First Floor Group
+    entities:
+      - light.landing_group
+      - light.bedroom_group
+      - light.office_group
+      - light.craft_room_group

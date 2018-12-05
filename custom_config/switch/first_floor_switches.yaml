@@ -14,7 +14,7 @@
   - platform: template
     switches:
       bedroom_lights:
-        value_template: "{{ is_state('light.bedroom_lights', 'on') }}"
+        value_template: "{{ is_state('light.bedroom_group', 'on') }}"
         turn_on:
           - service: light.turn_on
             entity_id: light.bedroom_lights
@@ -26,7 +26,7 @@
   - platform: template
     switches:
       office_lights:
-        value_template: "{{ is_state('light.office_lights', 'on') }}"
+        value_template: "{{ is_state('light.office_group', 'on') }}"
         turn_on:
           - service: light.turn_on
             entity_id: light.office_bloom
@@ -50,7 +50,7 @@
   - platform: template
     switches:
       craftroom_lights:
-        value_template: "{{ is_state('light.craft_room', 'on') }}"
+        value_template: "{{ is_state('light.craft_room_group', 'on') }}"
         turn_on:
           - service: light.turn_on
             entity_id: light.craft_room
@@ -62,38 +62,22 @@
   - platform: template
     switches:
       upstairs_lights:
-        value_template: "{{ is_state('group.upstairs_lights', 'on') }}"
+        value_template: "{{ is_state('light.first_floor_group', 'on') }}"
         turn_on:
           - service: light.turn_on
-            entity_id: light.landing_spot
+            entity_id: light.bedroom_group
           - service: light.turn_on
-            entity_id: light.bedroom_spotlights
+            entity_id: light.office_group
           - service: light.turn_on
-            entity_id: light.bedroom_lamp
+            entity_id: light.landing_group
           - service: light.turn_on
-            entity_id: light.office_bloom
-          - service: light.turn_on
-            entity_id: light.office_shadow
-          - service: light.turn_on
-            entity_id: light.office_spotlights
-          - service: light.turn_on
-            entity_id: light.office_desk
-          - service: light.turn_on
-            entity_id: light.craft_room
+            entity_id: light.craft_room_group
         turn_off:
           - service: light.turn_off
-            entity_id: light.landing_spot
+            entity_id: light.bedroom_group
           - service: light.turn_off
-            entity_id: light.bedroom_spotlights
+            entity_id: light.office_group
           - service: light.turn_off
-            entity_id: light.bedroom_lamp
+            entity_id: light.landing_group
           - service: light.turn_off
-            entity_id: light.office_bloom
-          - service: light.turn_off
-            entity_id: light.office_shadow
-          - service: light.turn_off
-            entity_id: light.office_spotlights
-          - service: light.turn_off
-            entity_id: light.office_desk
-          - service: light.turn_off
-            entity_id: light.craft_room
+            entity_id: light.craft_room_group
