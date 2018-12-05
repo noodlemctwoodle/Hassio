@@ -165,6 +165,11 @@ views:
             entity: sensor.network_out_eno1
             name: Eth0 Upload
             height: 40
+     - type: custom:tracker-card
+       title:
+       trackers:
+         - sensor.custom_card_tracker
+         - sensor.custom_component_tracker
 # Room - Hall/Front Door
   - title: hall
     icon: mdi:door
@@ -702,22 +707,43 @@ views:
               - automation.turn_on_landing_lights_day
               - automation.turn_on_landing_lights_night
               - automation.turn_off_landing_lights
-#        - type: vertical-stack
-#          cards:
-#          - type: entities
-#            title: 'Living Room Automations'
-#            show_header_toggle: false
-#            entities:
-#              - automation.turn_on_livingroom_lights_morning
-#              - automation.turn_on_livingroom_lights_day
-#              - automation.turn_on_livingroom_lights_night
-#              - automation.turn_on_livingroom_lights_away_mode
-        - type: custom:tracker-card
-          title:
-          trackers:
-            - sensor.custom_card_tracker
-            - sensor.custom_component_tracker
-
+        - type: vertical-stack
+          cards:
+          - type: entities
+            title: 'Living Room Automations'
+            show_header_toggle: true
+            entities:
+              - automation.turn_on_livingroom_lights_morning
+              - automation.turn_on_livingroom_lights_day
+              - automation.turn_on_livingroom_lights_night
+              - automation.turn_on_livingroom_lights_away_mode
+          - type: entities
+            title: 'Office Automations'
+            show_header_toggle: true
+            entities:
+              - automation.turn_on_office_light_morning
+              - automation.turn_on_office_light_day
+              - automation.turn_on_office_light_night
+          - type: entities
+            title: 'Heating Automations'
+            show_header_toggle: true
+            entities:
+              - automation.turn_on_heating
+              - automation.heating_on_notification
+              - automation.turn_off_heating
+              - automation.heating_off_notification
+              - automation.turn_off_the_heating_when_away
+        - type: vertical-stack
+          cards:
+          - type: entities
+            title: 'Presence Automations'
+            show_header_toggle: true
+            entities:
+              - automation.abi_is_home
+              - automation.abi_home_notification
+              - automation.abi_away_notification
+              - automation.motion_detected_in_front_garden
+              - automation.motion_detected_in_back_garden
 # FloorPlan
   - title: floorplan
     icon: mdi:floor-plan
@@ -725,21 +751,33 @@ views:
     cards:
       - type: vertical-stack
         cards:  
+### Downstairs
         - type: picture-elements
-          image: /local/floor-plan/downstairs.png
+          image: /local/floorplan-icons/downstairs.png
           elements:
+# Back door
           - type: state-icon
             tap_action: toggle
-            entity: light.living_room_pendant
+            entity: light.back_door
             style:
-              top: 67%
-              left: 65%
+              top: 10%
+              left: 72%   
           - type: state-icon
             tap_action: toggle
-            entity: light.living_room_lamp
+            title: Backdoor Lights
+            entity: switch.backdoor_lights
             style:
-              top: 72%
-              left: 41%  
+              top: 17%
+              left: 61%
+          - type: image
+            entity: camera.backyard_back_garden
+            camera_image: camera.backyard_back_garden
+            style:
+              top: 11%
+              left: 14%
+              width: 25%
+              border-radius: 10%   
+# Kitchen
           - type: state-icon
             tap_action: toggle
             entity: light.kitchen_spot_1
@@ -772,10 +810,48 @@ views:
               left: 50%              
           - type: state-icon
             tap_action: toggle
-            entity: light.back_door
+            title: Kitchen Lights
+            entity: switch.kitchen_lights
             style:
-              top: 10%
-              left: 72%   
+              top: 40%
+              left: 60%
+          - type: state-label
+            entity: sensor.kitchen_temperature
+            style:
+              top: 40%
+              left: 69%   
+          - type: image
+            entity: sensor.Kitchen_motion_sensor
+            title: Kitchen Motion
+            tap_action: toggle
+            image: /local/floorplan-icons/phue_sensor.png
+            filter: brightness(50%)
+            state_filter:
+              on: brightness(100%)
+            style:
+              top: 38%
+              left: 69%
+              width: 3%
+          - type: state-icon
+            tap_action: navigate
+            title: Kitchen Nest Protect
+            entity: binary_sensor.kitchen_nest_protect_online
+            style:
+              top: 30%
+              left: 61%
+          - type: image
+            entity: media_player.kitchen_home
+            tap_action: call-service
+            service: media_player.media_play_pause
+            image: /local/floorplan-icons/ghome_mini.png
+            filter: brightness(50%)
+            state_filter:
+              playing: brightness(100%)
+            style:
+              top: 40%
+              left: 31%
+              width: 5%
+# Dining Room
           - type: state-icon
             tap_action: toggle
             entity: light.dining_room
@@ -784,74 +860,24 @@ views:
               left: 72%               
           - type: state-icon
             tap_action: toggle
-            entity: light.hallway_spot_1
-            style:
-              top: 83%
-              left: 33%  
-          - type: image
-            entity: camera.front_door
-            camera_image: camera.front_door
-            style:
-              top: 33%
-              left: 14%
-              width: 25%
-              border-radius: 10%     
-          - type: image
-            entity: camera.backyard_back_garden
-            camera_image: camera.backyard_back_garden
-            style:
-              top: 11%
-              left: 14%
-              width: 25%
-              border-radius: 10%   
-          - type: state-icon
-            tap_action: toggle
-            entity: light.hallway_spot_2
-            style:
-              top: 83%
-              left: 22%   
-          - type: state-icon
-            tap_action: toggle
-            entity: light.bathroom
-            style:
-              top: 65%
-              left: 22%
-          - type: state-label
-            entity: sensor.living_room_thermostat_temperature
-            style:
-              top: 87%
-              left: 83%    
-          - type: state-label
-            entity: sensor.bathroom_temperature
-            style:
-              top: 74%
-              left: 24% 
-          - type: state-label
-            entity: sensor.hall_temperature
-            style:
-              top: 87%
-              left: 34% 
-          - type: state-icon
-            tap_action: toggle
-            title: Kitchen Lights
-            entity: switch.kitchen_lights
-            style:
-              top: 40%
-              left: 60%
-          - type: state-icon
-            tap_action: toggle
             title: Dining Room Lights
             entity: switch.diningroom_lights
             style:
               top: 40%
               left: 65%
+# Living Room
           - type: state-icon
             tap_action: toggle
-            title: Backdoor Lights
-            entity: switch.backdoor_lights
+            entity: light.living_room_pendant
             style:
-              top: 17%
-              left: 61%
+              top: 67%
+              left: 65%
+          - type: state-icon
+            tap_action: toggle
+            entity: light.living_room_lamp
+            style:
+              top: 72%
+              left: 41%  
           - type: state-icon
             tap_action: toggle
             title: Livingroom Lights
@@ -859,6 +885,65 @@ views:
             style:
               top: 77%
               left: 45%
+          - type: state-label
+            entity: sensor.living_room_thermostat_temperature
+            style:
+              top: 87%
+              left: 83%    
+          - type: state-label
+            entity: sensor.living_room_temperature
+            style:
+              top: 65%
+              left: 84%   
+          - type: image
+            entity: sensor.living_room_motion_sensor
+            title: Living Room Motion
+            tap_action: toggle
+            image: /local/floorplan-icons/phue_sensor.png
+            filter: brightness(50%)
+            state_filter:
+              on: brightness(100%)
+            style:
+              top: 63%
+              left: 84%
+              width: 3%
+          - type: image
+            entity: media_player.living_room_home
+            tap_action: call-service
+            service: media_player.media_play_pause
+            image: /local/floorplan-icons/ghome.png
+            filter: brightness(50%)
+            state_filter:
+              playing: brightness(100%)
+            style:
+              top: 68%
+              left: 42%
+              width: 8%
+          - type: image
+            entity: media_player.denon_avrx2300w
+            tap_action: call-service
+            service: media_player.media_play_pause
+            image: /local/floorplan-icons/denon.png
+            filter: brightness(50%)
+            state_filter:
+              playing: brightness(100%)
+            style:
+              top: 45%
+              left: 84%
+              width: 6%
+# Hall
+          - type: state-icon
+            tap_action: toggle
+            entity: light.hallway_spot_1
+            style:
+              top: 83%
+              left: 33%  
+          - type: state-icon
+            tap_action: toggle
+            entity: light.hallway_spot_2
+            style:
+              top: 83%
+              left: 22%   
           - type: state-icon
             tap_action: toggle
             title: Hall Lights
@@ -868,49 +953,21 @@ views:
               left: 30%
           - type: state-icon
             tap_action: toggle
-            title: Bathroom Lights
-            entity: switch.bathroom_lights
-            style:
-              top: 74%
-              left: 19%
-          - type: state-icon
-            tap_action: toggle
             title: All Downstairs Lights
             entity: switch.downstairs_lights
             style:
               top: 87%
               left: 40%
-          - type: state-icon
-            tap_action: navigate
-            title: Hallway Nest Protect
-            entity: binary_sensor.hallway_nest_protect_online
-            style:
-              top: 65%
-              left: 34%
-          - type: state-icon
-            tap_action: navigate
-            title: Hallway Nest Protect
-            entity: binary_sensor.kitchen_nest_protect_online
-            style:
-              top: 30%
-              left: 61%
-          - type: image
-            entity: sensor.bathroom_motion_sensor
-            title: Bathroom Motion
-            tap_action: toggle
-            image: /local/floor-plan/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
+          - type: state-label
+            entity: sensor.hall_temperature
             style:
               top: 87%
-              left: 28%
-              width: 3%
+              left: 34% 
           - type: image
             entity: sensor.hall_motion_sensor
             title: Hall Motion
             tap_action: toggle
-            image: /local/floor-plan/phue_sensor.png
+            image: /local/floorplan-icons/phue_sensor.png
             filter: brightness(50%)
             state_filter:
               on: brightness(100%)
@@ -919,65 +976,94 @@ views:
               left: 25%
               width: 3%
           - type: image
-            entity: sensor.landing_motion_sensor
-            title: Landing Motion
+            entity: camera.front_door
+            camera_image: camera.front_door
+            style:
+              top: 33%
+              left: 14%
+              width: 25%
+              border-radius: 10%  
+# Bathroom
+          - type: state-icon
             tap_action: toggle
-            image: /local/floor-plan/phue_sensor.png
+            entity: light.bathroom
+            style:
+              top: 65%
+              left: 22%
+          - type: state-icon
+            tap_action: toggle
+            title: Bathroom Lights
+            entity: switch.bathroom_lights
+            style:
+              top: 74%
+              left: 19%
+          - type: state-label
+            entity: sensor.bathroom_temperature
+            style:
+              top: 74%
+              left: 24% 
+          - type: image
+            entity: sensor.bathroom_motion_sensor
+            title: Bathroom Motion
+            tap_action: toggle
+            image: /local/floorplan-icons/phue_sensor.png
             filter: brightness(50%)
             state_filter:
               on: brightness(100%)
             style:
-              top: 53%
-              left: 30%
+              top: 87%
+              left: 28%
               width: 3%
-
-          - type: image
-            entity: media_player.living_room_home
-            tap_action: call-service
-            service: media_player.media_play_pause
-            image: /local/floor-plan/ghome.png
-            filter: brightness(50%)
-            state_filter:
-              playing: brightness(100%)
-            style:
-              top: 68%
-              left: 42%
-              width: 8%
-          - type: image
-            entity: media_player.kitchen_home
-            tap_action: call-service
-            service: media_player.media_play_pause
-            image: /local/floor-plan/ghome_mini.png
-            filter: brightness(50%)
-            state_filter:
-              playing: brightness(100%)
-            style:
-              top: 40%
-              left: 31%
-              width: 5%
-          - type: image
-            entity: media_player.denon_avrx2300w
-            tap_action: call-service
-            service: media_player.media_play_pause
-            image: /local/floor-plan/denon.png
-            filter: brightness(50%)
-            state_filter:
-              playing: brightness(100%)
-            style:
-              top: 45%
-              left: 84%
-              width: 6%
-
-
+### Upstairs
         - type: picture-elements
-          image: /local/floor-plan/upstairs.png
+          image: /local/floorplan-icons/upstairs.png
           elements:
+# Landing
           - type: state-icon
             tap_action: toggle
             entity: light.landing_spot
             style:
               top: 49%
               left: 43%
+          - type: state-icon
+            tap_action: toggle
+            title: Landing Lights
+            entity: switch.landing_lights
+            style:
+              top: 52%
+              left: 47%
+          - type: state-icon
+            tap_action: toggle
+            title: All Upstairs Lights
+            entity: switch.upstairs_lights
+            style:
+              top: 52%
+              left: 35%
+          - type: state-label
+            entity: sensor.landing_temperature
+            style:
+              top: 47%
+              left: 24%  
+          - type: image
+            entity: sensor.landing_motion_sensor
+            title: Landing Motion
+            tap_action: toggle
+            image: /local/floorplan-icons/phue_sensor.png
+            filter: brightness(50%)
+            state_filter:
+              on: brightness(100%)
+            style:
+              top: 45%
+              left: 24%
+              width: 3%
+          - type: state-icon
+            tap_action: navigate
+            title: Hallway Nest Protect
+            entity: binary_sensor.upstairs_nest_protect_online
+            style:
+              top: 50%
+              left: 25%
+# Bedroom              
           - type: state-icon
             tap_action: toggle
             entity: light.bedroom_lamp
@@ -998,10 +1084,43 @@ views:
               left: 65%  
           - type: state-icon
             tap_action: toggle
+            title: Bedroom Lights
+            entity: switch.bedroom_lights
+            style:
+              top: 56%
+              left: 38%
+          - type: state-label
+            entity: sensor.bedroom_temperature
+            style:
+              top: 58%
+              left: 35%   
+          - type: image
+            entity: sensor.bedroom_motion_sensor
+            title: Bedroom Motion
+            tap_action: toggle
+            image: /local/floorplan-icons/phue_sensor.png
+            filter: brightness(50%)
+            state_filter:
+              on: brightness(100%)
+            style:
+              top: 56%
+              left: 35%
+              width: 3%
+# Craft Room
+          - type: state-icon
+            tap_action: toggle
             entity: light.craft_room
             style:
               top: 35%
               left: 65%  
+          - type: state-icon
+            tap_action: toggle
+            title: Craft Room Lights
+            entity: switch.craftroom_lights
+            style:
+              top: 52%
+              left: 54%
+# Office
           - type: state-icon
             tap_action: toggle
             entity: light.office_spot_1
@@ -1032,39 +1151,6 @@ views:
             style:
               top: 40%
               left: 23%  
-          - type: state-label
-            entity: sensor.landing_temperature
-            style:
-              top: 47%
-              left: 24%    
-          - type: state-icon
-            tap_action: toggle
-            title: All Upstairs Lights
-            entity: switch.upstairs_lights
-            style:
-              top: 52%
-              left: 35%
-          - type: state-icon
-            tap_action: toggle
-            title: Bedroom Lights
-            entity: switch.bedroom_lights
-            style:
-              top: 56%
-              left: 38%
-          - type: state-icon
-            tap_action: toggle
-            title: Landing Lights
-            entity: switch.landing_lights
-            style:
-              top: 52%
-              left: 47%
-          - type: state-icon
-            tap_action: toggle
-            title: Craft Room Lights
-            entity: switch.craftroom_lights
-            style:
-              top: 52%
-              left: 54%
           - type: state-icon
             tap_action: toggle
             title: Office Lights
@@ -1072,6 +1158,23 @@ views:
             style:
               top: 40%
               left: 49%
+          - type: state-label
+            entity: sensor.office_temperature
+            style:
+              top: 17%
+              left: 26%   
+          - type: image
+            entity: sensor.office_motion_sensor
+            title: Office Motion
+            tap_action: toggle
+            image: /local/floorplan-icons/phue_sensor.png
+            filter: brightness(50%)
+            state_filter:
+              on: brightness(100%)
+            style:
+              top: 15%
+              left: 26%
+              width: 3%
           - type: state-icon
             tap_action: toggle
             title: Unraid Server
@@ -1090,7 +1193,7 @@ views:
             entity: media_player.office_speaker
             tap_action: call-service
             service: media_player.media_play_pause
-            image: /local/floor-plan/ghome_mini.png
+            image: /local/floorplan-icons/ghome_mini.png
             filter: brightness(50%)
             state_filter:
               playing: brightness(100%)
