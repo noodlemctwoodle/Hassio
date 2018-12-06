@@ -898,6 +898,11 @@ views:
               top: 87%
               left: 83%    
           - type: state-label
+            entity: sensor.living_room_thermostat_hvac_state
+            style:
+              top: 86%
+              left: 83%    
+          - type: state-label
             entity: sensor.living_room_temperature
             style:
               top: 65%
