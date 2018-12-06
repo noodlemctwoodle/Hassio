@@ -224,6 +224,7 @@ script: !include scripts.yaml
 hangouts: !include custom_config/notify/hangouts.yaml
 #### /custom_config/network/ ####
 device_tracker: !include custom_config/network/device_tracker.yaml
+input_number: !include custom_config/input_number/hue_dimmer.yaml
 shell_command: !include custom_config/network/shell_commands.yaml
 zone: !include custom_config/network/zones.yaml
 

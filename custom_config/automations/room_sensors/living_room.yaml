@@ -7,9 +7,9 @@
     entity_id: sensor.living_room_motion_sensor
     to: 'on'
   condition:
-  - below: '3'
-    condition: numeric_state
+  - condition: numeric_state
     entity_id: sensor.living_room_light_level
+    below: '3'
   - condition: state
     entity_id: light.living_room_lamp
     state: 'off'
@@ -33,9 +33,9 @@
     entity_id: sensor.living_room_motion_sensor
     to: 'on'
   condition:
-  - below: '5'
-    condition: numeric_state
+  - condition: numeric_state
     entity_id: sensor.living_room_light_level
+    below: '5'
   - condition: state
     entity_id: light.living_room_lamp
     state: 'off'
@@ -62,9 +62,9 @@
     entity_id: sensor.living_room_motion_sensor
     to: 'on'
   condition:
-  - below: '2'
-    condition: numeric_state
+  - condition: numeric_state
     entity_id: sensor.living_room_light_level
+    below: '2'
   - condition: state
     entity_id: light.living_room_lamp
     state: 'off'
@@ -89,9 +89,9 @@
     entity_id: sun.sun
     to: 'below_horizon'
   condition:
-  - below: '2'
-    condition: numeric_state
+  - condition: numeric_state
     entity_id: sensor.living_room_light_level
+    below: '2'
   - condition: state
     entity_id: sensor.toby_connected_ap
     state: 'Offline'

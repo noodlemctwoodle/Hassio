@@ -70,6 +70,10 @@ sensor.office_battery_level:
   icon: mdi:battery
 sensor.bedroom_battery_level:
   icon: mdi:battery
+sensor.living_room_switch_battery_level:
+  icon: mdi:battery
+sensor.living_room_remote:
+  icon: mdi:remote
 sensor.toby_presence:
   icon: mdi:home-automation
 sensor.abi_presence:

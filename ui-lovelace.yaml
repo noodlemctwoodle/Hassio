@@ -45,6 +45,53 @@ views:
                   name: First Floor
         - type: horizontal-stack
           cards:
+    # Hue Average
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: sensor.average_room_temp
+                name: Average Temp
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: sensor.average_room_lux
+                name: Average LUX
+  # System Stats
+     - type: vertical-stack
+       cards:
+        - type: horizontal-stack
+          cards: 
+          - type: gauge
+            title: Mem Usage
+            entity: sensor.memory_use_percent
+          - type: sensor
+            entity: sensor.memory_free
+            name: Memory Free
+            height: 35
+        - type: horizontal-stack
+          cards: 
+          - type: gauge
+            title: CPU Usage
+            entity: sensor.processor_use  
+          - type: sensor
+            entity: sensor.cpu_speed
+            name: CPU Speed
+            height: 35
+        - type: gauge
+          title: Disk Usage
+          entity: sensor.disk_use_percent_home
+        - type: horizontal-stack
+          cards:  
+          - type: sensor
+            entity: sensor.network_in_eno1
+            name: Eth0 Download
+            height: 40
+          - type: sensor
+            entity: sensor.network_out_eno1
+            name: Eth0 Upload
+            height: 40
+        - type: horizontal-stack
+          cards:
       # Presence Detection
             - type: custom:monster-card
               show_empty: false
@@ -118,58 +165,17 @@ views:
                 include:
                   - entity_id: "*abi_connected_ap*"
                     state: "Offline"
-        - type: horizontal-stack
-          cards:
-      # Hue Average
-            - type: entities
-              show_header_toggle: false
-              entities:
-                - entity: sensor.average_room_temp
-                  name: Average Temp
-            - type: entities
-              show_header_toggle: false
-              entities:
-                - entity: sensor.average_room_lux
-                  name: Average LUX
-  # System Stats
-     - type: vertical-stack
-       cards:
-        - type: horizontal-stack
-          cards: 
-          - type: gauge
-            title: Mem Usage
-            entity: sensor.memory_use_percent
-          - type: sensor
-            entity: sensor.memory_free
-            name: Memory Free
-            height: 35
-        - type: horizontal-stack
-          cards: 
-          - type: gauge
-            title: CPU Usage
-            entity: sensor.processor_use  
-          - type: sensor
-            entity: sensor.cpu_speed
-            name: CPU Speed
-            height: 35
-        - type: gauge
-          title: Disk Usage
-          entity: sensor.disk_use_percent_home
-        - type: horizontal-stack
-          cards:  
-          - type: sensor
-            entity: sensor.network_in_eno1
-            name: Eth0 Download
-            height: 40
-          - type: sensor
-            entity: sensor.network_out_eno1
-            name: Eth0 Upload
-            height: 40
      - type: custom:tracker-card
        title:
        trackers:
          - sensor.custom_card_tracker
          - sensor.custom_component_tracker
+     - type: entities
+       title: Version
+       show_header_toggle: false
+       entities:
+        - sensor.current_version
+
 # Room - Hall/Front Door
   - title: hall
     icon: mdi:door
@@ -229,7 +235,7 @@ views:
         cards:  
   # Hue Sensor
         - type: glance
-          title: Hue Sensor
+          title: Hue Sensors
           entities:
             - entity: sensor.living_room_motion_sensor
               name: Motion
@@ -238,7 +244,9 @@ views:
             - entity: sensor.living_room_temperature
               name: Temp
             - entity: sensor.living_room_battery_level
-              name: Battery
+              name: Sensor
+            - entity: sensor.living_room_switch_battery_level
+              name: Remote
   # Hue Lights
         - type: entities
           title: Hue Lights
@@ -256,12 +264,19 @@ views:
             entities:
               - light.living_room_lamp
               - light.living_room_pendant
+              - input_number.livingroom_brightness
         - type: entities
           title: Christmas Lights
           show_header_toggle: false
           entities:
             - entity: switch.christmas_lights
               name: Living Room Christmas
+  # Hue Remote
+        - type: glance
+          title: Hue Remote
+          entities:
+            - entity: sensor.living_room_remote
+              name: Input
       - type: vertical-stack
         cards:      
   # Nest Thermostat
@@ -484,6 +499,11 @@ views:
               name: Lights
               entities:
                 - light.landing_spot
+          - type: entities
+            title: 'Attic Light'
+            show_header_toggle: false
+            entities:
+              - light.attic      
   # Nest Protect
         - type: vertical-stack
           cards:
