@@ -1,102 +1,109 @@
-#Landing Sensor Automations
-- alias: Turn on landing lights morning
+# Kitchen Sensor Automations
+- alias: Turn on kitchen light morning
   trigger:
     platform: state
-    entity_id: sensor.landing_motion_sensor
+    entity_id: sensor.kitchen_motion_sensor
     to: 'on'
   condition:
     condition: and
     conditions:
     - condition: numeric_state
-      entity_id: sensor.landing_light_level
+      entity_id: sensor.kitchen_light_level
       below: '3'
     - condition: state
-      entity_id: light.landing_spot
+      entity_id: light.kitchen_group
       state: 'off'
     - condition: time
       after: '07:00:00'
-      before: '09:59:00'
+      before: '08:59:00'
   action:
     service: homeassistant.turn_on
-    entity_id: light.landing_spot
+    entity_id: light.kitchen_group
     data_template:
-      brightness: 130
+      brightness: 160
       color_temp: 318
       transition: 5
 
-- alias: Turn on landing lights day
+- alias: Turn on kitchen light day
   trigger:
     platform: state
-    entity_id: sensor.landing_motion_sensor
+    entity_id: sensor.kitchen_motion_sensor
     to: 'on'
   condition:
     condition: and
     conditions:
     - condition: numeric_state
-      entity_id: sensor.landing_light_level
-      below: '4'
+      entity_id: sensor.kitchen_light_level
+      below: '6'
     - condition: state
-      entity_id: light.landing_spot
+      entity_id: light.kitchen_group
       state: 'off'
     - condition: time
       after: '09:00:00'
       before: '23:29:00'
   action:
     service: homeassistant.turn_on
-    entity_id: light.landing_spot
+    entity_id: light.kitchen_group
     data_template:
-      brightness: 254
+      brightness: 200
       color_temp: 318
       transition: 5
 
-- alias: Turn on landing lights night
+- alias: Turn on kitchen light night
   trigger:
     platform: state
-    entity_id: sensor.landing_motion_sensor
+    entity_id: sensor.kitchen_motion_sensor
     to: 'on'
   condition:
     condition: and
     conditions:
     - condition: numeric_state
-      entity_id: sensor.landing_light_level
+      entity_id: sensor.kitchen_light_level
       below: '2'
     - condition: state
-      entity_id: light.landing_spot
+      entity_id: light.kitchen_group
       state: 'off'
     - condition: time
       after: '23:30:00'
       before: '06:59:00'
   action:
     service: homeassistant.turn_on
-    entity_id: light.landing_spot
+    entity_id: light.kitchen_group
     data_template:
-      brightness: 1
+      brightness: 30
       color_temp: 318
       transition: 30
 
-- alias: Turn off landing lights
+- alias: Turn off kitchen lights
   trigger:
     - platform: state
-      entity_id: sensor.landing_motion_sensor
+      entity_id: sensor.kitchen_motion_sensor
       to: 'off'
       for:
-        minutes: '1'
+        minutes: '10'
     - platform: state
-      entity_id: sensor.landing_motion_sensor
+      entity_id: sensor.kitchen_motion_sensor
       to: 'off'
       for:
-        minutes: '2'
+        minutes: '15'
     - platform: state
-      entity_id: sensor.landing_motion_sensor
+      entity_id: sensor.kitchen_motion_sensor
       to: 'off'
       for:
-        minutes: '5'
+        minutes: '20'
+    - platform: state
+      entity_id: sensor.kitchen_motion_sensor
+      to: 'off'
+      for:
+        minutes: '25'
   condition:
     - condition: state
-      entity_id: sensor.landing_motion_sensor
+      entity_id: sensor.kitchen_motion_sensor
       state: 'off'
+      for:
+        minutes: '10'
   action:
     service: homeassistant.turn_off
-    entity_id: light.landing_spot
+    entity_id: light.kitchen_group_group
     data_template:
       transition: 30

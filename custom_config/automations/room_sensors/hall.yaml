@@ -5,18 +5,20 @@
     entity_id: sensor.hall_motion_sensor
     to: 'on'
   condition:
-  - below: '3'
-    condition: numeric_state
-    entity_id: sensor.hall_light_level
-  - condition: state
-    entity_id: light.hallway_spot_1
-    state: 'off'
-  - condition: state
-    entity_id: light.hallway_spot_2
-    state: 'off'
-  - condition: time
-    after: '05:00:00'
-    before: '09:59:00'
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.hall_light_level
+      below: '3'
+    - condition: state
+      entity_id: light.hallway_spot_1
+      state: 'off'
+    - condition: state
+      entity_id: light.hallway_spot_2
+      state: 'off'
+    - condition: time
+      after: '05:00:00'
+      before: '09:59:00'
   action:
     service: homeassistant.turn_on
     entity_id: light.hallway_spot_1, light.hallway_spot_2
@@ -31,18 +33,20 @@
     entity_id: sensor.hall_motion_sensor
     to: 'on'
   condition:
-  - below: '5'
-    condition: numeric_state
-    entity_id: sensor.hall_light_level
-  - condition: state
-    entity_id: light.hallway_spot_1
-    state: 'off'
-  - condition: state
-    entity_id: light.hallway_spot_2
-    state: 'off'    
-  - condition: time
-    after: '09:00:00'
-    before: '23:29:00'
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.hall_light_level
+      below: '5'
+    - condition: state
+      entity_id: light.hallway_spot_1
+      state: 'off'
+    - condition: state
+      entity_id: light.hallway_spot_2
+      state: 'off'    
+    - condition: time
+      after: '09:00:00'
+      before: '23:29:00'
   action:
     service: homeassistant.turn_on
     entity_id: light.hallway_spot_1, light.hallway_spot_2
@@ -57,18 +61,20 @@
     entity_id: sensor.hall_motion_sensor
     to: 'on'
   condition:
-  - below: '2'
-    condition: numeric_state
-    entity_id: sensor.hall_light_level
-  - condition: state
-    entity_id: light.hallway_spot_1
-    state: 'off'
-  - condition: state
-    entity_id: light.hallway_spot_2
-    state: 'off'
-  - condition: time
-    after: '23:30:00'
-    before: '04:59:00'
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.hall_light_level
+      below: '2'
+    - condition: state
+      entity_id: light.hallway_spot_1
+      state: 'off'
+    - condition: state
+      entity_id: light.hallway_spot_2
+      state: 'off'
+    - condition: time
+      after: '23:30:00'
+      before: '04:59:00'
   action:
     service: homeassistant.turn_on
     entity_id: light.hallway_spot_1, light.hallway_spot_2
@@ -100,6 +106,6 @@
       state: 'off'
   action:
     service: homeassistant.turn_off
-    entity_id: light.hall_spotlights
+    entity_id: light.hall_group
     data_template:
       transition: 30
