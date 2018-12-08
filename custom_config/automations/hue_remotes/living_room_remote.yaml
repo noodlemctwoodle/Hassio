@@ -55,15 +55,6 @@
 #      brightness: "{{ states('input_number.livingroom_brightness') | int }}"
 
 ### Turn off Actions
-- alias: Turn off Amp
-  trigger:
-    platform: state
-    entity_id:  sensor.living_room_switch
-    to: '4_click_up'
-  action:
-    service: homeassistant.turn_off
-    entity_id: media_player.denon_avrx2300w
-
 - alias: Turn off Pendant
   trigger:
     platform: state
