@@ -3,7 +3,7 @@
   trigger:
     platform: state
     entity_id: binary_sensor.backyard_camera_back_garden_motion_detected
-    from: 'off'
+    to: 'detected'
   condition:
   - condition: state
     entity_id: device_tracker.google_pixel_abi
@@ -23,7 +23,7 @@
   trigger:
     platform: state
     entity_id: binary_sensor.front_door_camera_motion_detected
-    from: 'off'
+    to: 'detected'
   condition:
   - condition: state
     entity_id: device_tracker.google_pixel_abi
