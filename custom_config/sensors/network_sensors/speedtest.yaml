@@ -1,7 +1,7 @@
 # Speedtest.net WAN Speedtest 
     # 3733 = Virgin Media Aztec West
   - platform: speedtest
-    server_id: '3733'
+#    server_id: '3733'
     minute: 1
     monitored_conditions:
       - ping

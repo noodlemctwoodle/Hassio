@@ -612,6 +612,8 @@ views:
               - light.office_shadow
               - light.office_spotlights
               - light.office_desk
+              - light.office_server_rack
+
   # Switches
       - type: vertical-stack
         cards:  

@@ -21,12 +21,28 @@
     - ip
     - oui
 
-#  - platform: google_maps
-#    username: !secret google_username
-#    password: !secret google_password
+  - platform: google_maps
+    username: !secret google_username
+    password: !secret google_password
 
+
+# Kitchen Speaker
 #  - platform: googlehome
-#    host: 10.0.20.36
-  
+#    host: !secret kitchen_home_ip
+#    interval_seconds: 3
+#    rssi_threshold: -69
+#    consider_home: 20
+
+# Living Room Speaker 
 #  - platform: googlehome
-#    host: 10.0.20.28
+#    host: !secret lounge_home_ip
+#    interval_seconds: 3
+#    rssi_threshold: -67
+#    consider_home: 20    
+
+# Office Speaker   
+#  - platform: googlehome
+#    host: !secret office_home_ip
+#    interval_seconds: 3
+#    rssi_threshold: -69  
+#    consider_home: 20

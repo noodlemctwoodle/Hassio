@@ -16,6 +16,13 @@
     - condition: time
       after: '07:00:00'
       before: '08:59:00'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: sensor.bathroom_switch
+        state: '4_click_up'
+        for:
+          minutes: 5
   action:
     service: homeassistant.turn_on
     entity_id: light.bathroom
@@ -41,6 +48,13 @@
     - condition: time
       after: '09:00:00'
       before: '23:29:00'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: sensor.bathroom_switch
+        state: '4_click_up'
+        for:
+          minutes: 5
   action:
     service: homeassistant.turn_on
     entity_id: light.bathroom
