@@ -247,6 +247,12 @@ views:
               name: Sensor
             - entity: sensor.living_room_switch_battery_level
               name: Remote
+        - type: glance
+#          title: Door Sensor
+          entities:
+            - entity: binary_sensor.living_room_door
+              name: Door Sensor
+              icon: mdi:door
   # Hue Lights
         - type: entities
           title: Hue Lights
@@ -271,12 +277,6 @@ views:
           entities:
             - entity: switch.christmas_lights
               name: Living Room Christmas
-  # Hue Remote
-        - type: glance
-          title: Hue Remote
-          entities:
-            - entity: sensor.living_room_remote
-              name: Input
       - type: vertical-stack
         cards:      
   # Nest Thermostat
@@ -292,6 +292,12 @@ views:
           - binary_sensor.living_room_thermostat_is_locked
       - type: vertical-stack
         cards:
+  # Hue Remote
+        - type: glance
+          title: Hue Remote
+          entities:
+            - entity: sensor.living_room_remote
+              name: Input
   # Media Player
         - type: conditional
           conditions:
@@ -448,6 +454,13 @@ views:
               name: Temp
             - entity: sensor.bathroom_battery_level
               name: Battery
+        - type: glance
+#          title: Door Sensor
+          entities:
+            - entity: binary_sensor.bathroom_door
+              name: Door Sensor
+              icon: mdi:door
+
   # Hue Lights
         - type: entities
           title: Hue Lights

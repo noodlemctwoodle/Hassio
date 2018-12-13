@@ -111,6 +111,10 @@ panel_iframe:
 # Checks for available updates
 updater:
 
+# LoveLace UI Configuration
+lovelace:
+  mode: yaml
+
  # Checks for available custom card updates 
 custom_updater:
   track:
@@ -131,13 +135,14 @@ cloud:
         - switch.home_desktop
         - switch.office_lock
         - switch.christmas_lights
-        - climate.landing_temperature
-        - climate.bathroom_temperatur
 
 # Nest Integration 
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
+
+ifttt:
+  key: !secret ifttt_api
 
 # Enables configuration UI
 config:
@@ -182,16 +187,22 @@ notify:
 prometheus:
   namespace: !secret prometheus_scrape_name
 
-# Climate > To be removed
-climate:
-  - platform: generic_thermostat
-    name: Landing Temperature 
-    heater: switch.demo1
-    target_sensor: sensor.landing_temperature
-  - platform: generic_thermostat
-    name: Bathroom Temperature 
-    heater: switch.demo1
-    target_sensor: sensor.bathroom_temperature
+# MQTT Binary Sensors
+binary_sensor:
+  - platform: mqtt
+    state_topic:  "/doorsensors/bathroom/state"
+    command_topic: "/doorsensors/status/LWT"
+    name: Bathroom Door
+    payload_on: "1"
+    payload_off: "0"
+    device_class: opening
+  - platform: mqtt
+    state_topic:  "/doorsensors/livingroom/state"
+    command_topic: "/doorsensors/status/LWT"
+    name: Living Room Door
+    payload_on: "1"
+    payload_off: "0"
+    device_class: opening
 
 # Dark Sky Weather API for LoveLaceUI
 weather:

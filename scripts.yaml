@@ -1,2 +1,12 @@
 
+  plex_play:
+    sequence:
+      - condition: template
+        value_template: '{{ Player.uuid == "SOMETHING" }}'
+      - delay:
+          seconds: 10
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Pendant"
 
