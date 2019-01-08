@@ -112,8 +112,8 @@ panel_iframe:
 updater:
 
 # LoveLace UI Configuration
-lovelace:
-  mode: yaml
+#lovelace:
+#  mode: yaml
 
  # Checks for available custom card updates 
 custom_updater:
@@ -133,7 +133,7 @@ cloud:
       include_entities:
         - switch.home_server
         - switch.home_desktop
-        - switch.office_lock
+        - switch.comms_cab_lock
         - switch.christmas_lights
 
 # Nest Integration 
@@ -189,6 +189,7 @@ prometheus:
 
 # MQTT Binary Sensors
 binary_sensor:
+  - platform: hue
   - platform: mqtt
     state_topic:  "/doorsensors/bathroom/state"
     command_topic: "/doorsensors/status/LWT"

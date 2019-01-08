@@ -2,7 +2,7 @@
 - alias: Turn on office light morning
   trigger:
     platform: state
-    entity_id: sensor.office_motion_sensor
+    entity_id: binary_sensor.office_motion_sensor
     to: 'on'
   condition:
   - below: '3'
@@ -25,7 +25,7 @@
 - alias: Turn on office light day
   trigger:
     platform: state
-    entity_id: sensor.office_motion_sensor
+    entity_id: binary_sensor.office_motion_sensor
     to: 'on'
   condition:
   - below: '6'
@@ -48,7 +48,7 @@
 - alias: Turn on office light night
   trigger:
     platform: state
-    entity_id: sensor.office_motion_sensor
+    entity_id: binary_sensor.office_motion_sensor
     to: 'on'
   condition:
   - below: '2'
@@ -71,28 +71,28 @@
 - alias: Turn off office lights
   trigger:
     - platform: state
-      entity_id: sensor.office_motion_sensor
+      entity_id: binary_sensor.office_motion_sensor
       to: 'off'
       for:
         minutes: '60'
     - platform: state
-      entity_id: sensor.office_motion_sensor
+      entity_id: binary_sensor.office_motion_sensor
       to: 'off'
       for:
         minutes: '120'
     - platform: state
-      entity_id: sensor.office_motion_sensor
+      entity_id: binary_sensor.office_motion_sensor
       to: 'off'
       for:
         minutes: '180'
     - platform: state
-      entity_id: sensor.office_motion_sensor
+      entity_id: binary_sensor.office_motion_sensor
       to: 'off'
       for:
         minutes: '240'
   condition:
     - condition: state
-      entity_id: sensor.office_motion_sensor
+      entity_id: binary_sensor.office_motion_sensor
       state: 'off'
       for:
         minutes: '60'

@@ -14,11 +14,15 @@
       - light.kitchen_spot_4
       - light.kitchen_spot_5
 
-# Backdoor Hue Group
+# Dining Room Hue Group
   - platform: group
     name: Dining Room Group
     entities:
-      - light.dining_room_spot_1
+      - light.diningroom_spot_1
+      - light.diningroom_spot_2
+      - light.diningroom_spot_3
+      - light.diningroom_spot_4
+      - light.diningroom_spot_5
 
 # Living Room Hue Group
   - platform: group

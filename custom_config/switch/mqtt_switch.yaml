@@ -1,5 +1,5 @@
   - platform: mqtt
-    name: Office Lock
+    name: Comms Cab Lock
     state_topic: "stat/officelock/POWER"
     command_topic: "cmnd/officelock/power"
     payload_lock: "ON"

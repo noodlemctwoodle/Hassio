@@ -21,6 +21,10 @@
     - ip
     - oui
 
+# Hue Custom Component
+  - platform: hue
+
+  
 #  - platform: google_maps
 #    username: !secret google_username
 #    password: !secret google_password

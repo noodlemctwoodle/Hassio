@@ -4,7 +4,7 @@
 - alias: Turn on livingroom lights morning
   trigger:
     platform: state
-    entity_id: sensor.living_room_motion_sensor
+    entity_id: binary_sensor.living_room_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -35,7 +35,7 @@
 - alias: Turn on livingroom lights day
   trigger:
     platform: state
-    entity_id: sensor.living_room_motion_sensor
+    entity_id: binary_sensor.living_room_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -66,7 +66,7 @@
 - alias: Turn on livingroom lights night
   trigger:
     platform: state
-    entity_id: sensor.living_room_motion_sensor
+    entity_id: binary_sensor.living_room_motion_sensor
     to: 'on'
   condition:
     condition: and

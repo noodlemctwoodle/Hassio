@@ -2,7 +2,7 @@
 - alias: Turn on hall lights morning
   trigger:
     platform: state
-    entity_id: sensor.hall_motion_sensor
+    entity_id: binary_sensor.hall_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -30,7 +30,7 @@
 - alias: Turn on hall lights day
   trigger:
     platform: state
-    entity_id: sensor.hall_motion_sensor
+    entity_id: binary_sensor.hall_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -58,7 +58,7 @@
 - alias: Turn on hall lights night
   trigger:
     platform: state
-    entity_id: sensor.hall_motion_sensor
+    entity_id: binary_sensor.hall_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -86,23 +86,23 @@
 - alias: Turn off hall lights
   trigger:
     - platform: state
-      entity_id: sensor.hall_motion_sensor
+      entity_id: binary_sensor.hall_motion_sensor
       to: 'off'
       for:
         minutes: '1'
     - platform: state
-      entity_id: sensor.hall_motion_sensor
+      entity_id: binary_sensor.hall_motion_sensor
       to: 'off'
       for:
         minutes: '2'
     - platform: state
-      entity_id: sensor.hall_motion_sensor
+      entity_id: binary_sensor.hall_motion_sensor
       to: 'off'
       for:
         minutes: '5'
   condition:
     - condition: state
-      entity_id: sensor.hall_motion_sensor
+      entity_id: binary_sensor.hall_motion_sensor
       state: 'off'
   action:
     service: homeassistant.turn_off

@@ -41,7 +41,7 @@ switch.home_desktop:
 switch.home_server:
   friendly_name: Server
   icon: mdi:mdi:server
-switch.office_lock:
+switch.comms_cab_lock:
   icon: mdi:lock
 switch.christmas_lights:
   icon: mdi:power-socket-uk

@@ -2,7 +2,7 @@
 - alias: Turn on kitchen light morning
   trigger:
     platform: state
-    entity_id: sensor.kitchen_motion_sensor
+    entity_id: binary_sensor.kitchen_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -27,7 +27,7 @@
 - alias: Turn on kitchen light day
   trigger:
     platform: state
-    entity_id: sensor.kitchen_motion_sensor
+    entity_id: binary_sensor.kitchen_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -52,7 +52,7 @@
 - alias: Turn on kitchen light night
   trigger:
     platform: state
-    entity_id: sensor.kitchen_motion_sensor
+    entity_id: binary_sensor.kitchen_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -77,28 +77,28 @@
 - alias: Turn off kitchen lights
   trigger:
     - platform: state
-      entity_id: sensor.kitchen_motion_sensor
+      entity_id: binary_sensor.kitchen_motion_sensor
       to: 'off'
       for:
         minutes: '10'
     - platform: state
-      entity_id: sensor.kitchen_motion_sensor
+      entity_id: binary_sensor.kitchen_motion_sensor
       to: 'off'
       for:
         minutes: '15'
     - platform: state
-      entity_id: sensor.kitchen_motion_sensor
+      entity_id: binary_sensor.kitchen_motion_sensor
       to: 'off'
       for:
         minutes: '20'
     - platform: state
-      entity_id: sensor.kitchen_motion_sensor
+      entity_id: binary_sensor.kitchen_motion_sensor
       to: 'off'
       for:
         minutes: '25'
   condition:
     - condition: state
-      entity_id: sensor.kitchen_motion_sensor
+      entity_id: binary_sensor.kitchen_motion_sensor
       state: 'off'
       for:
         minutes: '10'
