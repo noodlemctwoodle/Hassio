@@ -1,7 +1,7 @@
 
 # Custom Card Resources
 resources:
-  - url: /local/custom_ui/tracker-card/tracker-card.js?v=0.1.5
+  - url: /local/custom_ui/tracker-card/tracker-card.js?v=0.2.0
     type: js
   - url: /local/custom_ui/monster-card/monster-card.js?v=0.2.3
     type: js
@@ -551,6 +551,30 @@ views:
     cards:
       - type: vertical-stack
         cards:  
+        - type: glance
+          entity: sensor.pixel_xl_battery_sensor
+          name: Pixel XL Batt
+          min: 0
+          max: 100
+          severity:
+            green: 61
+            yellow: 60
+            red: 20
+          theme: default
+        - type: gauge
+          entity: sensor.pixel_xl_light_sensor_2
+          min: 0
+          max: 100
+          theme: default
+          name: Pixel Xl Lux
+          severity:
+            green: 0
+            yellow: 0
+            red: 0
+
+
+      - type: vertical-stack
+        cards:  
   # Hue Sensor
         - type: glance
           title: Hue Sensor
@@ -794,6 +818,7 @@ views:
       - type: vertical-stack
         cards:  
 ### Downstairs
+        - type: custom:plan-coordinates                    
         - type: picture-elements
           image: /local/floorplan-icons/downstairs.png
           elements:
@@ -1062,6 +1087,8 @@ views:
               left: 24%
               width: 3%
 ### Upstairs
+
+        - type: custom:plan-coordinates                    
         - type: picture-elements
           image: /local/floorplan-icons/upstairs.png
           elements:

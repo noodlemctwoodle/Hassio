@@ -1,0 +1,48 @@
+  - platform: mqtt
+    name: "Pixel XL Battery"
+    state_topic: "homeassistant/sensor/android_pixel_xl_battery/state"
+    unit_of_measurement: '%'
+    value_template: "{{ value_json.level }}"
+    json_attributes:
+      - voltage
+      - temperature
+      - status
+      - power
+      - health
+      - technology
+  - platform: mqtt
+    name: "Pixel XL WIFI Sensor"
+    state_topic: "homeassistant/sensor/android_pixel_xl_wifi/state"
+    value_template: "{{ value_json.status }}"
+    json_attributes:
+      - ssid
+      - link_speed
+      - bssid
+      - rssi
+      - ip
+      - signal
+      - mac
+  - platform: mqtt
+    name: "Pixel XL Light Sensor"
+    state_topic: "homeassistant/sensor/android_pixel_xl_light/state"
+    unit_of_measurement: 'lx'
+    value_template: "{{ value_json.value }}"
+    json_attributes:
+      - sensor_name
+      - vendor
+      - version
+      - power
+      - resolution
+      - max_range
+  - platform: mqtt
+    name: "Pixel XL Pressure Sensor"
+    state_topic: "homeassistant/sensor/android_pixel_xl_pressure/state"
+    unit_of_measurement: 'hPa'
+    value_template: "{{ value_json.value }}"
+    json_attributes:
+      - sensor_name
+      - vendor
+      - version
+      - power
+      - resolution
+      - max_range

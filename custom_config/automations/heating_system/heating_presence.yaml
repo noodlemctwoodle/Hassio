@@ -3,13 +3,13 @@
     - platform: state
       entity_id: sensor.abi_connected_ap
       to: 'Offline'
-      for:
-        minutes: '5'
+    - platform: time_pattern
+      minutes: '5'
     - platform: state
       entity_id: sensor.toby_connected_ap
       to: 'Offline'
-      for:
-        minutes: '5'
+    - platform: time_pattern
+      minutes: '5'
   condition:
     - condition: state
       entity_id: sensor.abi_connected_ap

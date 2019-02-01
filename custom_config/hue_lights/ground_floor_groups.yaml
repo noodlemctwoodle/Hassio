@@ -2,7 +2,13 @@
   - platform: group
     name: Back Door Group
     entities:
-      - light.back_door
+      - light.backdoor_spot_1
+
+# Cupboard Hue Group
+  - platform: group
+    name: Cupboard Group
+    entities:
+      - light.cupboard_spot_1
 
 # Kitchen Hue Group
   - platform: group
@@ -54,3 +60,4 @@
       - light.living_room_group
       - light.hall_group
       - light.bathroom_group
+      - light.cupboard_group

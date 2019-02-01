@@ -8,6 +8,9 @@ switch.kitchen_lights:
 switch.diningroom_lights:
   friendly_name: Dining Room Lights
   icon: mdi:mdi:light-switch
+switch.cupboard_lights:
+  friendly_name: Cupboard Lights
+  icon: mdi:mdi:light-switch
 switch.backdoor_lights:
   friendly_name: Back Door Lights
   icon: mdi:mdi:light-switch

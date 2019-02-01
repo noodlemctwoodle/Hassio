@@ -135,6 +135,8 @@ cloud:
         - switch.home_desktop
         - switch.comms_cab_lock
         - switch.christmas_lights
+        - light.ground_floor_group
+        - light.first_floor_group
 
 # Nest Integration 
 nest:
@@ -182,6 +184,9 @@ notify:
     default_conversations:
       - id: !secret notifier_noodlemctwoodle
       - name: HA Main
+# HANotify Ariela 
+  - name: android
+    platform: fcm-android
 
 # Prometheus DB Comfiguration
 prometheus:
@@ -227,7 +232,6 @@ google:
   
 
 # Single File Configs
-group: !include groups.yaml
 script: !include scripts.yaml
 
 ## Custom Includes ##

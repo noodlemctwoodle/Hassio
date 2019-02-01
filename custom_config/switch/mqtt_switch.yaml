@@ -1,7 +1,7 @@
   - platform: mqtt
     name: Comms Cab Lock
     state_topic: "stat/officelock/POWER"
-    command_topic: "cmnd/officelock/power"
+    command_topic: "homeassistant/switch/officelock/cmnd/POWER"
     payload_lock: "ON"
     payload_unlock: "OFF"
     optimistic: false

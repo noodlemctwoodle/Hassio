@@ -34,6 +34,18 @@
           - service: light.turn_off
             entity_id: light.dining_room_group
 
+# Cupboard Light Switch
+  - platform: template
+    switches:
+      cupboard_lights:
+        value_template: "{{ is_state('light.cupboard_group', 'on') }}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.cupboard_group
+        turn_off:
+          - service: light.turn_off
+            entity_id: light.cupboard_group
+
 # Living Room Light Switch
   - platform: template
     switches:

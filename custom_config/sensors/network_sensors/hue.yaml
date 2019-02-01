@@ -129,6 +129,11 @@
         {% else %}
           Off
         {% endif %}'
+# Cupboard Hue Remote
+    cupboard_switch_battery_level:
+      friendly_name: 'Cupboard Remote Battery'
+      value_template: '{{state_attr("sensor.cupboard_switch", "battery")}}'
+      unit_of_measurement: '%'        
 # Living Room Hue Remote
     living_room_switch_battery_level:
       friendly_name: 'Living Room Remote Battery'

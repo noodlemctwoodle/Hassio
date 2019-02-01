@@ -8,3 +8,12 @@
     show_all_sources: True
     zones:
       - zone: Zone2
+
+  - platform: webostv
+    name: Living Room TV
+    host: 10.0.20.10
+    timeout: 5
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: "a8-23-fe-8c-2c-2e"

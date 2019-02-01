@@ -37,7 +37,7 @@
   - platform: group
     name: Craft Room Group
     entities:
-      - light.craft_room
+      - light.craftroom_pendant
 
 # First Floor Group
   - platform: group
@@ -46,4 +46,4 @@
       - light.landing_group
       - light.bedroom_group
       - light.office_group
-      - light.craft_room_group
+      - light.craftroom_group

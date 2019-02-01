@@ -21,8 +21,8 @@
       - condition: state
         entity_id: sensor.bathroom_switch
         state: '4_click_up'
-        for:
-          minutes: 5
+#      - platform: time_pattern
+#        minutes: 5
   action:
     service: homeassistant.turn_on
     entity_id: light.bathroom
@@ -53,8 +53,8 @@
       - condition: state
         entity_id: sensor.bathroom_switch
         state: '4_click_up'
-        for:
-          minutes: 5
+#        for:
+#          minutes: 5
   action:
     service: homeassistant.turn_on
     entity_id: light.bathroom
@@ -93,29 +93,29 @@
     - platform: state
       entity_id: binary_sensor.bathroom_motion_sensor
       to: 'off'
-      for:
-        minutes: '10'
+    - platform: time_pattern
+      minutes: '10'
     - platform: state
       entity_id: binary_sensor.bathroom_motion_sensor
       to: 'off'
-      for:
-        minutes: '15'
+    - platform: time_pattern
+      minutes: '15'
     - platform: state
       entity_id: binary_sensor.bathroom_motion_sensor
       to: 'off'
-      for:
-        minutes: '20'
+    - platform: time_pattern
+      minutes: '20'
     - platform: state
       entity_id: binary_sensor.bathroom_motion_sensor
       to: 'off'
-      for:
-        minutes: '25'
+    - platform: time_pattern
+      minutes: '25'
   condition:
     - condition: state
       entity_id: binary_sensor.bathroom_motion_sensor
       state: 'off'
-      for:
-        minutes: '10'
+#    - condition: time
+#      minutes: '10'
   action:
     service: homeassistant.turn_off
     entity_id: light.bathroom
