@@ -1,5 +1,6 @@
 # Philips Hue Motion Sensor - RestAPI (Custom-Component)
 ## https://github.com/robmarkcole/Hue-sensors-HASS ##
+## https://community.home-assistant.io/t/map-values-for-an-input-select/94354/20 ##
 
 - platform: hue
   ip_address: !secret hue_bridge_ip
@@ -13,98 +14,191 @@
       value_template: '{{state_attr("binary_sensor.kitchen_motion_sensor", "temperature")}}'
       unit_of_measurement: °C
       device_class: temperature
+
     kitchen_light_level:
       friendly_name: 'Kitchen light level'
       value_template: '{{state_attr("binary_sensor.kitchen_motion_sensor", "lx")}}'
       unit_of_measurement: lux
+
     kitchen_battery_level:
       friendly_name: 'Kitchen battery level'
       value_template: '{{state_attr("binary_sensor.kitchen_motion_sensor", "battery")}}'
       unit_of_measurement: '%'
+
+    kitchen_motion_sensor_sensitivity:
+      friendly_name: 'Kitchen sensitivity'
+      value_template: >
+        {{state_attr('binary_sensor.kitchen_motion_sensor','sensitivity')}}
+
+    kitchen_motion_sensor_threshold:
+      friendly_name: 'Kitchen threshold'
+      value_template: >
+        {{state_attr('binary_sensor.kitchen_motion_sensor','threshold')}}
+
 # Living Room Sensor
     living_room_temperature:
       friendly_name: 'Living Room temperature'
       value_template: '{{state_attr("binary_sensor.living_room_motion_sensor", "temperature")}}'
       unit_of_measurement: °C
       device_class: temperature
+
     living_room_light_level:
       friendly_name: 'Living Room light level'
       value_template: '{{state_attr("binary_sensor.living_room_motion_sensor", "lx")}}'
       unit_of_measurement: lux
+
     living_room_battery_level:
       friendly_name: 'Living Room battery level'
       value_template: '{{state_attr("binary_sensor.living_room_motion_sensor", "battery")}}'
       unit_of_measurement: '%'
+
+    living_room_motion_sensor_sensitivity:
+      friendly_name: 'Living Room sensitivity'
+      value_template: >
+        {{state_attr('binary_sensor.living_room_motion_sensor','sensitivity')}}
+
+    living_room_motion_sensor_threshold:
+      friendly_name: 'Bathroom threshold'
+      value_template: >
+        {{state_attr('binary_sensor.living_room_motion_sensor','threshold')}}
+
+
 # Bathroom Sensor  
     bathroom_temperature:
       friendly_name: 'Bathroom temperature'
       value_template: '{{state_attr("binary_sensor.bathroom_motion_sensor", "temperature")}}'
       unit_of_measurement: °C
       device_class: temperature
+
     bathroom_light_level:
       friendly_name: 'Bathroom light level'
       value_template: '{{state_attr("binary_sensor.bathroom_motion_sensor", "lx")}}'
       unit_of_measurement: lux
+
     bathroom_battery_level:
       friendly_name: 'Bathroom battery level'
       value_template: '{{state_attr("binary_sensor.bathroom_motion_sensor", "battery")}}'
-      unit_of_measurement: '%'   
+      unit_of_measurement: '%'
+
+    bathroom_motion_sensor_sensitivity:
+      friendly_name: 'Bathroom sensitivity'
+      value_template: >
+        {{state_attr('binary_sensor.bathroom_motion_sensor','sensitivity')}}
+
+    bathroom_motion_sensor_threshold:
+      friendly_name: 'Bathroom threshold'
+      value_template: >
+        {{state_attr('binary_sensor.bathroom_motion_sensor','threshold')}}
+
 # Hall Sensor
+
     hall_temperature:
       friendly_name: 'Hall temperature'
       value_template: '{{state_attr("binary_sensor.hall_motion_sensor", "temperature")}}'
       unit_of_measurement: °C
       device_class: temperature
+
     hall_light_level:
       friendly_name: 'Hall light level'
       value_template: '{{state_attr("binary_sensor.hall_motion_sensor", "lx")}}'
       unit_of_measurement: lux
+
     hall_battery_level:
       friendly_name: 'Hall battery level'
       value_template: '{{state_attr("binary_sensor.hall_motion_sensor", "battery")}}'
-      unit_of_measurement: '%' 
+      unit_of_measurement: '%'
+
+    hall_motion_sensor_sensitivity:
+      friendly_name: 'Hall sensitivity'
+      value_template: >
+        {{state_attr('binary_sensor.hall_motion_sensor','sensitivity')}}
+
+    hall_motion_sensor_threshold:
+      friendly_name: 'Hall threshold'
+      value_template: >
+        {{state_attr('binary_sensor.hall_motion_sensor','threshold')}}
+
 # Landing Sensor
     landing_temperature:
       friendly_name: 'Landing temperature'
       value_template: '{{state_attr("binary_sensor.landing_motion_sensor", "temperature")}}'
       unit_of_measurement: °C
       device_class: temperature
+
     landing_light_level:
       friendly_name: 'Landing light level'
       value_template: '{{state_attr("binary_sensor.landing_motion_sensor", "lx")}}'
       unit_of_measurement: lux
+
     landing_battery_level:
       friendly_name: 'Landing battery level'
       value_template: '{{state_attr("binary_sensor.landing_motion_sensor", "battery")}}'
       unit_of_measurement: '%' 
+
+    landing_motion_sensor_sensitivity:
+      friendly_name: 'Landing sensitivity'
+      value_template: >
+        {{state_attr('binary_sensor.landing_motion_sensor','sensitivity')}}
+
+    landing_motion_sensor_threshold:
+      friendly_name: 'Landing threshold'
+      value_template: >
+        {{state_attr('binary_sensor.landing_motion_sensor','threshold')}}
+
 # Office Sensor
     office_temperature:
       friendly_name: 'Office temperature'
       value_template: '{{state_attr("binary_sensor.office_motion_sensor", "temperature")}}'
       unit_of_measurement: °C
       device_class: temperature
+
     office_light_level:
       friendly_name: 'Office light level'
       value_template: '{{state_attr("binary_sensor.office_motion_sensor", "lx")}}'
       unit_of_measurement: lux
+
     office_battery_level:
       friendly_name: 'Office battery level'
       value_template: '{{state_attr("binary_sensor.office_motion_sensor", "battery")}}'
       unit_of_measurement: '%'
+
+    office_motion_sensor_sensitivity:
+      friendly_name: 'Office sensitivity'
+      value_template: >
+        {{state_attr('binary_sensor.office_motion_sensor','sensitivity')}}
+
+    office_motion_sensor_threshold:
+      friendly_name: 'Office threshold'
+      value_template: >
+        {{state_attr('binary_sensor.office_motion_sensor','threshold')}}
+
 # Bedroom Sensor
     bedroom_temperature:
       friendly_name: 'Bedroom temperature'
       value_template: '{{state_attr("binary_sensor.bedroom_motion_sensor", "temperature")}}'
       unit_of_measurement: °C
       device_class: temperature
+
     bedroom_light_level:
       friendly_name: 'Bedroom light level'
       value_template: '{{state_attr("binary_sensor.bedroom_motion_sensor", "lx")}}'
       unit_of_measurement: lux
+
     bedroom_battery_level:
       friendly_name: 'Bedroom battery level'
       value_template: '{{state_attr("binary_sensor.bedroom_motion_sensor", "battery")}}'
       unit_of_measurement: '%'
+
+    bedroom_motion_sensor_sensitivity:
+      friendly_name: 'Bedroom sensitivity'
+      value_template: >
+        {{state_attr('binary_sensor.bedroom_motion_sensor','sensitivity')}}
+
+    bedroom_motion_sensor_threshold:
+      friendly_name: 'Bedroom threshold'
+      value_template: >
+        {{state_attr('binary_sensor.bedroom_motion_sensor','threshold')}}
+
 # Kitchen Hue Remote
     kitchen_switch_battery_level:
       friendly_name: 'Kitchen Remote Battery'
@@ -236,3 +330,34 @@
     - sensor.landing_light_level
     - sensor.office_light_level
     - sensor.bedroom_light_level
+
+
+  bathroom_motion_sensor_sensitivity:
+    friendly_name: 'Bathroom sensitivity'
+    value_template: >
+      {{state_attr('binary_sensor.bathroom_motion_sensor','sensitivity')}}
+
+  hall_motion_sensor_sensitivity:
+    friendly_name: 'Hall sensitivity'
+    value_template: >
+      {{state_attr('binary_sensor.hall_motion_sensor','sensitivity')}}
+
+  office_motion_sensor_sensitivity:
+    friendly_name: 'Office sensitivity'
+    value_template: >
+      {{state_attr('binary_sensor.office_motion_sensor','sensitivity')}}
+
+  bathroom_motion_sensor_threshold:
+    friendly_name: 'Bathroom threshold'
+    value_template: >
+      {{state_attr('binary_sensor.bathroom_motion_sensor','threshold')}}
+
+  hall_motion_sensor_threshold:
+    friendly_name: 'Hall threshold'
+    value_template: >
+      {{state_attr('binary_sensor.hall_motion_sensor','threshold')}}
+
+  office_motion_sensor_threshold:
+    friendly_name: 'Office threshold'
+    value_template: >
+      {{state_attr('binary_sensor.office_motion_sensor','threshold')}}

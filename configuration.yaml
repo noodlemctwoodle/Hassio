@@ -12,6 +12,32 @@ homeassistant:
   time_zone: UTC
   # Customization file
   customize: !include customize.yaml
+  customize_glob:
+    sensor.*_motion_sensor_sensitivity:
+      templates:
+        icon: >
+          if (state === '0') return 'mdi:numeric-0-box-multiple-outline';
+          if (state === '1') return 'mdi:numeric-1-box-multiple-outline';
+          return 'mdi:numeric-2-box-multiple-outline';
+        icon_color: >
+          if (state === '0') return 'grey';
+          if (state === '1') return 'blue';
+          return 'red';
+
+    sensor.*_motion_sensor_threshold:
+      icon: mdi:altimeter
+      templates:
+        icon_color: >
+          if (state > 25000 ) return 'rgb(85, 0, 0)';
+          if (state > 20000) return 'rgb(255, 0, 0)';
+          if (state > 15000) return 'rgb(255, 165, 0)';
+          if (state > 10000) return 'rgb(0, 128, 0)';
+          if (state > 7500) return 'rgb(255, 211, 30)';
+          if (state > 5000) return 'rgb(255, 255, 0)';
+          if (state > 25000) return 'rgb(30, 144, 255)';
+          if (state > 1000) return 'rgb(30, 255, 255)';
+          return 'rgb(47, 0, 0)';
+
 
 # Enables the frontend
 frontend:
@@ -88,6 +114,10 @@ http:
   base_url: !secret base_url_ip
 
 websocket_api:
+
+api:
+
+system_health:
 
 # iFrame Panels > Possible removal from Hassio
 panel_iframe:
@@ -197,18 +227,27 @@ binary_sensor:
   - platform: hue
   - platform: mqtt
     state_topic:  "/doorsensors/bathroom/state"
-    command_topic: "/doorsensors/status/LWT"
+    availability_topic: "/doorsensors/status/LWT"
     name: Bathroom Door
     payload_on: "1"
     payload_off: "0"
     device_class: opening
   - platform: mqtt
     state_topic:  "/doorsensors/livingroom/state"
-    command_topic: "/doorsensors/status/LWT"
+    availability_topic: "/doorsensors/status/LWT"
     name: Living Room Door
     payload_on: "1"
     payload_off: "0"
     device_class: opening
+
+lock:
+  - platform: mqtt
+    name: Comms Cab
+    state_topic: "stat/officelock/POWER"
+    command_topic: "homeassistant/switch/officelock/cmnd/POWER"
+    payload_lock: "ON"
+    payload_unlock: "OFF"
+    optimistic: false
 
 # Dark Sky Weather API for LoveLaceUI
 weather:
@@ -219,17 +258,41 @@ google:
   client_id: !secret google_calendar_id 
   client_secret: !secret google_calendar_secret
 
-# Azure Image Processing > In Testing
-# image_processing:
-#  - platform: microsoft_face_detect
-#    source:
-#      - entity_id: camera.front_door
 
-# Azure Image Processing > In Testing
-#microsoft_face:
-#  api_key: !secret microsoft_face_api
-#  azure_region: !secret microsoft_face_region
-  
+
+rest_command:
+  set_hue_command: #not named sensitivy because the command can be used to set other entities/attributes also
+    url: !secret hue_command
+    method: put
+    payload: '{{ data }}'
+
+input_select:
+  select_hue_sensitivity:
+    name: select Hue sensitivity
+    options:
+      - Low
+      - Medium
+      - High
+
+  select_hue_motion_sensor:
+    name: select Motion sensor
+    icon: mdi:run-fast
+    options:
+      - Kitchen
+      - Living Room
+      - Hall
+      - Bathroom
+      - Landing
+      - Bedroom
+      - Office
+
+input_number:
+  slide_hue_threshold:
+    icon: mdi:altimeter
+    name: Slide Hue threshold
+    min: 0
+    max: 30000 #hue max = 65534 but makes slider max ot of scale, since max is almost identical to 30000
+    step: 2500
 
 # Single File Configs
 script: !include scripts.yaml
@@ -240,7 +303,7 @@ script: !include scripts.yaml
 hangouts: !include custom_config/notify/hangouts.yaml
 #### /custom_config/network/ ####
 device_tracker: !include custom_config/network/device_tracker.yaml
-input_number: !include custom_config/input_number/hue_dimmer.yaml
+#input_number: !include custom_config/input_number/hue_dimmer.yaml
 shell_command: !include custom_config/network/shell_commands.yaml
 zone: !include custom_config/network/zones.yaml
 

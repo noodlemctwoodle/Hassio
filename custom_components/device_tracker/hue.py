@@ -1,5 +1,6 @@
 """
 Sensor for checking the status of Hue sensors.
+
 For more details about this platform, please refer to the documentation at
 https://home-assistant.io/components/sensor.hue/
 """
@@ -27,7 +28,7 @@ from homeassistant.components.device_tracker import (
 from homeassistant.util import slugify
 from homeassistant.components import zone
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
 DEPENDENCIES = ["hue"]
 

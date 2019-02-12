@@ -1,5 +1,6 @@
 """
 Sensor for checking the status of Hue sensors.
+
 For more details about this platform, please refer to the documentation at
 https://home-assistant.io/components/sensor.hue/
 """
@@ -16,7 +17,7 @@ from homeassistant.helpers.event import async_track_time_interval
 
 DEPENDENCIES = ["hue"]
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -35,6 +36,8 @@ ATTRS = {
         "temperature",
         "on",
         "reachable",
+        "sensitivity",
+        "threshold",
     ],
     "RWL": ["last_updated", "battery", "on", "reachable"],
     "ZGP": ["last_updated"],
@@ -62,7 +65,8 @@ def parse_hue_api_response(sensors):
 def parse_sml(response):
     """Parse the json for a SML Hue motion sensor and return the data."""
     if response["type"] == "ZLLLightLevel":
-        lightlevel = response["state"]["lightlevel"]
+        lightlevel = response["state"].get("lightlevel")
+        tholddark = response["config"].get("tholddark")
         if lightlevel is not None:
             lx = round(float(10 ** ((lightlevel - 1) / 10000)), 2)
             dark = response["state"]["dark"]
@@ -72,6 +76,7 @@ def parse_sml(response):
                 "lx": lx,
                 "dark": dark,
                 "daylight": daylight,
+                "threshold": tholddark,
             }
         else:
             data = {
@@ -79,6 +84,7 @@ def parse_sml(response):
                 "lx": None,
                 "dark": None,
                 "daylight": None,
+                "threshold": tholddark,
             }
 
     elif response["type"] == "ZLLTemperature":
@@ -105,6 +111,7 @@ def parse_sml(response):
             "battery": response["config"]["battery"],
             "on": response["config"]["on"],
             "reachable": response["config"]["reachable"],
+            "sensitivity": response["config"]["sensitivity"],
             "last_updated": response["state"]["lastupdated"].split("T"),
         }
     return data
@@ -163,11 +170,18 @@ class HueSensorData(object):
         )
 
         new_sensors = data.keys() - self.data.keys()
-        updated_sensors = [
-            key
-            for key, new in data.items()
-            if key in self.data and self.data[key] != new
-        ]
+        updated_sensors = []
+        for key, new in data.items():
+            new['changed'] = True
+            old = self.data.get(key)
+            if not old or old == new:
+                continue
+            updated_sensors.append(key)
+            if (
+                old["last_updated"] == new["last_updated"]
+                and old["state"] == new["state"]
+            ):
+                new['changed'] = False
         self.data.update(data)
 
         new_entities = {
@@ -223,16 +237,9 @@ class HueSensor(BinarySensorDevice):
     def is_on(self):
         """Return the state of the sensor."""
         data = self._data.get(self._hue_id)
-        if data and data["model"] == "SML":
+        if data and data["model"] == "SML" and data["changed"]:
             return data["state"] == STATE_ON
-        return None
-
-    @property
-    def state(self):
-        """Return the state of the sensor."""
-        data = self._data.get(self._hue_id)
-        if data:
-            return data["state"]
+        return False
 
     @property
     def device_class(self):

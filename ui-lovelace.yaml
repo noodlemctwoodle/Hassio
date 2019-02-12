@@ -1,494 +1,507 @@
-
-# Custom Card Resources
+background: null
 resources:
-  - url: /local/custom_ui/tracker-card/tracker-card.js?v=0.2.0
-    type: js
-  - url: /local/custom_ui/monster-card/monster-card.js?v=0.2.3
-    type: js
-  - url: https://unpkg.com/moment@2.22.2/moment.js
-    type: js
-  - url: /local/custom_ui/calendar-card/calendar-card.js?v=1.0.1
-    type: module
-
-# Love Lace UI FrontEnd
+  - type: js
+    url: /local/custom_ui/tracker-card/tracker-card.js?v=0.1.5
+  - type: js
+    url: /local/custom_ui/monster-card/monster-card.js?v=0.2.3
+  - type: js
+    url: 'https://unpkg.com/moment@2.22.2/moment.js'
+  - type: module
+    url: /local/custom_ui/calendar-card/calendar-card.js?v=1.0.1
+  - type: js
+    url: /local/custom_ui/plan-coordinates/plan-coordinates.js?v=1
 title: Hassio
-background: content-box radial-gradient(grey, black)
 views:
-# Default View - Sytem Monitoring
-  - title: default_view
-    icon: mdi:home
-    cards:
-     - type: vertical-stack
-       cards:
-   # Time
-        - type: glance
-          entities:
-          - sensor.time_utc
-          - sensor.last_boot
-    # Weather
-        - type: weather-forecast
-          entity: weather.dark_sky
-        - type: horizontal-stack
-          cards:
-      # Hue Lights
-            - type: entities
-              title: Hue Lights
-              show_header_toggle: false
-              entities:
-                - entity: switch.downstairs_lights
-                  name: Ground Floor
-            - type: entities
-              title: Hue Lights
-              show_header_toggle: false
-              entities:
-                - entity: switch.upstairs_lights
-                  name: First Floor
-        - type: horizontal-stack
-          cards:
-    # Hue Average
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: sensor.average_room_temp
-                name: Average Temp
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: sensor.average_room_lux
-                name: Average LUX
-  # System Stats
-     - type: vertical-stack
-       cards:
-        - type: horizontal-stack
-          cards: 
-          - type: gauge
-            title: Mem Usage
-            entity: sensor.memory_use_percent
-          - type: sensor
-            entity: sensor.memory_free
-            name: Memory Free
-            height: 35
-        - type: horizontal-stack
-          cards: 
-          - type: gauge
-            title: CPU Usage
-            entity: sensor.processor_use  
-          - type: sensor
-            entity: sensor.cpu_speed
-            name: CPU Speed
-            height: 35
-        - type: gauge
-          title: Disk Usage
-          entity: sensor.disk_use_percent_home
-        - type: horizontal-stack
-          cards:  
-          - type: sensor
-            entity: sensor.network_in_eno1
-            name: Eth0 Download
-            height: 40
-          - type: sensor
-            entity: sensor.network_out_eno1
-            name: Eth0 Upload
-            height: 40
-        - type: horizontal-stack
-          cards:
-      # Presence Detection
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: glance
-                title: Toby Upstairs
-                show_state: false
-                show_name: false
-                column_width: 50%
-              filter:
-                include:
-                  - entity_id: "*toby_connected_ap*"
-                    state: "OFFICE_WIFI"
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: glance
-                title: Toby Downstairs
-                show_state: false
-                show_name: false
-                column_width: 20%
-              filter:
-                include:
-                  - entity_id: "*toby_connected_ap*"
-                    state: "LIVING_ROOM_WIFI"
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: glance
-                title: Toby Away
-                show_state: false
-                show_name: false
-                column_width: 20%
-              filter:
-                include:
-                  - entity_id: "*toby_connected_ap*"
-                    state: "Offline"
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: glance
-                title: Abi Upstairs
-                show_state: false
-                show_name: false
-                column_width: 50%
-              filter:
-                include:
-                  - entity_id: "*abi_connected_ap*"
-                    state: "OFFICE_WIFI"
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: glance
-                title: Abi Downstairs
-                show_state: false
-                show_name: false
-                column_width: 20%
-              filter:
-                include:
-                  - entity_id: "*abi_connected_ap*"
-                    state: "LIVING_ROOM_WIFI"
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: glance
-                title: Abi Away
-                show_state: false
-                show_name: false
-                column_width: 20%
-              filter:
-                include:
-                  - entity_id: "*abi_connected_ap*"
-                    state: "Offline"
-     - type: custom:tracker-card
-       title:
-       trackers:
-         - sensor.custom_card_tracker
-         - sensor.custom_component_tracker
-     - type: entities
-       title: Version
-       show_header_toggle: false
-       entities:
-        - sensor.current_version
-
-# Room - Hall/Front Door
-  - title: hall
-    icon: mdi:door
-    cards:
-      - type: vertical-stack
-        cards:
-  # Hue Sensor
-        - type: glance
-          title: Hue Sensor
-          entities:
-            - entity: sensor.hall_motion_sensor
-              name: Motion
-            - entity: sensor.hall_light_level
-              name: Light
-            - entity: sensor.hall_temperature
-              name: Temp
-            - entity: sensor.hall_battery_level
-              name: Battery
-  # Hue Lights
-        - type: entities
-          title: Hue Lights
-          show_header_toggle: false
-          entities:
-            - entity: switch.hall_lights
-              name: Light Switch
-        - type: conditional
-          conditions:
-            - entity: switch.hall_lights
-              state: "on"
-          card:
-            type: entities
-            name: Lights
-            entities:
-              - light.hallway_spot_1
-              - light.hallway_spot_2
-      - type: vertical-stack
-        cards:
-  # Nest Hello
-        - type: picture-glance
-          title: Front Door
-          entities:
-            - binary_sensor.front_door_camera_online
-            - binary_sensor.front_door_camera_person_detected
-            - binary_sensor.front_door_camera_sound_detected
-            - binary_sensor.front_door_camera__garden_left_activity
-            - binary_sensor.front_door_camera__garden_right_activity
-            - binary_sensor.front_door_camera__path_activity
-            - binary_sensor.front_door_camera_motion_detected        
-          camera_image: camera.front_door
-          show_info: true
-          tap_action: dialog
-# Room - Living Room
-  - title: lounge
-    icon: mdi:sofa
-    cards:
-      - type: vertical-stack
-        cards:  
-  # Hue Sensor
-        - type: glance
-          title: Hue Sensors
-          entities:
-            - entity: sensor.living_room_motion_sensor
-              name: Motion
-            - entity: sensor.living_room_light_level
-              name: Light
-            - entity: sensor.living_room_temperature
-              name: Temp
-            - entity: sensor.living_room_battery_level
-              name: Sensor
-            - entity: sensor.living_room_switch_battery_level
-              name: Remote
-        - type: glance
-#          title: Door Sensor
-          entities:
-            - entity: binary_sensor.living_room_door
-              name: Door Sensor
-              icon: mdi:door
-  # Hue Lights
-        - type: entities
-          title: Hue Lights
-          show_header_toggle: false
-          entities:
-            - entity: switch.livingroom_lights
-              name: Light Switch
-        - type: conditional
-          conditions:
-            - entity: switch.livingroom_lights
-              state: "on"
-          card:
-            type: entities
-            name: Lights
-            entities:
-              - light.living_room_lamp
-              - light.living_room_pendant
-              - input_number.livingroom_brightness
-        - type: entities
-          title: Christmas Lights
-          show_header_toggle: false
-          entities:
-            - entity: switch.christmas_lights
-              name: Living Room Christmas
-      - type: vertical-stack
-        cards:      
-  # Nest Thermostat
-        - type: thermostat
-          entity: climate.living_room
-        - type: entities
-          title: Nest Thermostat
-          show_header_toggle: true
-          entities:
-          - binary_sensor.living_room_thermostat_online
-          - binary_sensor.living_room_thermostat_has_leaf
-          - binary_sensor.living_room_thermostat_is_using_emergency_heat
-          - binary_sensor.living_room_thermostat_is_locked
-      - type: vertical-stack
-        cards:
-  # Hue Remote
-        - type: glance
-          title: Hue Remote
-          entities:
-            - entity: sensor.living_room_remote
-              name: Input
-  # Media Player
-        - type: conditional
-          conditions:
-            - entity: media_player.shield_tv
-              state: "on"
-          card:
-            type: media-control
-            name: Shield TV Plex
-            entities:
-              - media_player.shield_tv
-        - type: media-control
-          entity: media_player.denon_avrx2300w
-        - type: media-control
-          entity: media_player.living_room_home
-# Room - Kitchen
-  - title: kitchen
-    icon: mdi:pot
-    cards:
-      - type: vertical-stack
-        cards:
-  # Hue Sensor
-        - type: glance
-          title: Hue Sensor
-          entities:
-            - entity: sensor.kitchen_motion_sensor
-              name: Motion
-            - entity: sensor.kitchen_light_level
-              name: Light
-            - entity: sensor.kitchen_temperature
-              name: Temp
-            - entity: sensor.kitchen_battery_level
-              name: Battery
-  # Hue Lights
-        - type: entities
-          title: Hue Lights
-          show_header_toggle: false
-          entities:
-            - entity: switch.kitchen_lights
-              name: Kitchen Light Switch
-        - type: conditional
-          conditions:
-            - entity: switch.kitchen_lights
-              state: "on"
-          card:
-            type: entities
-            name: Lights
-            entities:
-              - light.kitchen_spot_1
-              - light.kitchen_spot_2
-              - light.kitchen_spot_3
-              - light.kitchen_spot_4
-              - light.kitchen_spot_5
-  # Hue Remote
-        - type: entities
-          title: Hue Remote
-          show_header_toggle: true
-          entities:
-            - sensor.kitchen_remote
-            - sensor.kitchen_switch_battery_level
-  # Hue Lights
-      - type: entities
-        title: Hue Lights
-        show_header_toggle: false
+  - cards:
+      - cards:
+          - entities:
+              - sensor.time_utc
+              - sensor.last_boot
+            type: glance
+          - entity: weather.dark_sky
+            type: weather-forecast
+          - cards:
+              - entities:
+                  - entity: switch.downstairs_lights
+                    name: Ground Floor Switch
+                show_header_toggle: false
+                type: entities
+              - entities:
+                  - entity: switch.upstairs_lights
+                    name: First Floor Switch
+                show_header_toggle: false
+                type: entities
+            type: vertical-stack
+          - cards:
+              - entities:
+                  - entity: sensor.average_room_temp
+                    name: Average Temp
+                show_header_toggle: false
+                type: entities
+              - entities:
+                  - entity: sensor.average_room_lux
+                    name: Average LUX
+                show_header_toggle: false
+                type: entities
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
+          - cards:
+              - entity: sensor.memory_use_percent
+                name: Memory Use
+                type: gauge
+              - entity: sensor.memory_free
+                height: 35
+                name: Memory Free
+                type: sensor
+            type: horizontal-stack
+          - cards:
+              - entity: sensor.processor_use
+                name: CPU Use
+                type: gauge
+              - entity: sensor.cpu_speed
+                height: 35
+                name: CPU Speed
+                type: sensor
+            type: horizontal-stack
+          - entity: sensor.disk_use_percent_home
+            name: Disk Usage
+            type: gauge
+          - cards:
+              - entity: sensor.network_in_eno1
+                height: 40
+                name: Eth0 Download
+                type: sensor
+              - entity: sensor.network_out_eno1
+                height: 40
+                name: Eth0 Upload
+                type: sensor
+            type: horizontal-stack
+          - cards:
+              - card:
+                  column_width: 50%
+                  entities: []
+                  show_name: false
+                  show_state: false
+                  title: Toby Upstairs
+                  type: glance
+                filter:
+                  include:
+                    - entity_id: '*toby_connected_ap*'
+                      state: OFFICE_WIFI
+                show_empty: false
+                type: 'custom:monster-card'
+              - card:
+                  column_width: 20%
+                  entities:
+                    - entity: sensor.toby_connected_ap
+                  show_name: false
+                  show_state: false
+                  title: Toby Downstairs
+                  type: glance
+                filter:
+                  include:
+                    - entity_id: '*toby_connected_ap*'
+                      state: LIVING_ROOM_WIFI
+                show_empty: false
+                type: 'custom:monster-card'
+              - card:
+                  column_width: 20%
+                  entities: []
+                  show_name: false
+                  show_state: false
+                  title: Toby Away
+                  type: glance
+                filter:
+                  include:
+                    - entity_id: '*toby_connected_ap*'
+                      state: Offline
+                show_empty: false
+                type: 'custom:monster-card'
+              - card:
+                  column_width: 50%
+                  entities: []
+                  show_name: false
+                  show_state: false
+                  title: Abi Upstairs
+                  type: glance
+                filter:
+                  include:
+                    - entity_id: '*abi_connected_ap*'
+                      state: OFFICE_WIFI
+                show_empty: false
+                type: 'custom:monster-card'
+              - card:
+                  column_width: 20%
+                  entities:
+                    - entity: sensor.abi_connected_ap
+                  show_name: false
+                  show_state: false
+                  title: Abi Downstairs
+                  type: glance
+                filter:
+                  include:
+                    - entity_id: '*abi_connected_ap*'
+                      state: LIVING_ROOM_WIFI
+                show_empty: false
+                type: 'custom:monster-card'
+              - card:
+                  column_width: 20%
+                  entities: []
+                  show_name: false
+                  show_state: false
+                  title: Abi Away
+                  type: glance
+                filter:
+                  include:
+                    - entity_id: '*abi_connected_ap*'
+                      state: Offline
+                show_empty: false
+                type: 'custom:monster-card'
+            type: horizontal-stack
+        type: vertical-stack
+      - aspect_ratio: '16:9'
+        default_zoom: 18
         entities:
-          - entity: switch.diningroom_lights
-            name: Diner Light Switch
-      - type: conditional
-        conditions:
-          - entity: switch.diningroom_lights
-            state: "on"
-        card:
-          type: entities
-          name: Lights
-          entities:
-            - light.dining_room
-      - type: vertical-stack
-        cards:
-  # Media Player
-        - type: media-control
-          entity: media_player.kitchen_home
-      - type: vertical-stack
-        cards:
-          - type: glance
-            title: Nest Protect
+          - entity: device_tracker.pixel_xl
+        title: Pixel XL Location
+        type: map
+      - title: null
+        trackers:
+          - sensor.custom_card_tracker
+          - sensor.custom_component_tracker
+        type: 'custom:tracker-card'
+      - entities:
+          - sensor.current_version
+        show_header_toggle: false
+        title: Version
+        type: entities
+    icon: 'mdi:home'
+    title: default_view
+  - cards:
+      - cards:
+          - entities:
+              - entity: binary_sensor.hall_motion_sensor
+                name: Motion
+              - entity: sensor.hall_light_level
+                name: Light
+              - entity: sensor.hall_temperature
+                name: Temp
+              - entity: sensor.hall_battery_level
+                name: Battery
+            title: Hue Sensor
+            type: glance
+          - entities:
+              - entity: switch.hall_lights
+                name: Hall Light Switch
+            show_header_toggle: false
+            type: entities
+          - card:
+              entities:
+                - light.hallway_spot_1
+                - light.hallway_spot_2
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.hall_lights
+                state: 'on'
+            type: conditional
+        type: vertical-stack
+      - cards:
+          - camera_image: camera.front_door
             entities:
+              - binary_sensor.front_door_camera_online
+              - binary_sensor.front_door_camera_person_detected
+              - binary_sensor.front_door_camera_sound_detected
+              - binary_sensor.front_door_camera__garden_left_activity
+              - binary_sensor.front_door_camera__garden_right_activity
+              - binary_sensor.front_door_camera__path_activity
+              - binary_sensor.front_door_camera_motion_detected
+            show_info: true
+            tap_action: dialog
+            title: Front Door
+            type: picture-glance
+        type: vertical-stack
+    icon: 'mdi:door'
+    title: Hall
+  - cards:
+      - cards:
+          - entities:
+              - entity: binary_sensor.living_room_motion_sensor
+                name: Motion
+              - entity: sensor.living_room_light_level
+                name: Light
+              - entity: sensor.living_room_temperature
+                name: Temp
+              - entity: sensor.living_room_battery_level
+                name: Sensor
+              - entity: sensor.living_room_switch_battery_level
+                name: Remote
+            title: Hue Sensors
+            type: glance
+          - entities:
+              - entity: binary_sensor.living_room_door
+                icon: 'mdi:door'
+                name: Door Sensor
+            type: glance
+          - entities:
+              - entity: switch.livingroom_lights
+                name: Living Room Light Switch
+            show_header_toggle: false
+            type: entities
+          - card:
+              entities:
+                - light.living_room_lamp
+                - light.living_room_pendant
+                - input_number.livingroom_brightness
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.livingroom_lights
+                state: 'on'
+            type: conditional
+          - entities:
+              - entity: switch.christmas_lights
+                name: Living Room Christmas
+            show_header_toggle: false
+            title: Christmas Lights
+            type: entities
+        type: vertical-stack
+      - cards:
+          - entity: climate.living_room
+            type: thermostat
+          - entities:
+              - binary_sensor.living_room_thermostat_online
+              - binary_sensor.living_room_thermostat_has_leaf
+              - binary_sensor.living_room_thermostat_is_using_emergency_heat
+              - binary_sensor.living_room_thermostat_is_locked
+            show_header_toggle: true
+            title: Nest Thermostat
+            type: entities
+        type: vertical-stack
+      - cards:
+          - entities:
+              - entity: sensor.living_room_remote
+                name: Input
+            title: Hue Remote
+            type: glance
+          - card:
+              entities:
+                - media_player.shield_tv
+              name: Shield TV Plex
+              type: media-control
+            conditions:
+              - entity: media_player.shield_tv
+                state: 'on'
+            type: conditional
+          - entity: media_player.living_room_tv
+            type: media-control
+          - entity: media_player.denon_avrx2300w
+            type: media-control
+          - entity: media_player.living_room_home
+            type: media-control
+        type: vertical-stack
+    icon: 'mdi:sofa'
+    title: Lounge
+  - cards:
+      - cards:
+          - entities:
+              - entity: binary_sensor.kitchen_motion_sensor
+                name: Motion
+              - entity: sensor.kitchen_light_level
+                name: Light
+              - entity: sensor.kitchen_temperature
+                name: Temp
+            title: Hue Sensor
+            type: glance
+        type: vertical-stack
+      - cards:
+          - entity: sensor.cupboard_switch_battery_level
+            max: 100
+            min: 0
+            name: Cupboard Switch
+            severity:
+              green: 100
+              red: 10
+              yellow: 50
+            show_header_toggle: false
+            type: gauge
+          - entity: sensor.kitchen_battery_level
+            green: 100
+            max: 100
+            min: 0
+            name: Kitchen Switch
+            red: 10
+            severity: null
+            show_header_toggle: false
+            type: gauge
+            yellow: 50
+          - entity: sensor.kitchen_battery_level
+            green: 100
+            max: 100
+            min: 0
+            name: Kitchen Sensor
+            red: 10
+            severity: null
+            show_header_toggle: false
+            type: gauge
+            yellow: 50
+        type: horizontal-stack
+      - cards:
+          - entities:
+              - entity: switch.kitchen_lights
+                name: Kitchen Light Switch
+            show_header_toggle: false
+            type: entities
+          - card:
+              entities:
+                - light.kitchen_spot_1
+                - light.kitchen_spot_2
+                - light.kitchen_spot_3
+                - light.kitchen_spot_4
+                - light.kitchen_spot_5
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.kitchen_lights
+                state: 'on'
+            type: conditional
+          - entities:
+              - entity: switch.diningroom_lights
+                name: Dining Room Light Switch
+            show_header_toggle: false
+            type: entities
+          - card:
+              entities:
+                - light.diningroom_spot_1
+                - light.diningroom_spot_2
+                - light.diningroom_spot_3
+                - light.diningroom_spot_4
+                - light.diningroom_spot_5
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.diningroom_lights
+                state: 'on'
+            type: conditional
+          - entities:
+              - entity: switch.cupboard_lights
+                name: Cupboard Light Switch
+            show_header_toggle: false
+            type: entities
+          - card:
+              entities:
+                - light.cupboard_spot_1
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.cupboard_lights
+                state: 'on'
+            type: conditional
+        type: vertical-stack
+      - cards:
+          - entities:
               - entity: binary_sensor.kitchen_nest_protect_online
                 name: Online
               - entity: sensor.kitchen_nest_protect_battery_health
                 name: Battery
               - entity: sensor.upstairs_nest_protect_color_status
                 name: Status
-          - type: horizontal-stack
-            cards:
-  # Nest Protect
-            - type: picture-entity
-              entity: sensor.kitchen_nest_protect_smoke_status
-              name: Smoke
-              state_image:
-                "Ok": /local/nest-icons/nest-protect-green.png
-                "Warning": /local/nest-icons/nest-protect-yellow.png
-                "Emergency": /local/nest-icons/nest-protect-red.png
-            - type: picture-entity
-              entity: sensor.kitchen_nest_protect_co_status
-              name: CO
-              state_image:
-                "Ok": /local/nest-icons/nest-protect-green.png
-                "Warning": /local/nest-icons/nest-protect-yellow.png
-                "Emergency": /local/nest-icons/nest-protect-red.png
-# Room - Utility Area/Back Door
-  - title: backdoor
-    icon: mdi:tree
-    cards:
-  # Hue Lights
-      - type: entities
-        title: Hue Lights
+            title: Nest Protect
+            type: glance
+          - cards:
+              - entity: sensor.kitchen_nest_protect_smoke_status
+                name: Smoke
+                state_image:
+                  Emergency: /local/nest-icons/nest-protect-red.png
+                  Ok: /local/nest-icons/nest-protect-green.png
+                  Warning: /local/nest-icons/nest-protect-yellow.png
+                type: picture-entity
+              - entity: sensor.kitchen_nest_protect_co_status
+                name: CO
+                state_image:
+                  Emergency: /local/nest-icons/nest-protect-red.png
+                  Ok: /local/nest-icons/nest-protect-green.png
+                  Warning: /local/nest-icons/nest-protect-yellow.png
+                type: picture-entity
+            type: horizontal-stack
+        type: vertical-stack
+      - entities:
+          - sensor.kitchen_remote
+        show_header_toggle: true
+        title: Hue Remote
+        type: entities
+      - cards:
+          - entity: media_player.kitchen_home
+            type: media-control
+        type: vertical-stack
+    icon: 'mdi:pot'
+    title: kitchen
+  - cards:
+      - entities:
+          - entity: switch.backdoor_lights
+            name: Back Door Light Switch
         show_header_toggle: false
-        entities:
-          - entity: switch.backdoor_lights
-            name: Light Switch
-      - type: conditional
-        conditions:
-          - entity: switch.backdoor_lights
-            state: "on"
-        card:
-          type: entities
-          name: Lights
+        type: entities
+      - card:
           entities:
             - light.back_door
-  # Nest Outdoor Cam
-      - type: picture-glance
-        title: Backyard (Back Garden)
+          name: Lights
+          type: entities
+        conditions:
+          - entity: switch.backdoor_lights
+            state: 'on'
+        type: conditional
+      - camera_image: camera.backyard_back_garden
         entities:
           - binary_sensor.backyard_camera_back_garden_online
           - binary_sensor.backyard_camera_back_garden__garden_left_activity
           - binary_sensor.backyard_camera_back_garden_person_detected
           - binary_sensor.backyard_camera_back_garden_motion_detected
           - binary_sensor.backyard_camera_back_garden_sound_detected
-        camera_image: camera.backyard_back_garden
-# Room - Bathroom
-  - title: bathroom
-    icon: mdi:human-male-female
-    cards:
-      - type: vertical-stack
-        cards:
-  # Hue Sensor
-        - type: glance
-          title: Hue Sensor
-          entities:
-            - entity: sensor.bathroom_motion_sensor
-              name: Motion
-            - entity: sensor.bathroom_light_level
-              name: Light
-            - entity: sensor.bathroom_temperature
-              name: Temp
-            - entity: sensor.bathroom_battery_level
-              name: Battery
-        - type: glance
-#          title: Door Sensor
-          entities:
-            - entity: binary_sensor.bathroom_door
-              name: Door Sensor
-              icon: mdi:door
-
-  # Hue Lights
-        - type: entities
-          title: Hue Lights
-          show_header_toggle: false
-          entities:
-            - entity: switch.bathroom_lights
-              name: Light Switch
-        - type: conditional
-          conditions:
-            - entity: switch.bathroom_lights
-              state: "on"
-          card:
-            type: entities
-            name: Lights
-            entities:
-              - light.bathroom
-
-# Room - Stairs/Landing
-  - title: landing
-    icon: mdi:stairs
-    cards:
-        - type: vertical-stack
-          cards:
-  # Hue Sensor
-          - type: glance
+        title: Backyard (Back Garden)
+        type: picture-glance
+    icon: 'mdi:tree'
+    title: Backdoor
+  - cards:
+      - cards:
+          - entities:
+              - entity: binary_sensor.bathroom_motion_sensor
+                name: Motion
+              - entity: sensor.bathroom_light_level
+                name: Light
+              - entity: sensor.bathroom_temperature
+                name: Temp
+              - entity: sensor.bathroom_battery_level
+                name: Battery
             title: Hue Sensor
-            entities:
-              - entity: sensor.landing_motion_sensor
+            type: glance
+          - entities:
+              - entity: binary_sensor.bathroom_door
+                icon: 'mdi:door'
+                name: Door Sensor
+            type: glance
+          - entities:
+              - entity: switch.bathroom_lights
+                name: Bathroom Light Switch
+            show_header_toggle: false
+            type: entities
+          - card:
+              entities:
+                - light.bathroom
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.bathroom_lights
+                state: 'on'
+            type: conditional
+        type: vertical-stack
+    icon: 'mdi:human-male-female'
+    title: Bathroom
+  - cards:
+      - cards:
+          - entities:
+              - entity: binary_sensor.landing_motion_sensor
                 name: Motion
               - entity: sensor.landing_light_level
                 name: Light
@@ -496,782 +509,859 @@ views:
                 name: Temp
               - entity: sensor.landing_battery_level
                 name: Battery
-  # Hue Lights
-          - type: entities
-            title: Hue Lights
+            title: Hue Sensor
+            type: glance
+          - entities:
+              - entity: switch.landing_lights
+                name: Landing Light Switch
             show_header_toggle: false
-            entities:
-              - entity: switch.landing_lights
-                name: Light Switch
-          - type: conditional
-            conditions:
-              - entity: switch.landing_lights
-                state: "on"
-            card:
-              type: entities
-              name: Lights
+            type: entities
+          - card:
               entities:
                 - light.landing_spot
-          - type: entities
-            title: 'Attic Light'
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.landing_lights
+                state: 'on'
+            type: conditional
+          - entities:
+              - light.attic
             show_header_toggle: false
-            entities:
-              - light.attic      
-  # Nest Protect
-        - type: vertical-stack
-          cards:
-          - type: glance
-            title: Nest Protect
-            entities:
+            title: Attic Light
+            type: entities
+        type: vertical-stack
+      - cards:
+          - entities:
               - entity: binary_sensor.upstairs_nest_protect_online
                 name: Online
               - entity: sensor.upstairs_nest_protect_battery_health
                 name: Battery
               - entity: sensor.upstairs_nest_protect_color_status
                 name: Status
-          - type: horizontal-stack
-            cards:
-            - type: picture-entity
-              entity: sensor.upstairs_nest_protect_smoke_status
-              name: Smoke
-              state_image:
-                "Ok": /local/nest-icons/nest-protect-green.png
-                "Warning": /local/nest-icons/nest-protect-yellow.png
-                "Emergency": /local/nest-icons/nest-protect-red.png
-            - type: picture-entity
-              entity: sensor.upstairs_nest_protect_co_status
-              name: CO
-              state_image:
-                "Ok": /local/nest-icons/nest-protect-green.png
-                "Warning": /local/nest-icons/nest-protect-yellow.png
-                "Emergency": /local/nest-icons/nest-protect-red.png
-# Room Bedroom
-  - title: bedroom
-    icon: mdi:hotel
-    cards:
-      - type: vertical-stack
-        cards:  
-        - type: glance
-          entity: sensor.pixel_xl_battery_sensor
-          name: Pixel XL Batt
-          min: 0
-          max: 100
-          severity:
-            green: 61
-            yellow: 60
-            red: 20
-          theme: default
-        - type: gauge
-          entity: sensor.pixel_xl_light_sensor_2
-          min: 0
-          max: 100
-          theme: default
-          name: Pixel Xl Lux
-          severity:
-            green: 0
-            yellow: 0
-            red: 0
-
-
-      - type: vertical-stack
-        cards:  
-  # Hue Sensor
-        - type: glance
-          title: Hue Sensor
-          entities:
-            - entity: sensor.bedroom_motion_sensor
-              name: Motion
-            - entity: sensor.bedroom_light_level
-              name: Light
-            - entity: sensor.bedroom_temperature
-              name: Temp
-            - entity: sensor.bedroom_battery_level
-              name: Battery
-  # Hue Lights
-        - type: entities
-          title: Hue Lights
-          show_header_toggle: false
-          entities:
-            - entity: switch.bedroom_lights
-              name: Light Switch
-        - type: conditional
-          conditions:
-            - entity: switch.bedroom_lights
-              state: "on"
-          card:
+            title: Nest Protect
+            type: glance
+          - cards:
+              - entity: sensor.upstairs_nest_protect_smoke_status
+                name: Smoke
+                state_image:
+                  Emergency: /local/nest-icons/nest-protect-red.png
+                  Ok: /local/nest-icons/nest-protect-green.png
+                  Warning: /local/nest-icons/nest-protect-yellow.png
+                type: picture-entity
+              - entity: sensor.upstairs_nest_protect_co_status
+                name: CO
+                state_image:
+                  Emergency: /local/nest-icons/nest-protect-red.png
+                  Ok: /local/nest-icons/nest-protect-green.png
+                  Warning: /local/nest-icons/nest-protect-yellow.png
+                type: picture-entity
+            type: horizontal-stack
+        type: vertical-stack
+    icon: 'mdi:stairs'
+    title: Landing
+  - cards:
+      - cards:
+          - entities:
+              - entity: binary_sensor.bedroom_motion_sensor
+                name: Motion
+              - entity: sensor.bedroom_light_level
+                name: Light
+              - entity: sensor.bedroom_temperature
+                name: Temp
+              - entity: sensor.bedroom_battery_level
+                name: Battery
+            title: Hue Sensor
+            type: glance
+          - entities:
+              - entity: switch.bedroom_lights
+                name: Bedroom Light Switch
+            show_header_toggle: false
             type: entities
-            name: Lights
-            entities:
-              - light.bedroom_pendant_1
-              - light.bedroom_pendant_2
-              - light.bedroom_lamp
-  # Hue Remote
-        - type: entities
-          title: Hue Remote
-          show_header_toggle: true
-          entities:
-            - sensor.bedroom_remote
-            - sensor.bedroom_switch_battery_level
-# Room - Office
-  - title: office
-    icon: mdi:office-building
-    cards:
-      - type: vertical-stack
-        cards:  
-  # Hue Sensor
-        - type: glance
-          title: Hue Sensor
-          entities:
-            - entity: sensor.office_motion_sensor
-              name: Motion
-            - entity: sensor.office_light_level
-              name: Light
-            - entity: sensor.office_temperature
-              name: Temp
-            - entity: sensor.office_battery_level
-              name: Battery
-  # Hue Lights
-        - type: entities
-          title: Hue Lights
-          show_header_toggle: false
-          entities:
-            - entity:  switch.office_lights
-              name: Light Switch
-        - type: conditional
-          conditions:
-            - entity:  switch.office_lights
-              state: "on"
-          card:
+          - card:
+              entities:
+                - light.bedroom_pendant_1
+                - light.bedroom_pendant_2
+                - light.bedroom_lamp
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.bedroom_lights
+                state: 'on'
+            type: conditional
+          - entities:
+              - sensor.bedroom_remote
+              - sensor.bedroom_switch_battery_level
+            show_header_toggle: true
+            title: Hue Remote
             type: entities
-            name: Lights
-            entities:
-              - light.office_bloom
-              - light.office_shadow
-              - light.office_spotlights
-              - light.office_desk
-              - light.office_server_rack
-
-  # Switches
-      - type: vertical-stack
-        cards:  
-        - type: entities
-          title: Turn On/Off Device
-          show_header_toggle: false
-          entities:
-            - switch.office_lock
-            - switch.home_server
-            - switch.home_desktop
-  # Media Player
-        - type: media-control
-          entity: media_player.office_speaker
-        - type: media-control
-          entity: media_player.office_chromecast_audio          
-      - type: "custom:calendar-card"
-        showProgressBar: true
-        numberOfDays: 14
-        entities:
+        type: vertical-stack
+    icon: 'mdi:hotel'
+    title: Bedroom
+  - cards:
+      - cards:
+          - entities:
+              - entity: binary_sensor.office_motion_sensor
+                name: Motion
+              - entity: sensor.office_light_level
+                name: Light
+              - entity: sensor.office_temperature
+                name: Temp
+              - entity: sensor.office_battery_level
+                name: Battery
+            title: Hue Sensor
+            type: glance
+          - entities:
+              - entity: switch.office_lights
+                name: Office Light Switch
+            show_header_toggle: false
+            type: entities
+          - card:
+              entities:
+                - light.office_bloom
+                - light.office_shadow
+                - light.office_spotlights
+                - light.office_desk
+                - light.office_server_rack
+              name: Lights
+              type: entities
+            conditions:
+              - entity: switch.office_lights
+                state: 'on'
+            type: conditional
+        type: vertical-stack
+      - cards:
+          - entities:
+              - lock.comms_cab
+              - switch.home_server
+              - switch.home_desktop
+            show_header_toggle: false
+            title: Turn On/Off Device
+            type: entities
+          - entity: media_player.office_speaker
+            type: media-control
+          - entity: media_player.office_chromecast_audio
+            type: media-control
+        type: vertical-stack
+      - entities:
           - calendar.noodlemctwoodle
           - calendar.contacts
-      - type: "custom:calendar-card"
-        name: "Birthdays"
-        showProgressBar: false
         numberOfDays: 14
+        showProgressBar: true
+        type: 'custom:calendar-card'
+      - entities:
+          - calendar.contacts
+        name: Birthdays
+        numberOfDays: 14
+        showProgressBar: false
+        type: 'custom:calendar-card'
+      - cards:
+          - entity: sensor.pixel_xl_battery_sensor
+            max: 100
+            min: 0
+            name: Pixel XL Batt
+            severity:
+              green: 61
+              red: 20
+              yellow: 60
+            theme: default
+            type: gauge
+          - entity: sensor.pixel_xl_light_sensor_2
+            max: 100
+            min: 0
+            name: Pixel Xl Lux
+            severity:
+              green: 0
+              red: 0
+              yellow: 0
+            theme: default
+            type: gauge
+        type: vertical-stack
+    icon: 'mdi:office-building'
+    title: Office
+  - cards:
+      - type: entities
         entities:
-         - calendar.contacts
-# Network Devices 
-  - title: network_devices
-    icon: mdi:network
-    cards:
-      - type: custom:monster-card
-        card:
-          type: entities
+          - entity: input_select.select_hue_motion_sensor
+          - entity: input_select.select_hue_sensitivity
+          - entity: script.set_hue_sensitivity
+        title: Set Hue sensitivity sensor
+        show_header_toggle: false
+      - type: entities
+        entities:
+          - entity: input_select.select_hue_motion_sensor
+          - entity: input_number.slide_hue_threshold
+          - entity: script.set_hue_threshold
+        title: Set Hue threshold sensor
+        show_header_toggle: false
+      - type: entities
+        entities:
+          - entity: sensor.kitchen_motion_sensor_sensitivity
+          - entity: sensor.living_room_motion_sensor_sensitivity
+          - entity: sensor.hall_motion_sensor_sensitivity
+          - entity: sensor.bathroom_motion_sensor_sensitivity
+          - entity: sensor.landing_motion_sensor_sensitivity
+          - entity: sensor.bedroom_motion_sensor_sensitivity
+          - entity: sensor.office_motion_sensor_sensitivity
+        title: Hue sensitivity sensors
+        show_header_toggle: false
+    badges: []
+    title: Hue
+    icon: 'mdi:home-automation'
+    panel: false
+  - cards:
+      - card:
+          entities:
+            - entity: device_tracker.204d0983ac37
+            - entity: device_tracker.62210a37cc20
+            - entity: device_tracker.62220337c01c
+            - entity: device_tracker.78abbbd53a07
+            - entity: device_tracker.abi_laptop
+            - entity: device_tracker.ac3743dda895
+            - entity: device_tracker.christmas_lights_plug
+            - entity: device_tracker.chromecast_audio_office
+            - entity: device_tracker.chs_iot_vlan
+            - entity: device_tracker.chscldk01
+            - entity: device_tracker.chsdoc01
+            - entity: device_tracker.chsdt01_lan
+            - entity: device_tracker.chsdt01_wifi
+            - entity: device_tracker.chshue01
+            - entity: device_tracker.chspfs01
+            - entity: device_tracker.chspfs01_lacp
+            - entity: device_tracker.chsunr01
+            - entity: device_tracker.chsvh01_lan
+            - entity: device_tracker.denon_avr
+            - entity: device_tracker.e2210731c020
+            - entity: device_tracker.espeasy0
+            - entity: device_tracker.fire_tv
+            - entity: device_tracker.google_home_kitchen
+            - entity: device_tracker.google_home_living_room
+            - entity: device_tracker.google_home_office
+            - entity: device_tracker.google_pixel_abi
+            - entity: device_tracker.google_pixel_xl_toby
+            - entity: device_tracker.happy_bubbles
+            - entity: device_tracker.harmonyhub
+            - entity: device_tracker.hd_homerun
+            - entity: device_tracker.hue_google_pixel_xl
+            - entity: device_tracker.lgwebostv
+            - entity: device_tracker.living_room_tv
+            - entity: device_tracker.nest_hello
+            - entity: device_tracker.nest_outdoor_cam
+            - entity: device_tracker.nest_protect_hall
+            - entity: device_tracker.nest_protect_kitchen
+            - entity: device_tracker.nest_thermostat_living_room
+            - entity: device_tracker.nexus_9_tablet
+            - entity: device_tracker.office_lock
+            - entity: device_tracker.shield_tv
+            - entity: device_tracker.work_laptop
+            - entity: device_tracker.xboxone
           title: LAN Devices
+          type: entities
         filter:
           include:
             - domain: device_tracker
-      - type: custom:monster-card
-        card:
-          type: entities
+        type: 'custom:monster-card'
+      - card:
+          entities:
+            - entity: binary_sensor.26_bath_road_away
+            - entity: binary_sensor.backyard_camera_back_garden__back_garden_activity
+            - entity: binary_sensor.backyard_camera_back_garden__garden_patio_activity
+            - entity: binary_sensor.backyard_camera_back_garden_motion_detected
+            - entity: binary_sensor.backyard_camera_back_garden_online
+            - entity: binary_sensor.backyard_camera_back_garden_person_detected
+            - entity: binary_sensor.backyard_camera_back_garden_sound_detected
+            - entity: binary_sensor.bathroom_door
+            - entity: binary_sensor.bathroom_motion_sensor
+            - entity: binary_sensor.bedroom_motion_sensor
+            - entity: binary_sensor.front_door_camera__garden_left_activity
+            - entity: binary_sensor.front_door_camera__garden_right_activity
+            - entity: binary_sensor.front_door_camera__path_activity
+            - entity: binary_sensor.front_door_camera__road_activity
+            - entity: binary_sensor.front_door_camera_motion_detected
+            - entity: binary_sensor.front_door_camera_online
+            - entity: binary_sensor.front_door_camera_person_detected
+            - entity: binary_sensor.front_door_camera_sound_detected
+            - entity: binary_sensor.hall_motion_sensor
+            - entity: binary_sensor.kitchen_motion_sensor
+            - entity: binary_sensor.kitchen_nest_protect_online
+            - entity: binary_sensor.landing_motion_sensor
+            - entity: binary_sensor.living_room_door
+            - entity: binary_sensor.living_room_motion_sensor
+            - entity: binary_sensor.living_room_thermostat_fan
+            - entity: binary_sensor.living_room_thermostat_has_leaf
+            - entity: binary_sensor.living_room_thermostat_is_locked
+            - entity: binary_sensor.living_room_thermostat_is_using_emergency_heat
+            - entity: binary_sensor.living_room_thermostat_online
+            - entity: binary_sensor.office_motion_sensor
+            - entity: binary_sensor.upstairs_nest_protect_online
           title: Binary Sensors
+          type: entities
         filter:
           include:
             - domain: binary_sensor
-      - type: vertical-stack
-        cards:  
-        - type: conditional
-          conditions:
-            - entity: switch.home_server
-              state: "on"
-          card:
+        type: 'custom:monster-card'
+      - cards:
+          - card:
+              entities:
+                - sensor.nzbget_article_cache
+                - sensor.nzbget_average_speed
+                - sensor.nzbget_disk_free
+                - sensor.nzbget_download_paused
+                - sensor.nzbget_queue_size
+                - sensor.nzbget_size
+                - sensor.nzbget_speed
+                - sensor.nzbget_uptime
+              title: NZBGet
+              type: entities
+            conditions:
+              - entity: switch.home_server
+                state: 'on'
+            type: conditional
+          - card:
+              entities:
+                - sensor.sonarr_upcoming
+                - sensor.sonarr_queue
+                - sensor.sonarr_disk_space
+              title: Sonarr
+              type: entities
+            conditions:
+              - entity: switch.home_server
+                state: 'on'
+            type: conditional
+          - card:
+              entities:
+                - sensor.radarr_upcoming
+                - sensor.radarr_status
+                - sensor.radarr_disk_space
+              title: Radarr
+              type: entities
+            conditions:
+              - entity: switch.home_server
+                state: 'on'
+            type: conditional
+          - entities:
+              - sensor.speedtest_download
+              - sensor.speedtest_upload
+              - sensor.speedtest_ping
+            show_header_toggle: true
+            title: Internet Speedtest
             type: entities
-            title: NZBGet
-            entities:
-            - sensor.nzbget_article_cache
-            - sensor.nzbget_average_speed
-            - sensor.nzbget_disk_free
-            - sensor.nzbget_download_paused
-            - sensor.nzbget_queue_size
-            - sensor.nzbget_size
-            - sensor.nzbget_speed
-            - sensor.nzbget_uptime
-        - type: conditional
-          conditions:
-            - entity: switch.home_server
-              state: "on"
-          card:
-            type: entities
-            title: Sonarr
-            entities:
-            - sensor.sonarr_upcoming
-            - sensor.sonarr_queue
-            - sensor.sonarr_disk_space
-        - type: conditional
-          conditions:
-            - entity: switch.home_server
-              state: "on"
-          card:
-            type: entities
-            title: Radarr
-            entities:
-            - sensor.radarr_upcoming
-            - sensor.radarr_status
-            - sensor.radarr_disk_space
-        - type: entities
-          title: Internet Speedtest
-          show_header_toggle: true
-          entities:
-            - sensor.speedtest_download
-            - sensor.speedtest_upload
-            - sensor.speedtest_ping
-# Settings Page
-  - title: device_settings
-    icon: mdi:settings
-    cards:
-        - type: vertical-stack
-          cards:
-          - type: entities
-            title: 'Hall Automations'
-            show_header_toggle: false
-            entities:
+        type: vertical-stack
+    icon: 'mdi:network'
+    title: Network Devices
+  - cards:
+      - cards:
+          - entities:
               - automation.turn_on_hall_lights_morning
               - automation.turn_on_hall_lights_day
               - automation.turn_on_hall_lights_night
               - automation.turn_off_hall_lights
-          - type: entities
-            title: 'Bathroom Automations'
             show_header_toggle: false
-            entities:
+            title: Hall Automations
+            type: entities
+          - entities:
               - automation.turn_on_bathroom_light_morning
               - automation.turn_on_bathroom_light_day
               - automation.turn_on_bathroom_light_night
               - automation.turn_off_bathroom_lights
-          - type: entities
-            title: 'Landing Automations'
             show_header_toggle: false
-            entities:
+            title: Bathroom Automations
+            type: entities
+          - entities:
               - automation.turn_on_landing_lights_morning
               - automation.turn_on_landing_lights_day
               - automation.turn_on_landing_lights_night
               - automation.turn_off_landing_lights
-        - type: vertical-stack
-          cards:
-          - type: entities
-            title: 'Living Room Automations'
-            show_header_toggle: true
-            entities:
+            show_header_toggle: false
+            title: Landing Automations
+            type: entities
+        type: vertical-stack
+      - cards:
+          - entities:
               - automation.turn_on_livingroom_lights_morning
               - automation.turn_on_livingroom_lights_day
               - automation.turn_on_livingroom_lights_night
               - automation.turn_on_livingroom_lights_away_mode
-          - type: entities
-            title: 'Office Automations'
             show_header_toggle: true
-            entities:
+            title: Living Room Automations
+            type: entities
+          - entities:
               - automation.turn_on_office_light_morning
               - automation.turn_on_office_light_day
               - automation.turn_on_office_light_night
-          - type: entities
-            title: 'Heating Automations'
             show_header_toggle: true
-            entities:
+            title: Office Automations
+            type: entities
+          - entities:
               - automation.turn_on_heating
               - automation.heating_on_notification
               - automation.turn_off_heating
               - automation.heating_off_notification
               - automation.turn_off_the_heating_when_away
-        - type: vertical-stack
-          cards:
-          - type: entities
-            title: 'Presence Automations'
             show_header_toggle: true
-            entities:
+            title: Heating Automations
+            type: entities
+        type: vertical-stack
+      - cards:
+          - entities:
               - automation.abi_is_home
               - automation.abi_home_notification
               - automation.abi_away_notification
               - automation.motion_detected_in_front_garden
               - automation.motion_detected_in_back_garden
-# FloorPlan
-  - title: floorplan
-    icon: mdi:floor-plan
-    panel: true
-    cards:
-      - type: vertical-stack
-        cards:  
-### Downstairs
-        - type: custom:plan-coordinates                    
-        - type: picture-elements
+            show_header_toggle: true
+            title: Presence Automations
+            type: entities
+        type: vertical-stack
+    icon: 'mdi:settings'
+    title: Device Settings
+  - cards:
+      cards:
+        - type: 'custom:plan-coordinates'
+        - elements:
+            - entity: light.back_door
+              style:
+                left: 72%
+                top: 10%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.backdoor_lights
+              style:
+                left: 61%
+                top: 17%
+              tap_action: toggle
+              title: Backdoor Lights
+              type: state-icon
+            - camera_image: camera.backyard_back_garden
+              entity: camera.backyard_back_garden
+              style:
+                border-radius: 10%
+                left: 14%
+                top: 11%
+                width: 25%
+              type: image
+            - entity: light.kitchen_spot_1
+              style:
+                left: 41%
+                top: 26%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.kitchen_spot_2
+              style:
+                left: 50%
+                top: 26%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.kitchen_spot_3
+              style:
+                left: 37%
+                top: 30%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.kitchen_spot_4
+              style:
+                left: 40%
+                top: 35%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.kitchen_spot_5
+              style:
+                left: 50%
+                top: 35%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.kitchen_lights
+              style:
+                left: 60%
+                top: 40%
+              tap_action: toggle
+              title: Kitchen Lights
+              type: state-icon
+            - entity: sensor.kitchen_temperature
+              style:
+                left: 69%
+                top: 40%
+              type: state-label
+            - entity: sensor.Kitchen_motion_sensor
+              filter: brightness(50%)
+              image: /local/floorplan-icons/phue_sensor.png
+              state_filter:
+                'on': brightness(100%)
+              style:
+                left: 69%
+                top: 38%
+                width: 3%
+              tap_action: toggle
+              title: Kitchen Motion
+              type: image
+            - entity: binary_sensor.kitchen_nest_protect_online
+              style:
+                left: 61%
+                top: 30%
+              tap_action: navigate
+              title: Kitchen Nest Protect
+              type: state-icon
+            - entity: media_player.kitchen_home
+              filter: brightness(50%)
+              image: /local/floorplan-icons/ghome_mini.png
+              service: media_player.media_play_pause
+              state_filter:
+                playing: brightness(100%)
+              style:
+                left: 31%
+                top: 40%
+                width: 5%
+              tap_action: call-service
+              type: image
+            - entity: light.dining_room
+              style:
+                left: 72%
+                top: 30%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.diningroom_lights
+              style:
+                left: 65%
+                top: 40%
+              tap_action: toggle
+              title: Dining Room Lights
+              type: state-icon
+            - entity: light.living_room_pendant
+              style:
+                left: 65%
+                top: 67%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.living_room_lamp
+              style:
+                left: 41%
+                top: 72%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.livingroom_lights
+              style:
+                left: 45%
+                top: 77%
+              tap_action: toggle
+              title: Livingroom Lights
+              type: state-icon
+            - entity: sensor.living_room_thermostat_temperature
+              style:
+                left: 83%
+                top: 87%
+              type: state-label
+            - entity: sensor.living_room_thermostat_hvac_state
+              style:
+                left: 83%
+                top: 86%
+              type: state-label
+            - entity: sensor.living_room_temperature
+              style:
+                left: 84%
+                top: 65%
+              type: state-label
+            - entity: sensor.living_room_motion_sensor
+              filter: brightness(50%)
+              image: /local/floorplan-icons/phue_sensor.png
+              state_filter:
+                'on': brightness(100%)
+              style:
+                left: 84%
+                top: 63%
+                width: 3%
+              tap_action: toggle
+              title: Living Room Motion
+              type: image
+            - entity: media_player.living_room_home
+              filter: brightness(50%)
+              image: /local/floorplan-icons/ghome.png
+              service: media_player.media_play_pause
+              state_filter:
+                playing: brightness(100%)
+              style:
+                left: 42%
+                top: 68%
+                width: 8%
+              tap_action: call-service
+              type: image
+            - entity: media_player.denon_avrx2300w
+              filter: brightness(50%)
+              image: /local/floorplan-icons/denon.png
+              service: media_player.media_play_pause
+              state_filter:
+                playing: brightness(100%)
+              style:
+                left: 84%
+                top: 45%
+                width: 6%
+              tap_action: call-service
+              type: image
+            - entity: light.hallway_spot_1
+              style:
+                left: 33%
+                top: 83%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.hallway_spot_2
+              style:
+                left: 22%
+                top: 83%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.hall_lights
+              style:
+                left: 30%
+                top: 87%
+              tap_action: toggle
+              title: Hall Lights
+              type: state-icon
+            - entity: switch.downstairs_lights
+              style:
+                left: 40%
+                top: 87%
+              tap_action: toggle
+              title: All Downstairs Lights
+              type: state-icon
+            - entity: sensor.hall_temperature
+              style:
+                left: 26%
+                top: 89%
+              type: state-label
+            - entity: sensor.hall_motion_sensor
+              filter: brightness(50%)
+              image: /local/floorplan-icons/phue_sensor.png
+              state_filter:
+                'on': brightness(100%)
+              style:
+                left: 26%
+                top: 87%
+                width: 3%
+              tap_action: toggle
+              title: Hall Motion
+              type: image
+            - camera_image: camera.front_door
+              entity: camera.front_door
+              style:
+                border-radius: 10%
+                left: 14%
+                top: 33%
+                width: 25%
+              type: image
+            - entity: light.bathroom
+              style:
+                left: 22%
+                top: 65%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.bathroom_lights
+              style:
+                left: 19%
+                top: 74%
+              tap_action: toggle
+              title: Bathroom Lights
+              type: state-icon
+            - entity: sensor.bathroom_temperature
+              style:
+                left: 24%
+                top: 74%
+              type: state-label
+            - entity: sensor.bathroom_motion_sensor
+              filter: brightness(50%)
+              image: /local/floorplan-icons/phue_sensor.png
+              state_filter:
+                'on': brightness(100%)
+              style:
+                left: 24%
+                top: 72%
+                width: 3%
+              tap_action: toggle
+              title: Bathroom Motion
+              type: image
           image: /local/floorplan-icons/downstairs.png
-          elements:
-# Back door
-          - type: state-icon
-            tap_action: toggle
-            entity: light.back_door
-            style:
-              top: 10%
-              left: 72%   
-          - type: state-icon
-            tap_action: toggle
-            title: Backdoor Lights
-            entity: switch.backdoor_lights
-            style:
-              top: 17%
-              left: 61%
-          - type: image
-            entity: camera.backyard_back_garden
-            camera_image: camera.backyard_back_garden
-            style:
-              top: 11%
-              left: 14%
-              width: 25%
-              border-radius: 10%   
-# Kitchen
-          - type: state-icon
-            tap_action: toggle
-            entity: light.kitchen_spot_1
-            style:
-              top: 26%
-              left: 41%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.kitchen_spot_2
-            style:
-              top: 26%
-              left: 50%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.kitchen_spot_3
-            style:
-              top: 30%
-              left: 37%              
-          - type: state-icon
-            tap_action: toggle
-            entity: light.kitchen_spot_4
-            style:
-              top: 35%
-              left: 40%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.kitchen_spot_5
-            style:
-              top: 35%
-              left: 50%              
-          - type: state-icon
-            tap_action: toggle
-            title: Kitchen Lights
-            entity: switch.kitchen_lights
-            style:
-              top: 40%
-              left: 60%
-          - type: state-label
-            entity: sensor.kitchen_temperature
-            style:
-              top: 40%
-              left: 69%   
-          - type: image
-            entity: sensor.Kitchen_motion_sensor
-            title: Kitchen Motion
-            tap_action: toggle
-            image: /local/floorplan-icons/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
-            style:
-              top: 38%
-              left: 69%
-              width: 3%
-          - type: state-icon
-            tap_action: navigate
-            title: Kitchen Nest Protect
-            entity: binary_sensor.kitchen_nest_protect_online
-            style:
-              top: 30%
-              left: 61%
-          - type: image
-            entity: media_player.kitchen_home
-            tap_action: call-service
-            service: media_player.media_play_pause
-            image: /local/floorplan-icons/ghome_mini.png
-            filter: brightness(50%)
-            state_filter:
-              playing: brightness(100%)
-            style:
-              top: 40%
-              left: 31%
-              width: 5%
-# Dining Room
-          - type: state-icon
-            tap_action: toggle
-            entity: light.dining_room
-            style:
-              top: 30%
-              left: 72%               
-          - type: state-icon
-            tap_action: toggle
-            title: Dining Room Lights
-            entity: switch.diningroom_lights
-            style:
-              top: 40%
-              left: 65%
-# Living Room
-          - type: state-icon
-            tap_action: toggle
-            entity: light.living_room_pendant
-            style:
-              top: 67%
-              left: 65%
-          - type: state-icon
-            tap_action: toggle
-            entity: light.living_room_lamp
-            style:
-              top: 72%
-              left: 41%  
-          - type: state-icon
-            tap_action: toggle
-            title: Livingroom Lights
-            entity: switch.livingroom_lights
-            style:
-              top: 77%
-              left: 45%
-          - type: state-label
-            entity: sensor.living_room_thermostat_temperature
-            style:
-              top: 87%
-              left: 83%    
-          - type: state-label
-            entity: sensor.living_room_thermostat_hvac_state
-            style:
-              top: 86%
-              left: 83%    
-          - type: state-label
-            entity: sensor.living_room_temperature
-            style:
-              top: 65%
-              left: 84%   
-          - type: image
-            entity: sensor.living_room_motion_sensor
-            title: Living Room Motion
-            tap_action: toggle
-            image: /local/floorplan-icons/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
-            style:
-              top: 63%
-              left: 84%
-              width: 3%
-          - type: image
-            entity: media_player.living_room_home
-            tap_action: call-service
-            service: media_player.media_play_pause
-            image: /local/floorplan-icons/ghome.png
-            filter: brightness(50%)
-            state_filter:
-              playing: brightness(100%)
-            style:
-              top: 68%
-              left: 42%
-              width: 8%
-          - type: image
-            entity: media_player.denon_avrx2300w
-            tap_action: call-service
-            service: media_player.media_play_pause
-            image: /local/floorplan-icons/denon.png
-            filter: brightness(50%)
-            state_filter:
-              playing: brightness(100%)
-            style:
-              top: 45%
-              left: 84%
-              width: 6%
-# Hall
-          - type: state-icon
-            tap_action: toggle
-            entity: light.hallway_spot_1
-            style:
-              top: 83%
-              left: 33%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.hallway_spot_2
-            style:
-              top: 83%
-              left: 22%   
-          - type: state-icon
-            tap_action: toggle
-            title: Hall Lights
-            entity: switch.hall_lights
-            style:
-              top: 87%
-              left: 30%
-          - type: state-icon
-            tap_action: toggle
-            title: All Downstairs Lights
-            entity: switch.downstairs_lights
-            style:
-              top: 87%
-              left: 40%
-          - type: state-label
-            entity: sensor.hall_temperature
-            style:
-              top: 89%
-              left: 26% 
-          - type: image
-            entity: sensor.hall_motion_sensor
-            title: Hall Motion
-            tap_action: toggle
-            image: /local/floorplan-icons/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
-            style:
-              top: 87%
-              left: 26%
-              width: 3%
-          - type: image
-            entity: camera.front_door
-            camera_image: camera.front_door
-            style:
-              top: 33%
-              left: 14%
-              width: 25%
-              border-radius: 10%  
-# Bathroom
-          - type: state-icon
-            tap_action: toggle
-            entity: light.bathroom
-            style:
-              top: 65%
-              left: 22%
-          - type: state-icon
-            tap_action: toggle
-            title: Bathroom Lights
-            entity: switch.bathroom_lights
-            style:
-              top: 74%
-              left: 19%
-          - type: state-label
-            entity: sensor.bathroom_temperature
-            style:
-              top: 74%
-              left: 24% 
-          - type: image
-            entity: sensor.bathroom_motion_sensor
-            title: Bathroom Motion
-            tap_action: toggle
-            image: /local/floorplan-icons/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
-            style:
-              top: 72%
-              left: 24%
-              width: 3%
-### Upstairs
-
-        - type: custom:plan-coordinates                    
-        - type: picture-elements
+          type: picture-elements
+        - type: 'custom:plan-coordinates'
+        - elements:
+            - entity: light.landing_spot
+              style:
+                left: 43%
+                top: 49%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.landing_lights
+              style:
+                left: 47%
+                top: 52%
+              tap_action: toggle
+              title: Landing Lights
+              type: state-icon
+            - entity: switch.upstairs_lights
+              style:
+                left: 35%
+                top: 52%
+              tap_action: toggle
+              title: All Upstairs Lights
+              type: state-icon
+            - entity: sensor.landing_temperature
+              style:
+                left: 24%
+                top: 47%
+              type: state-label
+            - entity: sensor.landing_motion_sensor
+              filter: brightness(50%)
+              image: /local/floorplan-icons/phue_sensor.png
+              state_filter:
+                'on': brightness(100%)
+              style:
+                left: 24%
+                top: 45%
+                width: 3%
+              tap_action: toggle
+              title: Landing Motion
+              type: image
+            - entity: binary_sensor.upstairs_nest_protect_online
+              style:
+                left: 25%
+                top: 50%
+              tap_action: navigate
+              title: Hallway Nest Protect
+              type: state-icon
+            - entity: light.bedroom_lamp
+              style:
+                left: 75%
+                top: 56%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.bedroom_pendant_1
+              style:
+                left: 42%
+                top: 70%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.bedroom_pendant_2
+              style:
+                left: 65%
+                top: 70%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.bedroom_lights
+              style:
+                left: 38%
+                top: 56%
+              tap_action: toggle
+              title: Bedroom Lights
+              type: state-icon
+            - entity: sensor.bedroom_temperature
+              style:
+                left: 35%
+                top: 58%
+              type: state-label
+            - entity: sensor.bedroom_motion_sensor
+              filter: brightness(50%)
+              image: /local/floorplan-icons/phue_sensor.png
+              state_filter:
+                'on': brightness(100%)
+              style:
+                left: 35%
+                top: 56%
+                width: 3%
+              tap_action: toggle
+              title: Bedroom Motion
+              type: image
+            - entity: light.craft_room
+              style:
+                left: 65%
+                top: 35%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.craftroom_lights
+              style:
+                left: 54%
+                top: 52%
+              tap_action: toggle
+              title: Craft Room Lights
+              type: state-icon
+            - entity: light.office_spot_1
+              style:
+                left: 35%
+                top: 35%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.office_spot_2
+              style:
+                left: 43%
+                top: 22%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.office_desk
+              style:
+                left: 23%
+                top: 25%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.office_shadow
+              style:
+                left: 23%
+                top: 17%
+              tap_action: toggle
+              type: state-icon
+            - entity: light.office_bloom
+              style:
+                left: 23%
+                top: 40%
+              tap_action: toggle
+              type: state-icon
+            - entity: switch.office_lights
+              style:
+                left: 49%
+                top: 40%
+              tap_action: toggle
+              title: Office Lights
+              type: state-icon
+            - entity: sensor.office_temperature
+              style:
+                left: 26%
+                top: 17%
+              type: state-label
+            - entity: sensor.office_motion_sensor
+              filter: brightness(50%)
+              image: /local/floorplan-icons/phue_sensor.png
+              state_filter:
+                'on': brightness(100%)
+              style:
+                left: 26%
+                top: 15%
+                width: 3%
+              tap_action: toggle
+              title: Office Motion
+              type: image
+            - entity: switch.home_server
+              style:
+                left: 35%
+                top: 41%
+              tap_action: toggle
+              title: Unraid Server
+              type: state-icon
+            - entity: switch.home_desktop
+              style:
+                left: 25%
+                top: 28%
+              tap_action: toggle
+              title: Desktop Computer
+              type: state-icon
+            - entity: media_player.office_speaker
+              filter: brightness(50%)
+              image: /local/floorplan-icons/ghome_mini.png
+              service: media_player.media_play_pause
+              state_filter:
+                playing: brightness(100%)
+              style:
+                left: 26%
+                top: 41%
+                width: 5%
+              tap_action: call-service
+              type: image
           image: /local/floorplan-icons/upstairs.png
-          elements:
-# Landing
-          - type: state-icon
-            tap_action: toggle
-            entity: light.landing_spot
-            style:
-              top: 49%
-              left: 43%
-          - type: state-icon
-            tap_action: toggle
-            title: Landing Lights
-            entity: switch.landing_lights
-            style:
-              top: 52%
-              left: 47%
-          - type: state-icon
-            tap_action: toggle
-            title: All Upstairs Lights
-            entity: switch.upstairs_lights
-            style:
-              top: 52%
-              left: 35%
-          - type: state-label
-            entity: sensor.landing_temperature
-            style:
-              top: 47%
-              left: 24%  
-          - type: image
-            entity: sensor.landing_motion_sensor
-            title: Landing Motion
-            tap_action: toggle
-            image: /local/floorplan-icons/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
-            style:
-              top: 45%
-              left: 24%
-              width: 3%
-          - type: state-icon
-            tap_action: navigate
-            title: Hallway Nest Protect
-            entity: binary_sensor.upstairs_nest_protect_online
-            style:
-              top: 50%
-              left: 25%
-# Bedroom              
-          - type: state-icon
-            tap_action: toggle
-            entity: light.bedroom_lamp
-            style:
-              top: 56%
-              left: 75%              
-          - type: state-icon
-            tap_action: toggle
-            entity: light.bedroom_pendant_1
-            style:
-              top: 70%
-              left: 42%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.bedroom_pendant_2
-            style:
-              top: 70%
-              left: 65%  
-          - type: state-icon
-            tap_action: toggle
-            title: Bedroom Lights
-            entity: switch.bedroom_lights
-            style:
-              top: 56%
-              left: 38%
-          - type: state-label
-            entity: sensor.bedroom_temperature
-            style:
-              top: 58%
-              left: 35%   
-          - type: image
-            entity: sensor.bedroom_motion_sensor
-            title: Bedroom Motion
-            tap_action: toggle
-            image: /local/floorplan-icons/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
-            style:
-              top: 56%
-              left: 35%
-              width: 3%
-# Craft Room
-          - type: state-icon
-            tap_action: toggle
-            entity: light.craft_room
-            style:
-              top: 35%
-              left: 65%  
-          - type: state-icon
-            tap_action: toggle
-            title: Craft Room Lights
-            entity: switch.craftroom_lights
-            style:
-              top: 52%
-              left: 54%
-# Office
-          - type: state-icon
-            tap_action: toggle
-            entity: light.office_spot_1
-            style:
-              top: 35%
-              left: 35%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.office_spot_2
-            style:
-              top: 22%
-              left: 43%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.office_desk
-            style:
-              top: 25%
-              left: 23%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.office_shadow
-            style:
-              top: 17%
-              left: 23%  
-          - type: state-icon
-            tap_action: toggle
-            entity: light.office_bloom
-            style:
-              top: 40%
-              left: 23%  
-          - type: state-icon
-            tap_action: toggle
-            title: Office Lights
-            entity: switch.office_lights
-            style:
-              top: 40%
-              left: 49%
-          - type: state-label
-            entity: sensor.office_temperature
-            style:
-              top: 17%
-              left: 26%   
-          - type: image
-            entity: sensor.office_motion_sensor
-            title: Office Motion
-            tap_action: toggle
-            image: /local/floorplan-icons/phue_sensor.png
-            filter: brightness(50%)
-            state_filter:
-              on: brightness(100%)
-            style:
-              top: 15%
-              left: 26%
-              width: 3%
-          - type: state-icon
-            tap_action: toggle
-            title: Unraid Server
-            entity: switch.home_server
-            style:
-              top: 41%
-              left: 35%
-          - type: state-icon
-            tap_action: toggle
-            title: Desktop Computer
-            entity: switch.home_desktop
-            style:
-              top: 28%
-              left: 25%    
-          - type: image
-            entity: media_player.office_speaker
-            tap_action: call-service
-            service: media_player.media_play_pause
-            image: /local/floorplan-icons/ghome_mini.png
-            filter: brightness(50%)
-            state_filter:
-              playing: brightness(100%)
-            style:
-              top: 41%
-              left: 26%
-              width: 5%
+          type: picture-elements
+    icon: 'mdi:floor-plan'
+    panel: true
+    title: floorplan
