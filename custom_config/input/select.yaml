@@ -1,0 +1,18 @@
+  select_hue_sensitivity:
+    name: select Hue sensitivity
+    options:
+      - Low
+      - Medium
+      - High
+
+  select_hue_motion_sensor:
+    name: select Motion sensor
+    icon: mdi:run-fast
+    options:
+      - Kitchen
+      - Living Room
+      - Hall
+      - Bathroom
+      - Landing
+      - Bedroom
+      - Office

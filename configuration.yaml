@@ -12,32 +12,7 @@ homeassistant:
   time_zone: UTC
   # Customization file
   customize: !include customize.yaml
-  customize_glob:
-    sensor.*_motion_sensor_sensitivity:
-      templates:
-        icon: >
-          if (state === '0') return 'mdi:numeric-0-box-multiple-outline';
-          if (state === '1') return 'mdi:numeric-1-box-multiple-outline';
-          return 'mdi:numeric-2-box-multiple-outline';
-        icon_color: >
-          if (state === '0') return 'grey';
-          if (state === '1') return 'blue';
-          return 'red';
-
-    sensor.*_motion_sensor_threshold:
-      icon: mdi:altimeter
-      templates:
-        icon_color: >
-          if (state > 25000 ) return 'rgb(85, 0, 0)';
-          if (state > 20000) return 'rgb(255, 0, 0)';
-          if (state > 15000) return 'rgb(255, 165, 0)';
-          if (state > 10000) return 'rgb(0, 128, 0)';
-          if (state > 7500) return 'rgb(255, 211, 30)';
-          if (state > 5000) return 'rgb(255, 255, 0)';
-          if (state > 25000) return 'rgb(30, 144, 255)';
-          if (state > 1000) return 'rgb(30, 255, 255)';
-          return 'rgb(47, 0, 0)';
-
+  customize_glob: !include customize_glob.yaml
 
 # Enables the frontend
 frontend:
@@ -163,8 +138,7 @@ cloud:
       include_entities:
         - switch.home_server
         - switch.home_desktop
-        - switch.comms_cab_lock
-        - switch.christmas_lights
+        - lock.comms_cab
         - light.ground_floor_group
         - light.first_floor_group
 
@@ -240,6 +214,7 @@ binary_sensor:
     payload_off: "0"
     device_class: opening
 
+# MQTT Lock (SOnOff)
 lock:
   - platform: mqtt
     name: Comms Cab
@@ -254,45 +229,17 @@ weather:
   - platform: darksky
     api_key: !secret dark_sky_api
 
+# Google Calendar Custom Component
 google:
   client_id: !secret google_calendar_id 
   client_secret: !secret google_calendar_secret
 
-
-
+# Rest API Command = Philips Hue
 rest_command:
   set_hue_command: #not named sensitivy because the command can be used to set other entities/attributes also
     url: !secret hue_command
     method: put
     payload: '{{ data }}'
-
-input_select:
-  select_hue_sensitivity:
-    name: select Hue sensitivity
-    options:
-      - Low
-      - Medium
-      - High
-
-  select_hue_motion_sensor:
-    name: select Motion sensor
-    icon: mdi:run-fast
-    options:
-      - Kitchen
-      - Living Room
-      - Hall
-      - Bathroom
-      - Landing
-      - Bedroom
-      - Office
-
-input_number:
-  slide_hue_threshold:
-    icon: mdi:altimeter
-    name: Slide Hue threshold
-    min: 0
-    max: 30000 #hue max = 65534 but makes slider max ot of scale, since max is almost identical to 30000
-    step: 2500
 
 # Single File Configs
 script: !include scripts.yaml
@@ -303,7 +250,8 @@ script: !include scripts.yaml
 hangouts: !include custom_config/notify/hangouts.yaml
 #### /custom_config/network/ ####
 device_tracker: !include custom_config/network/device_tracker.yaml
-#input_number: !include custom_config/input_number/hue_dimmer.yaml
+input_number: !include custom_config/input/number.yaml
+input_select: !include custom_config/input/select.yaml
 shell_command: !include custom_config/network/shell_commands.yaml
 zone: !include custom_config/network/zones.yaml
 
