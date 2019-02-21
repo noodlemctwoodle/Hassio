@@ -134,6 +134,11 @@ nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
 
+# Philips Hue
+hue:
+  bridges:
+    - host: !secret hue_bridge_ip
+
 # IF There, Then That
 ifttt:
   key: !secret ifttt_api

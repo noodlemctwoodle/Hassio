@@ -14,12 +14,12 @@
       - free_disk_space
       - remaining_size
       - uptime
+
 # Radarr
   - platform: radarr
     api_key: !secret radarr_api_key
     host: !secret chsunr01_host
     port: !secret radarr_port
-    name: !secret radarr_server_name
     monitored_conditions:
 #      - movies
       - upcoming
@@ -28,12 +28,12 @@
     days: 7
     unit: GB
     ssl: false
+
 # Sonarr
   - platform: sonarr
     api_key: !secret sonarr_api_key
     host: !secret chsunr01_host
     port: !secret sonarr_port
-    name: !secret sonarr_server_name
     monitored_conditions:
       - upcoming
 #      - wanted

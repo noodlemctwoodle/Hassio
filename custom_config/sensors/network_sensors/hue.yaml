@@ -1,11 +1,6 @@
 # Philips Hue Motion Sensor - RestAPI (Custom-Component)
 ## https://github.com/robmarkcole/Hue-sensors-HASS ##
 ## https://community.home-assistant.io/t/map-values-for-an-input-select/94354/20 ##
-
-- platform: hue
-  ip_address: !secret hue_bridge_ip
-  token: !secret hue_bridge_password
-
 - platform: template
   sensors:
 # Kitchen Sensor
