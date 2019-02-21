@@ -16,3 +16,29 @@
       - Landing
       - Bedroom
       - Office
+  
+  hue_scenes:
+    name: Select Hue Scenes
+    icon: mdi:creation #palette
+    options:
+      - Arctische dageraad
+      - Savanne zonsondergang
+      - Tropische schemering
+      - Lentebloesem
+      - Concentreren
+      - Gedimd
+      - Energie
+      - Helder
+      - Lezen
+      - Nachtlampje
+      - Ontspannen
+      - 'Off'
+    initial: Ontspannen
+  
+  hue_groups:
+    name: Select Hue Group
+    icon: mdi:group
+    options:
+      - Buffet
+      - Dining table
+      - Living

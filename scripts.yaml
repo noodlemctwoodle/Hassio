@@ -1,5 +1,6 @@
 
   plex_play:
+    alias: Plex Play Webhook
     sequence:
       - condition: template
         value_template: '{{ Player.uuid == "SOMETHING" }}'
@@ -71,3 +72,13 @@
           {"sensitivity": {{sensitivity}} }
         id: >
           {{id}}
+
+  set_hue_scene:
+    alias: Set Hue scene
+    sequence:
+      service: hue.hue_activate_scene
+      data_template:
+        group_name: >
+          {{ states('input_select.hue_groups')}}
+        scene_name: >
+          {{ states('input_select.hue_scenes')}}

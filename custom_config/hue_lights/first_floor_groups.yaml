@@ -30,7 +30,6 @@
     entities:
       - light.office_spotlights
       - light.office_desk
-      - light.office_bloom
       - light.office_shadow
 
 # Craft Room Hue
@@ -38,6 +37,12 @@
     name: Craft Room Group
     entities:
       - light.craftroom_pendant
+
+# Craft Room Hue
+  - platform: group
+    name: Attic Group
+    entities:
+      - light.attic
 
 # First Floor Group
   - platform: group

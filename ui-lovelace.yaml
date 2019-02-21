@@ -1,7 +1,7 @@
 background: null
 resources:
   - type: js
-    url: /local/custom_ui/tracker-card/tracker-card.js?v=0.1.5
+    url: /local/custom_ui/tracker-card/tracker-card.js?v=1.0.0
   - type: js
     url: /local/custom_ui/monster-card/monster-card.js?v=0.2.3
   - type: js
@@ -9,7 +9,7 @@ resources:
   - type: module
     url: /local/custom_ui/calendar-card/calendar-card.js?v=1.0.1
   - type: js
-    url: /local/custom_ui/plan-coordinates/plan-coordinates.js?v=1
+    url: /local/custom_ui/plan-coordinates/plan-coordinates.js?v=0.1.0
 title: Hassio
 views:
   - cards:
