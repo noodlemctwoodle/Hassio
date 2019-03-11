@@ -17,7 +17,8 @@ Open source home automation that puts local control and privacy first. Powered b
 ## Some of the components that I use
 
 ![PFSense](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/PfSense-Logo.png)
-| 1u  Custom Built PFSense Firewall   |
+
+| 1u  Custom Built PFSense Firewall    |
 |---|
 |   |
 
