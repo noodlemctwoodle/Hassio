@@ -119,6 +119,7 @@ panel_iframe:
     icon: mdi:download
     url: !secret nzbget_url
 
+
  # Checks for available custom card updates 
 custom_updater:
   track:
@@ -164,7 +165,7 @@ prometheus:
 
 # MQTT Binary Sensors
 binary_sensor:
-  - platform: hue
+  - platform: huesensor
   - platform: mqtt
     state_topic:  "/doorsensors/bathroom/state"
     availability_topic: "/doorsensors/status/LWT"

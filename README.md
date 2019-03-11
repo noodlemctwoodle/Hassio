@@ -19,19 +19,25 @@ Open source home automation that puts local control and privacy first. Powered b
 - 1u  Custom Built PFSense Firewall
 
 ![Unifi](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/unifi-logo.png)
-- [Unifi 8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)
-- [Unifi 24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)
-- [Unifi UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)
-- [Unifi UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)
+|[Unifi 8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)   |[Unifi 24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)   | [Unifi UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)  | [Unifi UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+
 
 ![Philips Hue](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/logo-hue.png)
-- [Hue White and color ambiance Single bulb GU10](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-gu10/8718696485880)
-- [Hue White ambiance Single bulb GU10](https://www2.meethue.com/en-gb/p/hue-white-ambiance-single-bulb-gu10/8718696598283) 
-- [Hue White and color ambiance Single bulb B22](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-b22/8718696593073)
-- [Hue White and color ambiance Single bulb E27](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-e27/8718696592984)
-- [Hue White and color ambiance White and color ambiance LightStrip Plus](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-white-and-color-ambiance-lightstrip-plus/7190155PH)
-- [Hue White and color ambiance Bloom table lamp](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-bloom-table-lamp/7299760PU)
-- [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)
+
+|[White and color ambiance GU10](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-gu10/8718696485880)   |[White ambiance GU10](https://www2.meethue.com/en-gb/p/hue-white-ambiance-single-bulb-gu10/8718696598283)    | [White and color ambiance LightStrip Plus](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-white-and-color-ambiance-lightstrip-plus/7190155PH)   | [White and color ambiance Single bulb B22](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-b22/8718696593073)   | [White and color ambiance E27](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-e27/8718696592984)  | [White and color ambiance Bloom lamp](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-bloom-table-lamp/7299760PU)  |
+|---|---|---|---|---|---|
+|   |   |   |   |   |   |
+
+
+
+| [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190) | [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190) |
+|---|---|
+|   |   |
+
 
 ![Nest](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/nest-logo.png)
 - [Nest Hello](https://nest.com/uk/doorbell/nest-hello/overview/)
@@ -51,4 +57,5 @@ Open source home automation that puts local control and privacy first. Powered b
 
 ![TpLink Kasa](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/tplink-logo.png)
 - [TPLink Smart Plugs](https://www.tp-link.com/uk/products/details/cat-5258_HS110.html)
+
 
