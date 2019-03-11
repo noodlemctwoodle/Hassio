@@ -79,14 +79,14 @@ cloud:
 # Person component allows to connect device tracker entities to one or more person entities.
 person:
   - name: !secret person01
-    id: 00001
-    user_id: 312ecb0b238d49a198bef2e73e3b85e7
+    id: !secret person01_id
+    user_id: !secret person01_user_id
     device_trackers:
       - !secret person01_device_tracker01
       - !secret  person01_device_tracker02
       - !secret person01_device_tracker03
   - name: !secret person02
-    id: 00002
+    id: !secret person02_id
     device_trackers:
       - !secret person02_device_tracker01
 
@@ -155,6 +155,7 @@ notify:
     default_conversations:
       - id: !secret notifier_noodlemctwoodle
       - name: HA Main
+
 # HANotify Ariela 
   - name: android
     platform: fcm-android
