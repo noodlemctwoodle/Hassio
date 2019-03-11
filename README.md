@@ -10,15 +10,20 @@ Open source home automation that puts local control and privacy first. Powered b
 ## Some of the components that I use
 
 ![PFSense](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/PfSense-Logo.png)
+### Custom Build Firewall
+| [H110TM-ITX](https://www.asrock.com/mb/Intel/H110TM-ITX/index.asp)    | [Celeron G3930](https://ark.intel.com/content/www/us/en/ark/products/97452/intel-celeron-processor-g3930-2m-cache-2-90-ghz.html)   | [Samsung 250GB](https://www.scan.co.uk/products/250gb-samsung-860-evo-msata-ssd-sata3-6gb-s-mjx-mlc-v-nand-512mb-cache-read-550mb-s-write-520mb-s-97)    
+|:---:|:---:|:---:|
+| <img src="https://www.asrock.com//mb/photo/H110TM-ITX(L1).png" width="100" height="100" />   | <img src="https://cdn-reichelt.de/bilder/web/xxl_ws/E910/BX80677G3930_01.png" width="100" height="100" />    | <img src="https://www.scan.co.uk/images/products/super/2920789-l-b.jpg" width="100" height="100" />   | 
 
-| 1u  Custom Built PFSense Firewall    |
-|---|
-|   |
+| [Vengeance 8GB](https://www.scan.co.uk/products/8gb-1x8gb-corsair-ddr4-so-dimm-vengeance-pc4-21300-2666-non-ecc-unbuffered-cas-18-19-19-39-12v)   | [Intel I350-T4](https://www.scan.co.uk/products/4-port-intel-i350-t4-gigabit-network-card-rj-45-copper-pci-e-x4-oem)    | [Akasa A-ITX29-M1B](https://www.scan.co.uk/products/akasa-1u-galileo-tu3-fanless-slim-thin-mini-itx-case-4x-25-ssd-hdd-and-pcie-slot-support-optional)    |
+|:---:|:---:|:---:|
+| <img src="https://www.scan.co.uk/images/products/super/2933555-l-a.jpg" width="100" height="100" />   | <img src="https://www.scan.co.uk/images/products/super/2437230-l-a.jpg" width="100" height="100" />   | <img src="https://www.scan.co.uk/images/products/super/2806255-l-a.jpg" width="100" height="100" />   |
+
 
 ![Unifi](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/unifi-logo.png)
 
 |[8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)    |[24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)    | [UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)    | 
-|:---:|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|
 | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-8-150w-1_1024x1024.png" width="100" height="100" />    | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-24-4_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/uap-ac-pro-01_1024x1024.png" width="100" height="100" />  | 
 
 | [UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)    | [Gen2 Plus](https://unifi-protect.ubnt.com/cloud-key-gen2)    | [Video Camera G3](https://www.ui.com/unifi-video/unifi-video-camera-g3)   |
