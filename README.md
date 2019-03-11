@@ -17,7 +17,7 @@ Open source home automation that puts local control and privacy first. Powered b
 ## Some of the components that I use
 
 ![PFSense](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/PfSense-Logo.png)
-| 1u  Custom Built PFSense Firewall |
+| 1u  Custom Built PFSense Firewall   |
 |---|
 |   |
 
@@ -37,33 +37,38 @@ Open source home automation that puts local control and privacy first. Powered b
 
 
 
-| [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190) | [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190) |
+| [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)   | [Hue Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)   |
 |---|---|
 |   |   |
 
 
 ![Nest](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/nest-logo.png)
-| [Nest Hello](https://nest.com/uk/doorbell/nest-hello/overview/) | [Nest Protect](https://nest.com/uk/smoke-co-alarm/overview/) | [Nest Learning Thermostat](https://nest.com/uk/thermostats/nest-learning-thermostat/overview/) |
+
+| [Nest Hello](https://nest.com/uk/doorbell/nest-hello/overview/)   | [Nest Protect](https://nest.com/uk/smoke-co-alarm/overview/)    | [Nest Learning Thermostat](https://nest.com/uk/thermostats/nest-learning-thermostat/overview/)    |
 |---|---|---|
 |   |   |   |
 
 ![Google Home](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/google-logo.png)
-| [Google Home](https://store.google.com/gb/product/google_home) | [Google Home Mini](https://store.google.com/gb/product/google_home_mini?hl=en-GB) |
+
+| [Google Home](https://store.google.com/gb/product/google_home)    | [Google Home Mini](https://store.google.com/gb/product/google_home_mini?hl=en-GB)   |
 |---|---|
 |   |   |
 
 ![Sonoff](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/sonofflogo.png)
-| [Sonoff SV Switches](https://www.itead.cc/sonoff-sv.html) |
+
+| [Sonoff SV Switches](https://www.itead.cc/sonoff-sv.html)   |
 |---|
 |   |
 
 ![WeMo](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/wemo-logo.png)
-| [WeMo Insight Switch](https://www.belkin.com/uk/p/P-F7C029) |
+
+| [WeMo Insight Switch](https://www.belkin.com/uk/p/P-F7C029)   |
 |---|
 |   |
 
 ![TpLink Kasa](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/tplink-logo.png)
-| [TPLink Smart Plugs](https://www.tp-link.com/uk/products/details/cat-5258_HS110.html) |
+
+| [TPLink Smart Plugs](https://www.tp-link.com/uk/products/details/cat-5258_HS110.html)   |
 |---|
 |   |
 
