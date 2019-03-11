@@ -17,16 +17,19 @@ Open source home automation that puts local control and privacy first. Powered b
 
 ![Unifi](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/unifi-logo.png)
 
-|[8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)    |[24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)    | [UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)    | [UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)    | [Gen2 Plus](https://unifi-protect.ubnt.com/cloud-key-gen2)    | [Video Camera G3](https://www.ui.com/unifi-video/unifi-video-camera-g3)   |
+|[8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)    |[24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)    | [UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)    | 
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-8-150w-1_1024x1024.png" width="100" height="100" />    | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-24-4_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/uap-ac-pro-01_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/UAP-NanoHD_Front_copy_3f32aa6e-fe8e-424c-89af-c546afbe851a_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/UCK-G2-PLUS_Left_Angle_f7e37f50-6e3f-403a-a6b1-45e4a8276d5a_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/uvc-g3-4_1024x1024.png" width="100" height="100" />  |
+| <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-8-150w-1_1024x1024.png" width="100" height="100" />    | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-24-4_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/uap-ac-pro-01_1024x1024.png" width="100" height="100" />  | 
 
+| [UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)    | [Gen2 Plus](https://unifi-protect.ubnt.com/cloud-key-gen2)    | [Video Camera G3](https://www.ui.com/unifi-video/unifi-video-camera-g3)   |
+|:---:|:---:|:---:|
+| <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/UAP-NanoHD_Front_copy_3f32aa6e-fe8e-424c-89af-c546afbe851a_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/UCK-G2-PLUS_Left_Angle_f7e37f50-6e3f-403a-a6b1-45e4a8276d5a_1024x1024.png" width="100" height="100" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/uvc-g3-4_1024x1024.png" width="100" height="100" />  |
 
 
 ![Philips Hue](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/logo-hue.png)
 
 |[Color GU10](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-gu10/8718696485880)   |[White GU10](https://www2.meethue.com/en-gb/p/hue-white-ambiance-single-bulb-gu10/8718696598283)    | [Color E27](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-e27/8718696592984)   | [Color B22](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-single-bulb-b22/8718696593073)   | 
-|---|---|---|---|---|---|
+|:---:|:---:|:---:|:---:|
 | <img src="https://www.assets.lighting.philips.com/is/image/PhilipsLighting/18d62e4027a84a858c0aa9f400b4c1bc?wid=1280&hei=1280&$pnglarge$" width="100" height="100" />  | <img src="https://www.assets.lighting.philips.com/is/image/PhilipsLighting/45a1a76194bf4afaad6da9f400b50a5c?wid=1280&hei=1280&$pnglarge$" width="100" height="100" />  | <img src="https://www.assets.lighting.philips.com/is/image/PhilipsLighting/7b89528a23d142509de2a9b900a5bd12?wid=1280&hei=1280&$pnglarge$" width="100" height="100" />   | <img src="https://www.assets.lighting.philips.com/is/image/PhilipsLighting/47cad53d131e40228777a9f400b4fd0d?wid=1280&hei=1280&$pnglarge$" width="100" height="100" />  |
 
 | [Motion sensor](https://www2.meethue.com/en-gb/p/hue-motion-sensor/8718696595190)   | [Dimmer switch](https://www2.meethue.com/en-gb/p/hue-dimmer-switch/8718696743157)   | [Bloom table lamp](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-bloom-table-lamp/7299760PU)    | [Color LightStrip](https://www2.meethue.com/en-gb/p/hue-white-and-color-ambiance-white-and-color-ambiance-lightstrip-plus/7190155PH)   | 
