@@ -25,10 +25,10 @@ Open source home automation that puts local control and privacy first. Powered b
 ![Unifi](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/unifi-logo.png)
 
 |[Unifi 8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)    |[Unifi 24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)    | [Unifi UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)    | [Unifi UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)    | [Unifi Gen2 Plus](https://unifi-protect.ubnt.com/cloud-key-gen2)    | [UniFi Video Camera G3](https://www.ui.com/unifi-video/unifi-video-camera-g3)   |
-|---|---|---|---|---|---|
-| https://prd-www-cdn.ubnt.com/media/images/hero/productherogallery/unifi-switch-8-150w/us-8-150w-hero-tablet-2x.jpg   |   |   |   |   |   |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-8-150w-1_1024x1024.png" width="150" height="150" />    | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/us-24-4_1024x1024.png" width="150" height="150" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/uap-ac-pro-01_1024x1024.png" width="150" height="150" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/UAP-NanoHD_Front_copy_3f32aa6e-fe8e-424c-89af-c546afbe851a_1024x1024.png" width="150" height="150" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/UCK-G2-PLUS_Left_Angle_f7e37f50-6e3f-403a-a6b1-45e4a8276d5a_1024x1024.png" width="150" height="150" />  | <img src="https://cdn.shopify.com/s/files/1/1439/1668/products/uvc-g3-4_1024x1024.png" width="150" height="150" />  |
 
-
+https://cdn.shopify.com/s/files/1/1439/1668/products/us-24-4_1024x1024.png
 
 ![Philips Hue](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/logo-hue.png)
 
