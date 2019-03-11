@@ -15,13 +15,15 @@ Open source home automation that puts local control and privacy first. Powered b
 
 
 ## Some of the components that I use
+
 ![PFSense](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/PfSense-Logo.png)
 | 1u  Custom Built PFSense Firewall |
 |---|
 |   |
 
 ![Unifi](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/unifi-logo.png)
-|[Unifi 8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)   |[Unifi 24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)   | [Unifi UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)  | [Unifi UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)   | [Unifi Gen2 Plus](https://unifi-protect.ubnt.com/cloud-key-gen2) | [UniFi Video Camera G3](https://www.ui.com/unifi-video/unifi-video-camera-g3) |
+
+|[Unifi 8 port 150w POE Switch](https://www.ubnt.com/unifi-switching/unifi-switch-8-150w/)    |[Unifi 24 Port Switch](https://www.ubnt.com/unifi-switching/unifi-switch-2448/)    | [Unifi UAC-AP-Pro Access Point](https://www.ubnt.com/unifi/unifi-ap-ac-pro/)    | [Unifi UAC-NANO-HD Access Point](https://unifi-nanohd.ubnt.com/)    | [Unifi Gen2 Plus](https://unifi-protect.ubnt.com/cloud-key-gen2)    | [UniFi Video Camera G3](https://www.ui.com/unifi-video/unifi-video-camera-g3)   |
 |---|---|---|---|---|---|
 |   |   |   |   |   |   |
 
