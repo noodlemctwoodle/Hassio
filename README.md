@@ -13,6 +13,9 @@ The [Hassio](https://github.com/noodlemctwoodle/hassio/wiki/Install-Hass.io) gui
 ## NGINX Reverse Proxy for Hass.io and additional dockler contaianers
 The [NGINX and Lets Encrypt](https://github.com/noodlemctwoodle/hassio/wiki/Guide---NGINX-&-Lets-Encrypt) configuration sets up a reverse proxy to expose containers to [Home Assistant](https://www.home-assistant.io/) front end without HTTPS script errors.
 
+## Check out my Wiki
+Further information and guides can be found on my [wiki](https://github.com/noodlemctwoodle/hassio/wiki)
+
 ## Screenshots of my front end
 ![hassio1](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/screenshots/lounge.png)
 ![hassio2](https://raw.githubusercontent.com/noodlemctwoodle/hassio/master/www/github/screenshots/kitchen.png)
