@@ -17,8 +17,7 @@ appdaemon.yaml
 google_calendars.yaml
 # Ignore Python
 __pycache__
-__init__
-*.py
+__init__.py
 # Ignore Log Files
 home-assistant.log
 access.log
