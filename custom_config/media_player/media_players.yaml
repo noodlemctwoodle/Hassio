@@ -17,3 +17,9 @@
       service: wake_on_lan.send_magic_packet
       data:
         mac: "a8-23-fe-8c-2c-2e"
+
+  - platform: androidtv
+    host: 10.0.20.12
+    name: "NVidia Shield"
+    adb_server_ip: 127.0.0.1
+    adb_server_port: 5037
