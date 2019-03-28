@@ -102,6 +102,10 @@ speedtestdotnet:
 
 # iFrame Panels > Possible removal from Hassio
 panel_iframe:
+  vscode:
+    title: VS Code
+    icon: mdi:visual-studio-code
+    url: !secret vscode_url
   grafana:
     title: Grafana
     icon: mdi:graphql
