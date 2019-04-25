@@ -47,6 +47,18 @@ logbook:
       - sensor
       - media_player
 
+logger:
+  default: critical
+  logs:
+    homeassistant.components: critical
+    homeassistant.components.device_tracker: critical
+    homeassistant.components.camera: critical
+    homeassistant.components.media_playter: critical
+    homeassistant.components.plex.sensor: critical
+    homeassistant.components.radarr.sensor: critical
+    homeassistant.components.nzbget.sensor: critical
+    homeassistant.components.sonarr.sensor: critical
+
 # Track the sun
 sun:
 
@@ -75,6 +87,8 @@ cloud:
         - lock.comms_cab
         - light.ground_floor_group
         - light.first_floor_group
+        - camera.front_door
+        - camera.back_garden
 
 # Person component allows to connect device tracker entities to one or more person entities.
 person:
@@ -102,14 +116,10 @@ speedtestdotnet:
 
 # iFrame Panels > Possible removal from Hassio
 panel_iframe:
-  vscode:
-    title: VS Code
-    icon: mdi:visual-studio-code
-    url: !secret vscode_url
-  grafana:
-    title: Grafana
-    icon: mdi:graphql
-    url: !secret grafana_url
+#  grafana:
+#    title: Grafana
+#    icon: mdi:graphql
+#    url: !secret grafana_url
   sonarr:
     title: Sonarr
     icon: mdi:television-box
@@ -144,13 +154,20 @@ hue:
   bridges:
     - host: !secret hue_bridge_ip
 
+# TPLink Smart Plug Software Switch
+tplink:
+  switch:
+#    name: Christmas Lights
+    - host: !secret tp_link_host
+
 # IF There, Then That
 ifttt:
   key: !secret ifttt_api
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # Google Hangouts Notify Platform
 notify:
@@ -165,8 +182,8 @@ notify:
     platform: fcm-android
 
 # Prometheus DB Comfiguration
-prometheus:
-  namespace: !secret prometheus_scrape_name
+#prometheus:
+#  namespace: !secret prometheus_scrape_name
 
 # MQTT Binary Sensors
 binary_sensor:
@@ -195,6 +212,15 @@ lock:
     payload_lock: "ON"
     payload_unlock: "OFF"
     optimistic: false
+
+stream:
+
+camera:
+  - platform: generic
+    name: Back Garden
+    still_image_url: !secret still_image_url
+    stream_source: !secret rtsp_stream_source
+    verify_ssl: !secret verify_ssl
 
 # Dark Sky Weather API for LoveLaceUI
 weather:

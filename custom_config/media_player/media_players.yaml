@@ -3,23 +3,24 @@
     host: 10.0.20.58
 
   - platform: denonavr
-    host: 10.0.20.51
+    host: 10.0.20.31
     name: Denon AVRX2300w
     show_all_sources: True
     zones:
       - zone: Zone2
+        name: Living Room
 
   - platform: webostv
     name: Living Room TV
-    host: 10.0.20.10
+    host: 10.0.20.37
     timeout: 5
     turn_on_action:
       service: wake_on_lan.send_magic_packet
       data:
         mac: "a8-23-fe-8c-2c-2e"
 
-  - platform: androidtv
-    host: 10.0.20.12
-    name: "NVidia Shield"
-    adb_server_ip: 127.0.0.1
-    adb_server_port: 5037
+#  - platform: androidtv
+#    host: 10.0.20.12
+#    name: "NVidia Shield"
+#    adb_server_ip: 127.0.0.1
+#    adb_server_port: 5037
