@@ -47,17 +47,17 @@ logbook:
       - sensor
       - media_player
 
-logger:
-  default: critical
-  logs:
-    homeassistant.components: critical
-    homeassistant.components.device_tracker: critical
-    homeassistant.components.camera: critical
-    homeassistant.components.media_playter: critical
-    homeassistant.components.plex.sensor: critical
-    homeassistant.components.radarr.sensor: critical
-    homeassistant.components.nzbget.sensor: critical
-    homeassistant.components.sonarr.sensor: critical
+#logger:
+#  default: info
+#  logs:
+#    homeassistant.components: debug
+#    homeassistant.components.device_tracker: critical
+#    homeassistant.components.camera: critical
+#    homeassistant.components.media_playter: critical
+#    homeassistant.components.plex.sensor: critical
+#    homeassistant.components.radarr.sensor: critical
+#    homeassistant.components.nzbget.sensor: critical
+#    homeassistant.components.sonarr.sensor: critical
 
 # Track the sun
 sun:
@@ -143,7 +143,7 @@ custom_updater:
     - https://raw.githubusercontent.com/rdehuyss/homeassistant-lovelace-google-calendar-card/master/custom_updater.json
   component_urls:
     - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
-
+    
 # Nest Integration 
 nest:
   client_id: !secret nest_client_id
