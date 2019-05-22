@@ -6,6 +6,7 @@ secrets.yaml
 .google_maps_location_sharing.cookies
 .HA_VERSION
 .uuid
+.vscode
 deps
 tts
 assets
