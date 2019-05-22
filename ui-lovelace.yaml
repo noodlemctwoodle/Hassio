@@ -1,23 +1,38 @@
 background: null
 resources:
+  - type: module
+    url: /local/custom_ui/tracker-card.js?track=true
+  - type: module
+    url: /local/custom_ui/calendar-card.js?v=1.0.1
+  - type: module
+    url: /local/custom_ui/camera-card.js
+  - type: module
+    url: /local/plugins/mini-graph-card-bundle.js?v=0.3.3
+  - type: module
+    url: /local/plugins/mini-media-player-bundle.js?v=1.1.3
   - type: js
-    url: /local/custom_ui/tracker-card/tracker-card.js?v=1.0.0
+    url: /local/plugins/card-tools.js?track=true
   - type: js
-    url: /local/custom_ui/monster-card/monster-card.js?v=0.2.3
+    url: /local/plugins/card-modder.js?v=0.2
+  - type: js
+    url: /local/custom_ui/tiles-card.js?v=0.1
+  - type: js
+    url: /local/custom_ui/monster-card.js?v=0.2.3
   - type: js
     url: 'https://unpkg.com/moment@2.22.2/moment.js'
-  - type: module
-    url: /local/custom_ui/calendar-card/calendar-card.js?v=1.0.1
   - type: js
-    url: /local/custom_ui/plan-coordinates/plan-coordinates.js?v=0.1.0
-title: Hassio
+    url: /local/custom_ui/plan-coordinates.js?v=1
+  - type: js
+    url: /local/plugins/vertical-stack-in-card.js?v=0.1.2
+  - type: js
+    url: /local/plugins/layout-card.js?track=true
+  - type: js
+    url: /local/plugins/bar-card.js?track=true
+title: CleverHomes.app
 views:
-  - cards:
+  - badges: []
+    cards:
       - cards:
-          - entities:
-              - sensor.time_utc
-              - sensor.last_boot
-            type: glance
           - entity: weather.dark_sky
             type: weather-forecast
           - cards:
@@ -47,35 +62,31 @@ views:
         type: vertical-stack
       - cards:
           - cards:
-              - entity: sensor.memory_use_percent
-                name: Memory Use
-                type: gauge
-              - entity: sensor.memory_free
-                height: 35
-                name: Memory Free
-                type: sensor
+              - card:
+                  color: var(--primary-text-color)
+                  entity: climate.living_room
+                  name: Nest Thermostat
+                  show_header_toggle: false
+                  text-shadow: none
+                  type: thermostat
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
             type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
+      - cards:
           - cards:
-              - entity: sensor.processor_use
-                name: CPU Use
-                type: gauge
-              - entity: sensor.cpu_speed
-                height: 35
-                name: CPU Speed
-                type: sensor
-            type: horizontal-stack
-          - entity: sensor.disk_use_percent_home
-            name: Disk Usage
-            type: gauge
-          - cards:
-              - entity: sensor.network_in_eno1
-                height: 40
-                name: Eth0 Download
-                type: sensor
-              - entity: sensor.network_out_eno1
-                height: 40
-                name: Eth0 Upload
-                type: sensor
+              - entities:
+                  - entity: person.toby
+                    name: Toby
+                show_header_toggle: false
+                type: entities
+              - entities:
+                  - entity: person.abi
+                    name: Abi
+                show_header_toggle: false
+                type: entities
             type: horizontal-stack
           - cards:
               - card:
@@ -160,542 +171,2327 @@ views:
                 type: 'custom:monster-card'
             type: horizontal-stack
         type: vertical-stack
-      - aspect_ratio: '16:9'
-        default_zoom: 18
-        entities:
-          - entity: device_tracker.pixel_xl
-        title: Pixel XL Location
-        type: map
-      - title: null
-        trackers:
-          - sensor.custom_card_tracker
-          - sensor.custom_component_tracker
-        type: 'custom:tracker-card'
+      - cards:
+          - cards:
+              - card:
+                  aspect_ratio: '16:9'
+                  color: var(--primary-text-color)
+                  default_zoom: 18
+                  entities:
+                    - entity: device_tracker.pixel_xl
+                  text-shadow: none
+                  type: map
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - calendar.noodlemctwoodle
+                  numberOfDays: 14
+                  showProgressBar: true
+                  text-shadow: none
+                  type: 'custom:calendar-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
+    icon: ''
+    path: dashboard
+    title: Dashboard
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: sensor.current_version
+                  text-shadow: none
+                  type: entities
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  text-shadow: none
+                  type: 'custom:tracker-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+    path: hassio
+    title: Hassio
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 10
+                    - color: '#e0b400'
+                      value: 20
+                    - color: '#e45e65'
+                      value: 30
+                  entities:
+                    - sensor.chsdoc01_core0_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 0 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsdoc01_core1_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 1 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsdoc01_core2_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 2 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsdoc01_core3_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 3 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_mem_commit
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: RAM Commit
+                  points_per_hour: 1
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsdoc01_core_temp
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Core 1
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_disk_avail
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Disk Avail
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_disk_used
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Disk Used
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsdoc01_lan_inbound
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: VLAN20 In
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsdoc01_lan_outbound
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: VLAN20 Out
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        title: Docker Host Monitor
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 10
+                    - color: '#e0b400'
+                      value: 20
+                    - color: '#e45e65'
+                      value: 30
+                  entities:
+                    - sensor.chspfs01_core_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU Frequency
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_system_load
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: System Load
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chspfs01_core_temp_0
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Core 0
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chspfs01_core_temp_1
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Core 1
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_mem_commit
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: RAM Commit
+                  points_per_hour: 1
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_system_swap
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: System Swap
+                  points_per_hour: 1
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_disk_avail
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Disk Avail
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_disk_used
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Disk Used
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_vlan20_inbound
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: VLAN20 In
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chspfs01_vlan20_outbound
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: VLAN20 Out
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        title: PFSense Monitor
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 10
+                    - color: '#e0b400'
+                      value: 20
+                    - color: '#e45e65'
+                      value: 30
+                  entities:
+                    - sensor.chsuni01_core0_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 0 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_core1_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 1 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsuni01_core2_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 2 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsuni01_core3_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 3 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsuni01_core4_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 4 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsuni01_core5_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 5 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsuni01_core6_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 6 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 40
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 60
+                  entities:
+                    - sensor.chsuni01_core7_freq
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: CPU 7 Freq
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_mem_avail
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: RAM Avail
+                  points_per_hour: 1
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_system_swap
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: System Swap
+                  points_per_hour: 1
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_builtin_disk_avail
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Internal Avail
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_builtin_disk_used
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Internal Used
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_hdd_avail
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Camera Disk Avail
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_hdd_used
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: Camera Disk Avail
+                  points_per_hour: 6
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_lan_inbound
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: LAN In
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#039BE5'
+                      value: -50
+                    - color: '#0da035'
+                      value: 50
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#e45e65'
+                      value: 70
+                  entities:
+                    - sensor.chsuni01_lan_outbound
+                  group: false
+                  hour24: true
+                  line_width: 2
+                  name: LAN Out
+                  points_per_hour: 60
+                  show:
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.95)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        title: Unifi Controller Monitor
+        type: 'custom:vertical-stack-in-card'
       - entities:
-          - sensor.current_version
+          - entity: sensor.chsdoc01_uptime
+          - entity: sensor.chsuni01_uptime
+          - entity: sensor.chspfs01_uptime
         show_header_toggle: false
-        title: Version
+        title: System Stats
         type: entities
-    icon: 'mdi:home'
-    title: default_view
-  - cards:
       - cards:
-          - entities:
-              - entity: binary_sensor.hall_motion_sensor
-                name: Motion
-              - entity: sensor.hall_light_level
-                name: Light
-              - entity: sensor.hall_temperature
-                name: Temp
-              - entity: sensor.hall_battery_level
-                name: Battery
-            title: Hue Sensor
-            type: glance
-          - entities:
-              - entity: switch.hall_lights
-                name: Hall Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.hallway_spot_1
-                - light.hallway_spot_2
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.hall_lights
-                state: 'on'
-            type: conditional
-        type: vertical-stack
+          - cards:
+              - card:
+                  color_thresholds:
+                    - color: '#e45e65'
+                      value: 0
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#0da035'
+                      value: 80
+                  entities:
+                    - sensor.speedtest_download
+                  group: false
+                  hour24: true
+                  line_width: 3
+                  lower_bound: 0
+                  name: Down
+                  points_per_hour: 4
+                  show:
+                    extrema: true
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.925)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#e45e65'
+                      value: 0
+                    - color: '#e0b400'
+                      value: 24
+                    - color: '#0da035'
+                      value: 32
+                  entities:
+                    - sensor.speedtest_upload
+                  group: false
+                  hour24: true
+                  line_width: 3
+                  lower_bound: 0
+                  name: Up
+                  points_per_hour: 4
+                  show:
+                    extrema: true
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.925)
+                type: 'custom:card-modder'
+              - card:
+                  color_thresholds:
+                    - color: '#e45e65'
+                      value: 0
+                    - color: '#e0b400'
+                      value: 60
+                    - color: '#0da035'
+                      value: 80
+                  entities:
+                    - sensor.google_dns_ping
+                  group: false
+                  hour24: true
+                  line_width: 3
+                  lower_bound: 0
+                  name: Ping
+                  points_per_hour: 4
+                  show:
+                    extrema: true
+                    icon: true
+                    labels: false
+                    name: true
+                    state: true
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.925)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        title: Speedtest
+        type: 'custom:vertical-stack-in-card'
+    path: monitoring
+    title: Monitoring
+  - badges: []
+    cards:
       - cards:
-          - camera_image: camera.front_door
-            entities:
-              - binary_sensor.front_door_camera_online
-              - binary_sensor.front_door_camera_person_detected
-              - binary_sensor.front_door_camera_sound_detected
-              - binary_sensor.front_door_camera__garden_left_activity
-              - binary_sensor.front_door_camera__garden_right_activity
-              - binary_sensor.front_door_camera__path_activity
-              - binary_sensor.front_door_camera_motion_detected
-            show_info: true
-            tap_action: dialog
-            title: Front Door
-            type: picture-glance
-        type: vertical-stack
-    icon: 'mdi:door'
-    title: Hall
-  - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.living_room_temperature
+                  font_size: 75
+                  line_color: blue
+                  line_width: 8
+                  name: Temp
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.living_room_motion_sensor
+                      name: Motion
+                  text-shadow: none
+                  type: glance
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.living_room_light_level
+                  font_size: 75
+                  icon: 'mdi:brightness-6'
+                  line_color: green
+                  line_width: 8
+                  name: Light
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  direction: right
+                  entity: sensor.living_room_battery_level
+                  height: 30px
+                  max: 100
+                  min: 1
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Lounge Sensor
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  direction: right
+                  entity: sensor.living_room_switch_battery_level
+                  height: 30px
+                  max: 100
+                  min: 0
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Lounge Switch
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.living_room_group
+                  name: Lounge Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.living_room_lamp
+                  name: Lounge Lamp
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.living_room_mood
+                  name: Lounge Mood
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - cards:
-          - entities:
-              - entity: binary_sensor.living_room_motion_sensor
-                name: Motion
-              - entity: sensor.living_room_light_level
-                name: Light
-              - entity: sensor.living_room_temperature
-                name: Temp
-              - entity: sensor.living_room_battery_level
-                name: Sensor
-              - entity: sensor.living_room_switch_battery_level
-                name: Remote
-            title: Hue Sensors
-            type: glance
-          - entities:
-              - entity: binary_sensor.living_room_door
-                icon: 'mdi:door'
-                name: Door Sensor
-            type: glance
-          - entities:
-              - entity: switch.livingroom_lights
-                name: Living Room Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.living_room_lamp
-                - light.living_room_pendant
-                - input_number.livingroom_brightness
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.livingroom_lights
-                state: 'on'
-            type: conditional
-          - entities:
-              - entity: switch.christmas_lights
-                name: Living Room Christmas
-            show_header_toggle: false
-            title: Christmas Lights
-            type: entities
-        type: vertical-stack
-      - cards:
-          - entity: climate.living_room
-            type: thermostat
-          - entities:
-              - binary_sensor.living_room_thermostat_online
-              - binary_sensor.living_room_thermostat_has_leaf
-              - binary_sensor.living_room_thermostat_is_using_emergency_heat
-              - binary_sensor.living_room_thermostat_is_locked
-            show_header_toggle: true
-            title: Nest Thermostat
-            type: entities
-        type: vertical-stack
-      - cards:
-          - entities:
-              - entity: sensor.living_room_remote
-                name: Input
-            title: Hue Remote
-            type: glance
-          - card:
-              entities:
-                - media_player.shield_tv
-              name: Shield TV Plex
-              type: media-control
-            conditions:
-              - entity: media_player.shield_tv
-                state: 'on'
-            type: conditional
-          - entity: media_player.living_room_tv
-            type: media-control
-          - entity: media_player.denon_avrx2300w
-            type: media-control
-          - entity: media_player.living_room_home
-            type: media-control
-        type: vertical-stack
-    icon: 'mdi:sofa'
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: media_player.plex_plex_21e30c8406b2c90a_com_plexapp_android
+                  name: Shield TV
+                  text-shadow: none
+                  type: 'custom:mini-media-player'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: media_player.living_room_tv
+                  name: Lounge TV
+                  text-shadow: none
+                  type: 'custom:mini-media-player'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: media_player.living_room_home
+                  name: Lounge Google Home
+                  text-shadow: none
+                  type: 'custom:mini-media-player'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: media_player.denon_avr_x2300w
+                  name: Denon AV Receiver
+                  text-shadow: none
+                  type: 'custom:mini-media-player'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+    path: lounge
     title: Lounge
-  - cards:
+  - badges: []
+    cards:
       - cards:
-          - entities:
-              - entity: binary_sensor.kitchen_motion_sensor
-                name: Motion
-              - entity: sensor.kitchen_light_level
-                name: Light
-              - entity: sensor.kitchen_temperature
-                name: Temp
-            title: Hue Sensor
-            type: glance
-        type: vertical-stack
-      - cards:
-          - entity: sensor.cupboard_switch_battery_level
-            max: 100
-            min: 0
-            name: Cupboard Switch
-            severity:
-              green: 100
-              red: 10
-              yellow: 50
-            show_header_toggle: false
-            type: gauge
-          - entity: sensor.kitchen_battery_level
-            green: 100
-            max: 100
-            min: 0
-            name: Kitchen Switch
-            red: 10
-            severity: null
-            show_header_toggle: false
-            type: gauge
-            yellow: 50
-          - entity: sensor.kitchen_battery_level
-            green: 100
-            max: 100
-            min: 0
-            name: Kitchen Sensor
-            red: 10
-            severity: null
-            show_header_toggle: false
-            type: gauge
-            yellow: 50
-        type: horizontal-stack
-      - cards:
-          - entities:
-              - entity: switch.kitchen_lights
-                name: Kitchen Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.kitchen_spot_1
-                - light.kitchen_spot_2
-                - light.kitchen_spot_3
-                - light.kitchen_spot_4
-                - light.kitchen_spot_5
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.kitchen_lights
-                state: 'on'
-            type: conditional
-          - entities:
-              - entity: switch.diningroom_lights
-                name: Dining Room Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.diningroom_spot_1
-                - light.diningroom_spot_2
-                - light.diningroom_spot_3
-                - light.diningroom_spot_4
-                - light.diningroom_spot_5
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.diningroom_lights
-                state: 'on'
-            type: conditional
-          - entities:
-              - entity: switch.cupboard_lights
-                name: Cupboard Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.cupboard_spot_1
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.cupboard_lights
-                state: 'on'
-            type: conditional
-        type: vertical-stack
-      - cards:
-          - entities:
-              - entity: binary_sensor.kitchen_nest_protect_online
-                name: Online
-              - entity: sensor.kitchen_nest_protect_battery_health
-                name: Battery
-              - entity: sensor.upstairs_nest_protect_color_status
-                name: Status
-            title: Nest Protect
-            type: glance
           - cards:
-              - entity: sensor.kitchen_nest_protect_smoke_status
-                name: Smoke
-                state_image:
-                  Emergency: /local/nest-icons/nest-protect-red.png
-                  Ok: /local/nest-icons/nest-protect-green.png
-                  Warning: /local/nest-icons/nest-protect-yellow.png
-                type: picture-entity
-              - entity: sensor.kitchen_nest_protect_co_status
-                name: CO
-                state_image:
-                  Emergency: /local/nest-icons/nest-protect-red.png
-                  Ok: /local/nest-icons/nest-protect-green.png
-                  Warning: /local/nest-icons/nest-protect-yellow.png
-                type: picture-entity
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.kitchen_spot_1
+                  name: Kitchen Spot 1
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.kitchen_spot_2
+                  name: Kitchen Spot 2
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
             type: horizontal-stack
-        type: vertical-stack
-      - entities:
-          - sensor.kitchen_remote
-        show_header_toggle: true
-        title: Hue Remote
-        type: entities
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.kitchen_spot_3
+                  name: Kitchen Spot 3
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.kitchen_spot_4
+                  name: Kitchen Spot 4
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.kitchen_spot_5
+                  name: Kitchen Spot 5
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.kitchen_group
+                  name: Kitchen Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - cards:
-          - entity: media_player.kitchen_home
-            type: media-control
-        type: vertical-stack
-    icon: 'mdi:pot'
-    title: kitchen
-  - cards:
-      - entities:
-          - entity: switch.backdoor_lights
-            name: Back Door Light Switch
-        show_header_toggle: false
-        type: entities
-      - card:
-          entities:
-            - light.back_door
-          name: Lights
-          type: entities
-        conditions:
-          - entity: switch.backdoor_lights
-            state: 'on'
-        type: conditional
-      - camera_image: camera.backyard_back_garden
-        entities:
-          - binary_sensor.backyard_camera_back_garden_online
-          - binary_sensor.backyard_camera_back_garden__garden_left_activity
-          - binary_sensor.backyard_camera_back_garden_person_detected
-          - binary_sensor.backyard_camera_back_garden_motion_detected
-          - binary_sensor.backyard_camera_back_garden_sound_detected
-        title: Backyard (Back Garden)
-        type: picture-glance
-    icon: 'mdi:tree'
-    title: Backdoor
-  - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.diningroom_spot_1
+                  name: Dining Room Spot 1
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.diningroom_spot_2
+                  name: Dining Room Spot 2
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.diningroom_spot_3
+                  name: Dining Room Spot 3
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.diningroom_spot_4
+                  name: Dining Room Spot 4
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.diningroom_spot_5
+                  name: Dining Room Spot 5
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.dining_room_group
+                  name: Dining Room Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - cards:
-          - entities:
-              - entity: binary_sensor.bathroom_motion_sensor
-                name: Motion
-              - entity: sensor.bathroom_light_level
-                name: Light
-              - entity: sensor.bathroom_temperature
-                name: Temp
-              - entity: sensor.bathroom_battery_level
-                name: Battery
-            title: Hue Sensor
-            type: glance
-          - entities:
-              - entity: binary_sensor.bathroom_door
-                icon: 'mdi:door'
-                name: Door Sensor
-            type: glance
-          - entities:
-              - entity: switch.bathroom_lights
-                name: Bathroom Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.bathroom
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.bathroom_lights
-                state: 'on'
-            type: conditional
-        type: vertical-stack
-    icon: 'mdi:human-male-female'
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: media_player.kitchen_home
+                  name: Kitchen Google Home
+                  text-shadow: none
+                  type: 'custom:mini-media-player'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.kitchen_temperature
+                  font_size: 75
+                  line_color: blue
+                  line_width: 8
+                  name: Temp
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.kitchen_motion_sensor
+                      name: Motion
+                  text-shadow: none
+                  type: glance
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.kitchen_light_level
+                  font_size: 75
+                  icon: 'mdi:brightness-6'
+                  line_color: green
+                  line_width: 8
+                  name: Light
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  direction: right
+                  entity: sensor.kitchen_battery_level
+                  height: 30px
+                  max: 100
+                  min: 1
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Kitchen Sensor
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  direction: right
+                  entity: sensor.kitchen_switch_battery_level
+                  height: 30px
+                  max: 100
+                  min: 0
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Kitchen Switch
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.kitchen_nest_protect_online
+                      name: Online
+                    - entity: sensor.kitchen_nest_protect_battery_health
+                      name: Battery
+                    - entity: sensor.upstairs_nest_protect_color_status
+                      name: Status
+                  text-shadow: none
+                  title: Kitchen Nest Protect
+                  type: glance
+                  value_style: null
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - card:
+                  entity: sensor.kitchen_nest_protect_smoke_status
+                  name: Smoke
+                  state_image:
+                    Emergency: /local/nest-icons/nest-protect-red.png
+                    Ok: /local/nest-icons/nest-protect-green.png
+                    Warning: /local/nest-icons/nest-protect-yellow.png
+                  type: picture-entity
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  entity: sensor.kitchen_nest_protect_co_status
+                  name: Smoke
+                  state_image:
+                    Emergency: /local/nest-icons/nest-protect-red.png
+                    Ok: /local/nest-icons/nest-protect-green.png
+                    Warning: /local/nest-icons/nest-protect-yellow.png
+                  type: picture-entity
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+    path: kitchen
+    title: Kitchen
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: camera.back_garden
+                  text-shadow: none
+                  type: 'custom:camera-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.cupboard_spot_1
+                  name: Back Door Cupboard
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  direction: right
+                  entity: sensor.cupboard_switch_battery_level
+                  height: 30px
+                  max: 100
+                  min: 0
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Cupbard Switch
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.back_door
+                  name: Back Door
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+    path: back-door-garden
+    title: Back Door & Garden
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: camera.front_door
+                  text-shadow: none
+                  type: 'custom:camera-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.hall_temperature
+                  font_size: 75
+                  line_color: blue
+                  line_width: 8
+                  name: Temp
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.hall_motion_sensor
+                      name: Motion
+                  text-shadow: none
+                  type: glance
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.hall_light_level
+                  font_size: 75
+                  icon: 'mdi:brightness-6'
+                  line_color: green
+                  line_width: 8
+                  name: Light
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  direction: right
+                  entity: sensor.hall_battery_level
+                  height: 30px
+                  max: 100
+                  min: 1
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Hall Sensor
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.hall_group
+                  name: Hall Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+    path: hall
+    title: Hall
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.bathroom_temperature
+                  font_size: 75
+                  line_color: blue
+                  line_width: 8
+                  name: Temp
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.bathroom_motion_sensor
+                      name: Motion
+                  text-shadow: none
+                  type: glance
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.bathroom_light_level
+                  font_size: 75
+                  icon: 'mdi:brightness-6'
+                  line_color: green
+                  line_width: 8
+                  name: Light
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  direction: right
+                  entity: sensor.bathroom_battery_level
+                  height: 30px
+                  max: 100
+                  min: 1
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Bathroom Sensor
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.bathroom_group
+                  name: Bathroom Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+    path: bathroom
     title: Bathroom
-  - cards:
+  - badges: []
+    cards:
       - cards:
-          - entities:
-              - entity: binary_sensor.landing_motion_sensor
-                name: Motion
-              - entity: sensor.landing_light_level
-                name: Light
-              - entity: sensor.landing_temperature
-                name: Temp
-              - entity: sensor.landing_battery_level
-                name: Battery
-            title: Hue Sensor
-            type: glance
-          - entities:
-              - entity: switch.landing_lights
-                name: Landing Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.landing_spot
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.landing_lights
-                state: 'on'
-            type: conditional
-          - entities:
-              - light.attic
-            show_header_toggle: false
-            title: Attic Light
-            type: entities
-        type: vertical-stack
-      - cards:
-          - entities:
-              - entity: binary_sensor.upstairs_nest_protect_online
-                name: Online
-              - entity: sensor.upstairs_nest_protect_battery_health
-                name: Battery
-              - entity: sensor.upstairs_nest_protect_color_status
-                name: Status
-            title: Nest Protect
-            type: glance
           - cards:
-              - entity: sensor.upstairs_nest_protect_smoke_status
-                name: Smoke
-                state_image:
-                  Emergency: /local/nest-icons/nest-protect-red.png
-                  Ok: /local/nest-icons/nest-protect-green.png
-                  Warning: /local/nest-icons/nest-protect-yellow.png
-                type: picture-entity
-              - entity: sensor.upstairs_nest_protect_co_status
-                name: CO
-                state_image:
-                  Emergency: /local/nest-icons/nest-protect-red.png
-                  Ok: /local/nest-icons/nest-protect-green.png
-                  Warning: /local/nest-icons/nest-protect-yellow.png
-                type: picture-entity
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.landing_temperature
+                  font_size: 75
+                  line_color: blue
+                  line_width: 8
+                  name: Temp
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.landing_motion_sensor
+                      name: Motion
+                  text-shadow: none
+                  type: glance
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.landing_light_level
+                  font_size: 75
+                  icon: 'mdi:brightness-6'
+                  line_color: green
+                  line_width: 8
+                  name: Light
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
             type: horizontal-stack
-        type: vertical-stack
-    icon: 'mdi:stairs'
-    title: Landing
-  - cards:
+          - cards:
+              - card:
+                  direction: right
+                  entity: sensor.landing_battery_level
+                  height: 30px
+                  max: 100
+                  min: 1
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Landing Sensor
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.landing_group
+                  name: Landing Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.attic
+                  name: Loft Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - cards:
-          - entities:
-              - entity: binary_sensor.bedroom_motion_sensor
-                name: Motion
-              - entity: sensor.bedroom_light_level
-                name: Light
-              - entity: sensor.bedroom_temperature
-                name: Temp
-              - entity: sensor.bedroom_battery_level
-                name: Battery
-            title: Hue Sensor
-            type: glance
-          - entities:
-              - entity: switch.bedroom_lights
-                name: Bedroom Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.bedroom_pendant_1
-                - light.bedroom_pendant_2
-                - light.bedroom_lamp
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.bedroom_lights
-                state: 'on'
-            type: conditional
-          - entities:
-              - sensor.bedroom_remote
-              - sensor.bedroom_switch_battery_level
-            show_header_toggle: true
-            title: Hue Remote
-            type: entities
-        type: vertical-stack
-    icon: 'mdi:hotel'
-    title: Bedroom
-  - cards:
+          - cards:
+              - card:
+                  entity: sensor.upstairs_nest_protect_smoke_status
+                  name: Smoke
+                  state_image:
+                    Emergency: /local/nest-icons/nest-protect-red.png
+                    Ok: /local/nest-icons/nest-protect-green.png
+                    Warning: /local/nest-icons/nest-protect-yellow.png
+                  type: picture-entity
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  entity: sensor.upstairs_nest_protect_co_status
+                  name: Smoke
+                  state_image:
+                    Emergency: /local/nest-icons/nest-protect-red.png
+                    Ok: /local/nest-icons/nest-protect-green.png
+                    Warning: /local/nest-icons/nest-protect-yellow.png
+                  type: picture-entity
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.kitchen_nest_protect_online
+                      name: Online
+                    - entity: sensor.kitchen_nest_protect_battery_health
+                      name: Battery
+                    - entity: sensor.upstairs_nest_protect_color_status
+                      name: Status
+                  text-shadow: none
+                  title: Kitchen Nest Protect
+                  type: glance
+                  value_style: null
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
+    path: landing-loft
+    title: Landing & Loft
+  - badges: []
+    cards:
       - cards:
-          - entities:
-              - entity: binary_sensor.office_motion_sensor
-                name: Motion
-              - entity: sensor.office_light_level
-                name: Light
-              - entity: sensor.office_temperature
-                name: Temp
-              - entity: sensor.office_battery_level
-                name: Battery
-            title: Hue Sensor
-            type: glance
-          - entities:
-              - entity: switch.office_lights
-                name: Office Light Switch
-            show_header_toggle: false
-            type: entities
-          - card:
-              entities:
-                - light.office_bloom
-                - light.office_shadow
-                - light.office_spotlights
-                - light.office_desk
-                - light.office_server_rack
-              name: Lights
-              type: entities
-            conditions:
-              - entity: switch.office_lights
-                state: 'on'
-            type: conditional
-        type: vertical-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.office_temperature
+                  font_size: 75
+                  line_color: blue
+                  line_width: 8
+                  name: Temp
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.office_motion_sensor
+                      name: Motion
+                  text-shadow: none
+                  type: glance
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.office_light_level
+                  font_size: 75
+                  icon: 'mdi:brightness-6'
+                  line_color: green
+                  line_width: 8
+                  name: Light
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  direction: right
+                  entity: sensor.office_battery_level
+                  height: 30px
+                  max: 100
+                  min: 1
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Office Sensor
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.office_shadow
+                  name: Indirect Lighting
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.office_spotlights
+                  name: Office Spot Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.office_desk
+                  name: Office Desk
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - cards:
-          - entities:
-              - lock.comms_cab
-              - switch.home_server
-              - switch.home_desktop
-            show_header_toggle: false
-            title: Turn On/Off Device
-            type: entities
-          - entity: media_player.office_speaker
-            type: media-control
-          - entity: media_player.office_chromecast_audio
-            type: media-control
-        type: vertical-stack
-      - entities:
-          - calendar.noodlemctwoodle
-          - calendar.contacts
-        numberOfDays: 14
-        showProgressBar: true
-        type: 'custom:calendar-card'
-      - entities:
-          - calendar.contacts
-        name: Birthdays
-        numberOfDays: 14
-        showProgressBar: false
-        type: 'custom:calendar-card'
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - lock.comms_cab
+                    - switch.home_server
+                    - switch.home_desktop
+                  name: Temp
+                  show_header_toggle: false
+                  text-shadow: none
+                  type: entities
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - cards:
-          - entity: sensor.pixel_xl_battery_sensor
-            max: 100
-            min: 0
-            name: Pixel XL Batt
-            severity:
-              green: 61
-              red: 20
-              yellow: 60
-            theme: default
-            type: gauge
-          - entity: sensor.pixel_xl_light_sensor_2
-            max: 100
-            min: 0
-            name: Pixel Xl Lux
-            severity:
-              green: 0
-              red: 0
-              yellow: 0
-            theme: default
-            type: gauge
-        type: vertical-stack
-    icon: 'mdi:office-building'
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: media_player.office_speaker
+                  name: Office Google Home
+                  text-shadow: none
+                  type: 'custom:mini-media-player'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: media_player.office_chromecast_audio
+                  name: Office Chromecast Audio
+                  text-shadow: none
+                  type: 'custom:mini-media-player'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
+    path: office
     title: Office
-  - cards:
-      - type: entities
-        entities:
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.bedroom_temperature
+                  font_size: 75
+                  line_color: blue
+                  line_width: 8
+                  name: Temp
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - entity: binary_sensor.bedroom_motion_sensor
+                      name: Motion
+                  text-shadow: none
+                  type: glance
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entities:
+                    - sensor.bedroom_light_level
+                  font_size: 75
+                  icon: 'mdi:brightness-6'
+                  line_color: green
+                  line_width: 8
+                  name: Light
+                  text-shadow: none
+                  type: 'custom:mini-graph-card'
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+          - cards:
+              - card:
+                  direction: right
+                  entity: sensor.bedroom_battery_level
+                  height: 30px
+                  max: 100
+                  min: 1
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Bedroom Sensor
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  direction: right
+                  entity: sensor.bedroom_switch_battery_level
+                  height: 30px
+                  max: 100
+                  min: 0
+                  severity:
+                    - color: '#0da035'
+                      value: 100
+                    - color: '#e0b400'
+                      value: 50
+                    - color: '#e45e65'
+                      value: 10
+                  title: Bedroom Switch
+                  type: 'custom:bar-card'
+                  unit_of_measurement: '%'
+                  value_style:
+                    color: var(--primary-text-color)
+                    text-shadow: none
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: vertical-stack
+          - cards:
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.bedroom_lamp
+                  name: Bedroom Lamp
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+              - card:
+                  color: var(--primary-text-color)
+                  entity: light.bedroom_group
+                  name: Bedroom Lights
+                  text-shadow: none
+                  type: light
+                style:
+                  border: solid 2px var(--primary-color)
+                  transform: scale(0.975)
+                type: 'custom:card-modder'
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
+    path: bedroom
+    title: Bedroom
+  - badges: []
+    cards:
+      - entities:
           - entity: input_select.select_hue_motion_sensor
           - entity: input_select.select_hue_sensitivity
           - entity: script.set_hue_sensitivity
-        title: Set Hue sensitivity sensor
         show_header_toggle: false
-      - type: entities
-        entities:
+        title: Set Hue sensitivity sensor
+        type: entities
+      - entities:
           - entity: input_select.select_hue_motion_sensor
           - entity: input_number.slide_hue_threshold
           - entity: script.set_hue_threshold
-        title: Set Hue threshold sensor
         show_header_toggle: false
-      - type: entities
-        entities:
+        title: Set Hue threshold sensor
+        type: entities
+      - entities:
           - entity: sensor.kitchen_motion_sensor_sensitivity
           - entity: sensor.living_room_motion_sensor_sensitivity
           - entity: sensor.hall_motion_sensor_sensitivity
@@ -703,13 +2499,29 @@ views:
           - entity: sensor.landing_motion_sensor_sensitivity
           - entity: sensor.bedroom_motion_sensor_sensitivity
           - entity: sensor.office_motion_sensor_sensitivity
-        title: Hue sensitivity sensors
         show_header_toggle: false
-    badges: []
-    title: Hue
-    icon: 'mdi:home-automation'
+        title: Hue sensitivity sensors
+        type: entities
+      - entities:
+          - entity: sensor.kitchen_motion_sensor_threshold
+          - entity: sensor.living_room_motion_sensor_threshold
+          - entity: sensor.hall_motion_sensor_threshold
+          - entity: sensor.bathroom_motion_sensor_threshold
+          - entity: sensor.landing_motion_sensor_threshold
+          - entity: sensor.bedroom_motion_sensor_threshold
+          - entity: sensor.office_motion_sensor_threshold
+        show_header_toggle: false
+        title: Hue threshold sensors
+        type: entities
+      - entities:
+          - entity: input_select.hue_groups
+        type: entities
+    icon: ''
     panel: false
-  - cards:
+    path: hue
+    title: Hue
+  - badges: []
+    cards:
       - card:
           entities:
             - entity: device_tracker.204d0983ac37
@@ -800,56 +2612,11 @@ views:
           include:
             - domain: binary_sensor
         type: 'custom:monster-card'
-      - cards:
-          - card:
-              entities:
-                - sensor.nzbget_article_cache
-                - sensor.nzbget_average_speed
-                - sensor.nzbget_disk_free
-                - sensor.nzbget_download_paused
-                - sensor.nzbget_queue_size
-                - sensor.nzbget_size
-                - sensor.nzbget_speed
-                - sensor.nzbget_uptime
-              title: NZBGet
-              type: entities
-            conditions:
-              - entity: switch.home_server
-                state: 'on'
-            type: conditional
-          - card:
-              entities:
-                - sensor.sonarr_upcoming
-                - sensor.sonarr_queue
-                - sensor.sonarr_disk_space
-              title: Sonarr
-              type: entities
-            conditions:
-              - entity: switch.home_server
-                state: 'on'
-            type: conditional
-          - card:
-              entities:
-                - sensor.radarr_upcoming
-                - sensor.radarr_status
-                - sensor.radarr_disk_space
-              title: Radarr
-              type: entities
-            conditions:
-              - entity: switch.home_server
-                state: 'on'
-            type: conditional
-          - entities:
-              - sensor.speedtest_download
-              - sensor.speedtest_upload
-              - sensor.speedtest_ping
-            show_header_toggle: true
-            title: Internet Speedtest
-            type: entities
-        type: vertical-stack
-    icon: 'mdi:network'
+    icon: ''
+    path: network-devices
     title: Network Devices
-  - cards:
+  - badges: []
+    cards:
       - cards:
           - entities:
               - automation.turn_on_hall_lights_morning
@@ -903,6 +2670,39 @@ views:
             type: entities
         type: vertical-stack
       - cards:
+          - cards:
+              - entity: sensor.memory_use_percent
+                name: Memory Use
+                type: gauge
+              - entity: sensor.memory_free
+                height: 35
+                name: Memory Free
+                type: sensor
+            type: horizontal-stack
+          - cards:
+              - entity: sensor.processor_use
+                name: CPU Use
+                type: gauge
+              - entity: sensor.cpu_speed
+                height: 35
+                name: CPU Speed
+                type: sensor
+            type: horizontal-stack
+          - entity: sensor.disk_use_percent_home
+            name: Disk Usage
+            type: gauge
+          - cards:
+              - entity: sensor.network_in_eno1
+                height: 40
+                name: Eth0 Download
+                type: sensor
+              - entity: sensor.network_out_eno1
+                height: 40
+                name: Eth0 Upload
+                type: sensor
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
           - entities:
               - automation.abi_is_home
               - automation.abi_home_notification
@@ -913,455 +2713,5 @@ views:
             title: Presence Automations
             type: entities
         type: vertical-stack
-    icon: 'mdi:settings'
+    path: device-settings
     title: Device Settings
-  - cards:
-      cards:
-        - type: 'custom:plan-coordinates'
-        - elements:
-            - entity: light.back_door
-              style:
-                left: 72%
-                top: 10%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.backdoor_lights
-              style:
-                left: 61%
-                top: 17%
-              tap_action: toggle
-              title: Backdoor Lights
-              type: state-icon
-            - camera_image: camera.backyard_back_garden
-              entity: camera.backyard_back_garden
-              style:
-                border-radius: 10%
-                left: 14%
-                top: 11%
-                width: 25%
-              type: image
-            - entity: light.kitchen_spot_1
-              style:
-                left: 41%
-                top: 26%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.kitchen_spot_2
-              style:
-                left: 50%
-                top: 26%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.kitchen_spot_3
-              style:
-                left: 37%
-                top: 30%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.kitchen_spot_4
-              style:
-                left: 40%
-                top: 35%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.kitchen_spot_5
-              style:
-                left: 50%
-                top: 35%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.kitchen_lights
-              style:
-                left: 60%
-                top: 40%
-              tap_action: toggle
-              title: Kitchen Lights
-              type: state-icon
-            - entity: sensor.kitchen_temperature
-              style:
-                left: 69%
-                top: 40%
-              type: state-label
-            - entity: sensor.Kitchen_motion_sensor
-              filter: brightness(50%)
-              image: /local/floorplan-icons/phue_sensor.png
-              state_filter:
-                'on': brightness(100%)
-              style:
-                left: 69%
-                top: 38%
-                width: 3%
-              tap_action: toggle
-              title: Kitchen Motion
-              type: image
-            - entity: binary_sensor.kitchen_nest_protect_online
-              style:
-                left: 61%
-                top: 30%
-              tap_action: navigate
-              title: Kitchen Nest Protect
-              type: state-icon
-            - entity: media_player.kitchen_home
-              filter: brightness(50%)
-              image: /local/floorplan-icons/ghome_mini.png
-              service: media_player.media_play_pause
-              state_filter:
-                playing: brightness(100%)
-              style:
-                left: 31%
-                top: 40%
-                width: 5%
-              tap_action: call-service
-              type: image
-            - entity: light.dining_room
-              style:
-                left: 72%
-                top: 30%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.diningroom_lights
-              style:
-                left: 65%
-                top: 40%
-              tap_action: toggle
-              title: Dining Room Lights
-              type: state-icon
-            - entity: light.living_room_pendant
-              style:
-                left: 65%
-                top: 67%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.living_room_lamp
-              style:
-                left: 41%
-                top: 72%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.livingroom_lights
-              style:
-                left: 45%
-                top: 77%
-              tap_action: toggle
-              title: Livingroom Lights
-              type: state-icon
-            - entity: sensor.living_room_thermostat_temperature
-              style:
-                left: 83%
-                top: 87%
-              type: state-label
-            - entity: sensor.living_room_thermostat_hvac_state
-              style:
-                left: 83%
-                top: 86%
-              type: state-label
-            - entity: sensor.living_room_temperature
-              style:
-                left: 84%
-                top: 65%
-              type: state-label
-            - entity: sensor.living_room_motion_sensor
-              filter: brightness(50%)
-              image: /local/floorplan-icons/phue_sensor.png
-              state_filter:
-                'on': brightness(100%)
-              style:
-                left: 84%
-                top: 63%
-                width: 3%
-              tap_action: toggle
-              title: Living Room Motion
-              type: image
-            - entity: media_player.living_room_home
-              filter: brightness(50%)
-              image: /local/floorplan-icons/ghome.png
-              service: media_player.media_play_pause
-              state_filter:
-                playing: brightness(100%)
-              style:
-                left: 42%
-                top: 68%
-                width: 8%
-              tap_action: call-service
-              type: image
-            - entity: media_player.denon_avrx2300w
-              filter: brightness(50%)
-              image: /local/floorplan-icons/denon.png
-              service: media_player.media_play_pause
-              state_filter:
-                playing: brightness(100%)
-              style:
-                left: 84%
-                top: 45%
-                width: 6%
-              tap_action: call-service
-              type: image
-            - entity: light.hallway_spot_1
-              style:
-                left: 33%
-                top: 83%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.hallway_spot_2
-              style:
-                left: 22%
-                top: 83%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.hall_lights
-              style:
-                left: 30%
-                top: 87%
-              tap_action: toggle
-              title: Hall Lights
-              type: state-icon
-            - entity: switch.downstairs_lights
-              style:
-                left: 40%
-                top: 87%
-              tap_action: toggle
-              title: All Downstairs Lights
-              type: state-icon
-            - entity: sensor.hall_temperature
-              style:
-                left: 26%
-                top: 89%
-              type: state-label
-            - entity: sensor.hall_motion_sensor
-              filter: brightness(50%)
-              image: /local/floorplan-icons/phue_sensor.png
-              state_filter:
-                'on': brightness(100%)
-              style:
-                left: 26%
-                top: 87%
-                width: 3%
-              tap_action: toggle
-              title: Hall Motion
-              type: image
-            - camera_image: camera.front_door
-              entity: camera.front_door
-              style:
-                border-radius: 10%
-                left: 14%
-                top: 33%
-                width: 25%
-              type: image
-            - entity: light.bathroom
-              style:
-                left: 22%
-                top: 65%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.bathroom_lights
-              style:
-                left: 19%
-                top: 74%
-              tap_action: toggle
-              title: Bathroom Lights
-              type: state-icon
-            - entity: sensor.bathroom_temperature
-              style:
-                left: 24%
-                top: 74%
-              type: state-label
-            - entity: sensor.bathroom_motion_sensor
-              filter: brightness(50%)
-              image: /local/floorplan-icons/phue_sensor.png
-              state_filter:
-                'on': brightness(100%)
-              style:
-                left: 24%
-                top: 72%
-                width: 3%
-              tap_action: toggle
-              title: Bathroom Motion
-              type: image
-          image: /local/floorplan-icons/downstairs.png
-          type: picture-elements
-        - type: 'custom:plan-coordinates'
-        - elements:
-            - entity: light.landing_spot
-              style:
-                left: 43%
-                top: 49%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.landing_lights
-              style:
-                left: 47%
-                top: 52%
-              tap_action: toggle
-              title: Landing Lights
-              type: state-icon
-            - entity: switch.upstairs_lights
-              style:
-                left: 35%
-                top: 52%
-              tap_action: toggle
-              title: All Upstairs Lights
-              type: state-icon
-            - entity: sensor.landing_temperature
-              style:
-                left: 24%
-                top: 47%
-              type: state-label
-            - entity: sensor.landing_motion_sensor
-              filter: brightness(50%)
-              image: /local/floorplan-icons/phue_sensor.png
-              state_filter:
-                'on': brightness(100%)
-              style:
-                left: 24%
-                top: 45%
-                width: 3%
-              tap_action: toggle
-              title: Landing Motion
-              type: image
-            - entity: binary_sensor.upstairs_nest_protect_online
-              style:
-                left: 25%
-                top: 50%
-              tap_action: navigate
-              title: Hallway Nest Protect
-              type: state-icon
-            - entity: light.bedroom_lamp
-              style:
-                left: 75%
-                top: 56%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.bedroom_pendant_1
-              style:
-                left: 42%
-                top: 70%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.bedroom_pendant_2
-              style:
-                left: 65%
-                top: 70%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.bedroom_lights
-              style:
-                left: 38%
-                top: 56%
-              tap_action: toggle
-              title: Bedroom Lights
-              type: state-icon
-            - entity: sensor.bedroom_temperature
-              style:
-                left: 35%
-                top: 58%
-              type: state-label
-            - entity: sensor.bedroom_motion_sensor
-              filter: brightness(50%)
-              image: /local/floorplan-icons/phue_sensor.png
-              state_filter:
-                'on': brightness(100%)
-              style:
-                left: 35%
-                top: 56%
-                width: 3%
-              tap_action: toggle
-              title: Bedroom Motion
-              type: image
-            - entity: light.craft_room
-              style:
-                left: 65%
-                top: 35%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.craftroom_lights
-              style:
-                left: 54%
-                top: 52%
-              tap_action: toggle
-              title: Craft Room Lights
-              type: state-icon
-            - entity: light.office_spot_1
-              style:
-                left: 35%
-                top: 35%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.office_spot_2
-              style:
-                left: 43%
-                top: 22%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.office_desk
-              style:
-                left: 23%
-                top: 25%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.office_shadow
-              style:
-                left: 23%
-                top: 17%
-              tap_action: toggle
-              type: state-icon
-            - entity: light.office_bloom
-              style:
-                left: 23%
-                top: 40%
-              tap_action: toggle
-              type: state-icon
-            - entity: switch.office_lights
-              style:
-                left: 49%
-                top: 40%
-              tap_action: toggle
-              title: Office Lights
-              type: state-icon
-            - entity: sensor.office_temperature
-              style:
-                left: 26%
-                top: 17%
-              type: state-label
-            - entity: sensor.office_motion_sensor
-              filter: brightness(50%)
-              image: /local/floorplan-icons/phue_sensor.png
-              state_filter:
-                'on': brightness(100%)
-              style:
-                left: 26%
-                top: 15%
-                width: 3%
-              tap_action: toggle
-              title: Office Motion
-              type: image
-            - entity: switch.home_server
-              style:
-                left: 35%
-                top: 41%
-              tap_action: toggle
-              title: Unraid Server
-              type: state-icon
-            - entity: switch.home_desktop
-              style:
-                left: 25%
-                top: 28%
-              tap_action: toggle
-              title: Desktop Computer
-              type: state-icon
-            - entity: media_player.office_speaker
-              filter: brightness(50%)
-              image: /local/floorplan-icons/ghome_mini.png
-              service: media_player.media_play_pause
-              state_filter:
-                playing: brightness(100%)
-              style:
-                left: 26%
-                top: 41%
-                width: 5%
-              tap_action: call-service
-              type: image
-          image: /local/floorplan-icons/upstairs.png
-          type: picture-elements
-    icon: 'mdi:floor-plan'
-    panel: true
-    title: floorplan
