@@ -18,6 +18,7 @@ homeassistant:
 frontend:
 # Theme Based from @marcelhoffs https://community.home-assistant.io/t/midnight-theme/28598
   themes: !include themes.yaml
+  javascript_version: latest
 
 # Additional IP Address outside of Docker Container Used for Hassio 
 http:
@@ -47,6 +48,18 @@ logbook:
       - sensor
       - media_player
 
+#logger:
+#  default: info
+#  logs:
+#    homeassistant.components: debug
+#    homeassistant.components.device_tracker: critical
+#    homeassistant.components.camera: critical
+#    homeassistant.components.media_playter: critical
+#    homeassistant.components.plex.sensor: critical
+#    homeassistant.components.radarr.sensor: critical
+#    homeassistant.components.nzbget.sensor: critical
+#    homeassistant.components.sonarr.sensor: critical
+
 # Track the sun
 sun:
 
@@ -75,6 +88,8 @@ cloud:
         - lock.comms_cab
         - light.ground_floor_group
         - light.first_floor_group
+        - camera.front_door
+        - camera.back_garden
 
 # Person component allows to connect device tracker entities to one or more person entities.
 person:
@@ -102,14 +117,6 @@ speedtestdotnet:
 
 # iFrame Panels > Possible removal from Hassio
 panel_iframe:
-  vscode:
-    title: VS Code
-    icon: mdi:visual-studio-code
-    url: !secret vscode_url
-  grafana:
-    title: Grafana
-    icon: mdi:graphql
-    url: !secret grafana_url
   sonarr:
     title: Sonarr
     icon: mdi:television-box
@@ -131,9 +138,11 @@ custom_updater:
     - components
   card_urls:
     - https://raw.githubusercontent.com/rdehuyss/homeassistant-lovelace-google-calendar-card/master/custom_updater.json
+    - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
   component_urls:
     - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
-
+    
 # Nest Integration 
 nest:
   client_id: !secret nest_client_id
@@ -144,13 +153,20 @@ hue:
   bridges:
     - host: !secret hue_bridge_ip
 
+# TPLink Smart Plug Software Switch
+tplink:
+  switch:
+#    name: Christmas Lights
+    - host: !secret tp_link_host
+
 # IF There, Then That
 ifttt:
   key: !secret ifttt_api
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # Google Hangouts Notify Platform
 notify:
@@ -165,8 +181,8 @@ notify:
     platform: fcm-android
 
 # Prometheus DB Comfiguration
-prometheus:
-  namespace: !secret prometheus_scrape_name
+#prometheus:
+#  namespace: !secret prometheus_scrape_name
 
 # MQTT Binary Sensors
 binary_sensor:
@@ -185,6 +201,56 @@ binary_sensor:
     payload_on: "1"
     payload_off: "0"
     device_class: opening
+# Google Ping
+  - platform: ping
+    name: Google DNS Ping
+    host: 8.8.8.8
+    count: 5
+    scan_interval: 600
+  - platform: bayesian
+    prior: 0.75
+    name: "Presence Toby"
+    device_class: 'presence'
+    probability_threshold: 0.95
+    observations:
+      - entity_id: "person.toby"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: "device_tracker.google_pixel_xl_toby"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: "sensor.toby_connected_ap"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'LIVING_ROOM_WIFI'
+      - entity_id: "sensor.toby_connected_ap"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'OFFICE_WIFI'
+  - platform: bayesian
+    prior: 0.75
+    name: "Presence Abi"
+    device_class: 'presence'
+    probability_threshold: 0.95
+    observations:
+      - entity_id: "person.abi"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: "device_tracker.google_pixel_abi"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: "sensor.abi_connected_ap"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'LIVING_ROOM_WIFI'
+      - entity_id: "sensor.abi_connected_ap"
+        prob_given_true: 0.8
+        platform: 'state'
+        to_state: 'OFFICE_WIFI'
 
 # MQTT Lock (SOnOff)
 lock:
@@ -195,6 +261,17 @@ lock:
     payload_lock: "ON"
     payload_unlock: "OFF"
     optimistic: false
+
+stream:
+
+camera:
+  - platform: generic
+    name: Back Garden
+    still_image_url: !secret still_image_url
+    stream_source: !secret rtsp_stream_source
+    verify_ssl: !secret verify_ssl
+
+
 
 # Dark Sky Weather API for LoveLaceUI
 weather:

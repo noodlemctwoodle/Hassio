@@ -1,30 +1,5 @@
 # Kitchen Sensor Automations
-- alias: Turn on kitchen light morning
-  trigger:
-    platform: state
-    entity_id: binary_sensor.kitchen_motion_sensor
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.kitchen_light_level
-      below: '3'
-    - condition: state
-      entity_id: light.kitchen_group
-      state: 'off'
-    - condition: time
-      after: '07:00:00'
-      before: '08:59:00'
-  action:
-    service: homeassistant.turn_on
-    entity_id: light.kitchen_group
-    data_template:
-      brightness: 160
-      color_temp: 318
-      transition: 5
-
-- alias: Turn on kitchen light day
+- alias: Kitchen Motion
   trigger:
     platform: state
     entity_id: binary_sensor.kitchen_motion_sensor
@@ -38,43 +13,68 @@
     - condition: state
       entity_id: light.kitchen_group
       state: 'off'
-    - condition: time
-      after: '09:00:00'
-      before: '23:29:00'
+#    - condition: time
+#      after: '07:00:00'
+#      before: '08:59:00'
   action:
     service: homeassistant.turn_on
     entity_id: light.kitchen_group
     data_template:
-      brightness: 200
+      brightness: 160
       color_temp: 318
       transition: 5
 
-- alias: Turn on kitchen light night
-  trigger:
-    platform: state
-    entity_id: binary_sensor.kitchen_motion_sensor
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.kitchen_light_level
-      below: '2'
-    - condition: state
-      entity_id: light.kitchen_group
-      state: 'off'
-    - condition: time
-      after: '23:30:00'
-      before: '06:59:00'
-  action:
-    service: homeassistant.turn_on
-    entity_id: light.kitchen_group
-    data_template:
-      brightness: 30
-      color_temp: 318
-      transition: 30
+#- alias: Turn on kitchen light day
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.kitchen_motion_sensor
+#    to: 'on'
+#  condition:
+#    condition: and
+#    conditions:
+#    - condition: numeric_state
+#      entity_id: sensor.kitchen_light_level
+#      below: '6'
+#    - condition: state
+#      entity_id: light.kitchen_group
+#      state: 'off'
+#    - condition: time
+#      after: '09:00:00'
+#      before: '23:29:00'
+#  action:
+#    service: homeassistant.turn_on
+#    entity_id: light.kitchen_group
+#    data_template:
+#      brightness: 200
+#      color_temp: 318
+#      transition: 5
 
-- alias: Turn off kitchen lights
+#- alias: Turn on kitchen light night
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.kitchen_motion_sensor
+#    to: 'on'
+#  condition:
+#    condition: and
+#    conditions:
+#    - condition: numeric_state
+#      entity_id: sensor.kitchen_light_level
+#      below: '2'
+#    - condition: state
+#      entity_id: light.kitchen_group
+#      state: 'off'
+#    - condition: time
+#      after: '23:30:00'
+#      before: '06:59:00'
+#  action:
+#    service: homeassistant.turn_on
+#    entity_id: light.kitchen_group
+#    data_template:
+#      brightness: 30
+#      color_temp: 318
+#      transition: 30
+
+- alias: Kitchen No Motion
   trigger:
     - platform: state
       entity_id: binary_sensor.kitchen_motion_sensor

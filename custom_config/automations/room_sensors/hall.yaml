@@ -1,5 +1,5 @@
 # Hall Sensor Automations
-- alias: Turn on hall lights morning
+- alias: Hall Motion
   trigger:
     platform: state
     entity_id: binary_sensor.hall_motion_sensor
@@ -9,81 +9,72 @@
     conditions:
     - condition: numeric_state
       entity_id: sensor.hall_light_level
-      below: '3'
+      below: '6'
     - condition: state
-      entity_id: light.hallway_spot_1
+      entity_id: light.hall_group
       state: 'off'
-    - condition: state
-      entity_id: light.hallway_spot_2
-      state: 'off'
-    - condition: time
-      after: '05:00:00'
-      before: '09:59:00'
+#    - condition: time
+#      after: '05:00:00'
+#      before: '09:59:00'
   action:
     service: homeassistant.turn_on
-    entity_id: light.hallway_spot_1, light.hallway_spot_2
+    entity_id: light.hall_group
     data_template:
       brightness: 130
       color_temp: 318
       transition: 5
 
-- alias: Turn on hall lights day
-  trigger:
-    platform: state
-    entity_id: binary_sensor.hall_motion_sensor
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.hall_light_level
-      below: '5'
-    - condition: state
-      entity_id: light.hallway_spot_1
-      state: 'off'
-    - condition: state
-      entity_id: light.hallway_spot_2
-      state: 'off'    
-    - condition: time
-      after: '09:00:00'
-      before: '23:29:00'
-  action:
-    service: homeassistant.turn_on
-    entity_id: light.hallway_spot_1, light.hallway_spot_2
-    data_template:
-      brightness: 254
-      color_temp: 318
-      transition: 5
+#- alias: Turn on hall lights day
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.hall_motion_sensor
+#    to: 'on'
+#  condition:
+#    condition: and
+#    conditions:
+#    - condition: numeric_state
+#      entity_id: sensor.hall_light_level
+#      below: '5'
+#    - condition: state
+#      entity_id: light.hall_group
+#      state: 'off'
+#    - condition: time
+#      after: '09:00:00'
+#      before: '23:29:00'
+#  action:
+#    service: homeassistant.turn_on
+#    entity_id: light.hall_group
+#    data_template:
+#      brightness: 254
+#      color_temp: 318
+#      transition: 5
 
-- alias: Turn on hall lights night
-  trigger:
-    platform: state
-    entity_id: binary_sensor.hall_motion_sensor
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.hall_light_level
-      below: '2'
-    - condition: state
-      entity_id: light.hallway_spot_1
-      state: 'off'
-    - condition: state
-      entity_id: light.hallway_spot_2
-      state: 'off'
-    - condition: time
-      after: '23:30:00'
-      before: '04:59:00'
-  action:
-    service: homeassistant.turn_on
-    entity_id: light.hallway_spot_1, light.hallway_spot_2
-    data_template:
-      brightness: 1
-      color_temp: 318
-      transition: 30
+#- alias: Turn on hall lights night
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.hall_motion_sensor
+#    to: 'on'
+#  condition:
+#    condition: and
+#    conditions:
+#    - condition: numeric_state
+#      entity_id: sensor.hall_light_level
+#      below: '2'
+#    - condition: state
+#      entity_id: light.hall_group
+#      state: 'off'
+#    - condition: time
+#      after: '23:30:00'
+#      before: '04:59:00'
+#  action:
+#    service: homeassistant.turn_on
+#    entity_id: light.hall_group
+#    data_template:
+#      brightness: 1
+#      color_temp: 318
+#      transition: 30
 
-- alias: Turn off hall lights
+- alias: Hall No Motion
   trigger:
     - platform: state
       entity_id: binary_sensor.hall_motion_sensor
