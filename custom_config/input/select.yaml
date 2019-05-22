@@ -42,3 +42,9 @@
       - Buffet
       - Dining table
       - Living
+
+  theme:
+    name: Select Theme
+    options:
+      - Day
+      - Night

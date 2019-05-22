@@ -12,7 +12,7 @@
 
   - platform: webostv
     name: Living Room TV
-    host: 10.0.20.37
+    host: 10.0.20.19
     timeout: 5
     turn_on_action:
       service: wake_on_lan.send_magic_packet

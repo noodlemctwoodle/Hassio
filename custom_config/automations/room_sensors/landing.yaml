@@ -1,5 +1,5 @@
 #Landing Sensor Automations
-- alias: Turn on landing lights morning
+- alias: Landing Motion
   trigger:
     platform: state
     entity_id: binary_sensor.landing_motion_sensor
@@ -9,13 +9,13 @@
     conditions:
     - condition: numeric_state
       entity_id: sensor.landing_light_level
-      below: '3'
+      below: '6'
     - condition: state
       entity_id: light.landing_spot
       state: 'off'
-    - condition: time
-      after: '07:00:00'
-      before: '09:59:00'
+#    - condition: time
+#      after: '07:00:00'
+#      before: '09:59:00'
   action:
     service: homeassistant.turn_on
     entity_id: light.landing_spot
@@ -24,57 +24,57 @@
       color_temp: 318
       transition: 5
 
-- alias: Turn on landing lights day
-  trigger:
-    platform: state
-    entity_id: binary_sensor.landing_motion_sensor
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.landing_light_level
-      below: '4'
-    - condition: state
-      entity_id: light.landing_spot
-      state: 'off'
-    - condition: time
-      after: '09:00:00'
-      before: '23:29:00'
-  action:
-    service: homeassistant.turn_on
-    entity_id: light.landing_spot
-    data_template:
-      brightness: 254
-      color_temp: 318
-      transition: 5
+#- alias: Turn on landing lights day
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.landing_motion_sensor
+#    to: 'on'
+#  condition:
+#    condition: and
+#    conditions:
+#    - condition: numeric_state
+#      entity_id: sensor.landing_light_level
+#      below: '4'
+#    - condition: state
+#      entity_id: light.landing_spot
+#      state: 'off'
+#    - condition: time
+#      after: '09:00:00'
+#      before: '23:29:00'
+#  action:
+#    service: homeassistant.turn_on
+#    entity_id: light.landing_spot
+#    data_template:
+#      brightness: 254
+#      color_temp: 318
+#      transition: 5
 
-- alias: Turn on landing lights night
-  trigger:
-    platform: state
-    entity_id: binary_sensor.landing_motion_sensor
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.landing_light_level
-      below: '2'
-    - condition: state
-      entity_id: light.landing_spot
-      state: 'off'
-    - condition: time
-      after: '23:30:00'
-      before: '06:59:00'
-  action:
-    service: homeassistant.turn_on
-    entity_id: light.landing_spot
-    data_template:
-      brightness: 1
-      color_temp: 318
-      transition: 30
+#- alias: Turn on landing lights night
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.landing_motion_sensor
+#    to: 'on'
+#  condition:
+#    condition: and
+#    conditions:
+#    - condition: numeric_state
+#      entity_id: sensor.landing_light_level
+#      below: '2'
+#    - condition: state
+#      entity_id: light.landing_spot
+#      state: 'off'
+#    - condition: time
+#      after: '23:30:00'
+#      before: '06:59:00'
+#  action:
+#    service: homeassistant.turn_on
+#    entity_id: light.landing_spot
+#    data_template:
+#      brightness: 1
+#      color_temp: 318
+#      transition: 30
 
-- alias: Turn off landing lights
+- alias: Landing No Motion
   trigger:
     - platform: state
       entity_id: binary_sensor.landing_motion_sensor
