@@ -48,10 +48,10 @@ logbook:
       - sensor
       - media_player
 
-#logger:
-#  default: info
-#  logs:
-#    homeassistant.components: debug
+logger:
+  default: info
+  logs:
+    homeassistant.components: debug
 #    homeassistant.components.device_tracker: critical
 #    homeassistant.components.camera: critical
 #    homeassistant.components.media_playter: critical
