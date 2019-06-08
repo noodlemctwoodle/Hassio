@@ -9,7 +9,7 @@ homeassistant:
   # metric for Metric, imperial for Imperial
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: UTC
+  time_zone: Europe/London
   # Customization file
   customize: !include customize.yaml
   customize_glob: !include customize_glob.yaml
@@ -50,8 +50,8 @@ logbook:
 
 logger:
   default: info
-  logs:
-    homeassistant.components: debug
+#  logs:
+#    homeassistant.components: debug
 #    homeassistant.components.device_tracker: critical
 #    homeassistant.components.camera: critical
 #    homeassistant.components.media_playter: critical
@@ -80,16 +80,6 @@ config:
 
 # Nabu Casa Cloud Component $5 per month - https://www.nabucasa.com/
 cloud:
-  google_actions:
-    filter:
-      include_entities:
-        - switch.home_server
-        - switch.home_desktop
-        - lock.comms_cab
-        - light.ground_floor_group
-        - light.first_floor_group
-        - camera.front_door
-        - camera.back_garden
 
 # Person component allows to connect device tracker entities to one or more person entities.
 person:
@@ -201,6 +191,18 @@ binary_sensor:
     payload_on: "1"
     payload_off: "0"
     device_class: opening
+  - platform: mqtt
+    name: "Unifi Protect Garden Motion"
+    state_topic: "/homeassistant/camera/motion"
+    payload_on: "ON"
+    payload_off: "OFF"
+    value_template: "{%if is_state(entity_id,\"on\")-%}OFF{%-else-%}ON{%-endif%}"
+    device_class: presence
+
+
+
+
+
 # Google Ping
   - platform: ping
     name: Google DNS Ping
@@ -271,7 +273,15 @@ camera:
     stream_source: !secret rtsp_stream_source
     verify_ssl: !secret verify_ssl
 
-
+# Tensor Flow
+#image_processing:
+#  - platform: tensorflow
+#    source:
+#      - entity_id: camera.back_garden
+#    model:
+#      graph: ./custom_components/object_detection/model/frozen_inference_graph.pb
+#    categories:
+#      - category: person
 
 # Dark Sky Weather API for LoveLaceUI
 weather:

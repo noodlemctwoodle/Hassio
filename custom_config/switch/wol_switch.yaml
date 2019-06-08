@@ -5,7 +5,8 @@
     host: !secret server_ip_address
     broadcast_address: !secret server_broadcast
     turn_off:
-      service: shell_command.server_off
+      service: switch.turn_off
+      entity_id: switch.server_off
 
 # Desktop On/Off Switch
   - platform: wake_on_lan
@@ -15,3 +16,10 @@
     broadcast_address: !secret server_broadcast
     turn_off:
       service: shell_command.pc_off
+
+# Turn Off Server
+  - platform: command_line
+    switches:
+      server_off:
+        command_on: switch.home_server
+        command_off: !secret server_off_cmd

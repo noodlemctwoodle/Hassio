@@ -1,5 +1,6 @@
 """
 Sensor for checking the status of Hue sensors.
+
 For more details about this platform, please refer to the documentation at
 https://home-assistant.io/components/sensor.hue/
 """
@@ -15,7 +16,7 @@ from homeassistant.helpers.event import async_track_time_interval
 
 DEPENDENCIES = ["hue"]
 
-__version__ = "1.0.5"
+__version__ = "1.4"
 
 _LOGGER = logging.getLogger(__name__)
 

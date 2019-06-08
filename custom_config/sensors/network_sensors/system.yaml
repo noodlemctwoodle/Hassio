@@ -1,5 +1,11 @@
 # Hassio Verison
   - platform: version
+  
+# Time  
+  - platform: time_date
+    display_options:
+      - 'time'
+
 
 # Google Ping Sensor
   - platform: template
