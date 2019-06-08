@@ -1,0 +1,13 @@
+  - id: Unifi Protect Outside
+    initial_state: 'on'
+    alias: Unifi Protect Outside
+    trigger:
+      platform: state
+      entity_id: binary_sensor.unifi_protect_garden_motion
+      from: 'on'
+      to: 'off'
+    action:
+      - delay: 
+          seconds: 30
+      - service: homeassistant.turn_off
+        entity_id: binary_sensor.unifi_protect_garden_motion
