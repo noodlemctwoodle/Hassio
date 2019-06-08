@@ -66,6 +66,4 @@ enter the password when requested
 
 7. Install and configure [SSH Config Tool](https://forums.unraid.net/topic/45586-ssh-and-denyhosts-updated-for-v61/) from the UnRaid community app store
 
-
-
-        
+![unraid](https://github.com/noodlemctwoodle/Hassio/blob/master/www/github/screenshots/unraid.png)
