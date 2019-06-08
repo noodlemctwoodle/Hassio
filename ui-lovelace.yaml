@@ -28,7 +28,7 @@ resources:
     url: /local/plugins/layout-card.js?track=true
   - type: js
     url: /local/plugins/bar-card.js?track=true
-title: CleverHomes.app
+title: Hassio
 views:
   - badges: []
     cards:
