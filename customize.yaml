@@ -111,12 +111,15 @@ sensor.average_room_temp:
 sensor.average_room_lux:
   icon: mdi:brightness-6
 
+# Script
 script.set_hue_sensitivity:
   action_name: 'Set'
   icon: mdi:settings
 script.set_hue_threshold:
   action_name: 'Set'
   icon: mdi:settings
+
+# Input Select
 input_select.select_hue_sensitivity:
   templates:
     icon: >
@@ -128,6 +131,7 @@ input_select.select_hue_sensitivity:
       if (state === 'Medium') return 'blue';
       return 'red';
 
+# Input Number
 input_number.slide_hue_threshold:
   templates:
     icon_color: >
@@ -141,6 +145,7 @@ input_number.slide_hue_threshold:
       if (state > 1000) return 'rgb(30, 255, 255)';
       return 'rgb(47, 0, 0)';
 
+# Input Text
 input_text.tiles_set_hue_scene:
   custom_ui_state_card: state-card-tiles
   config:

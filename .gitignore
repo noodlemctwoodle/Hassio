@@ -12,10 +12,9 @@ tts
 assets
 appdaemon
 node-red
-custom_components/object_detection
-custom_components/huesensor
-custom_components/fcm-android
-custom_components/custom_updater
+custom_components
+tensorflow
+www/community
 # Ignore yaml
 ip_bans.yaml
 known_devices.yaml
@@ -59,5 +58,4 @@ ssh.pub
 ssh
 unraid
 unraid.pub
-custom_components/huesensor/binary_sensor.py
-custom_components/huesensor/device_tracker.py
+hassio.code-workspace
