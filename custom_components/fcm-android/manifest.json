@@ -1,8 +1,0 @@
-{
-    "domain": "fcm-notify",
-    "name": "Android Notify",
-    "documentation": "https://github.com/MCrissDev/HANotify",
-    "dependencies": [],
-    "codeowners": ["@MCrissDev"],
-    "requirements": []
-  }

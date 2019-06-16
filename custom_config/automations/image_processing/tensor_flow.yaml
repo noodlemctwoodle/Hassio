@@ -1,0 +1,19 @@
+- alias: Scan for faces when motion detected front door
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_camera_motion_detected
+      to: 'on'
+  action:
+    - service: image_processing.scan
+      data:
+        entity_id: image_processing.tensorflow_front_door
+
+- alias: Scan for faces when motion detected back garden
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_camera_motion_detected
+      to: 'on'
+  action:
+    - service: image_processing.scan
+      data:
+        entity_id: image_processing.tensorflow_back_garden

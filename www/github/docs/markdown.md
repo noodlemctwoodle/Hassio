@@ -4,25 +4,27 @@
 
 1. Create UnRaid Directory in hassio dir
 
-        mkdir /config/unraid/.ssh
+        mkdir /unraid/
+        cd /unraid
+        mkdir .ssh
 
 2. Generate the RSA Key
    
         ssh-keygen
 
-    specifiy the location of the output to be `/config/unraid/.ssh/`
+    specifiy the location of the output to be `/config/unraid/.ssh/rsa_key_name`
 
 3. Once an SSH key has been created, the ssh-copy-id command can be used to install it as an authorized key on the server. Once the key has been authorized for SSH, it grants access to the server without a password.
 
 Use a command like the following to copy SSH key:
 
-        ssh-copy-id -i /config/unraid/.ssh/rsa_pub user@host
+        ssh-copy-id -i /config/unraid/.ssh/rsa_key_name user@host
 
 enter the password when requested
 
 4. Once the key has been copied, it is best to test it
 
-        ssh -i /config/unraid/.ssh/rsa_pub user@host
+        ssh -i /config/unraid/.ssh/rsa_key_name user@host
 
 5. If the UnRaid server is rebooted before when next section of the guide is completed your SSH keys will get removed from UnRaid and you will need to start again from step 3.
 
@@ -64,6 +66,16 @@ enter the password when requested
         # SSH Script
         /boot/config/ssh/setup_ssh_client.sh
 
-7. Install and configure [SSH Config Tool](https://forums.unraid.net/topic/45586-ssh-and-denyhosts-updated-for-v61/) from the UnRaid community app store
+7. Reboot Unraid server
+        
+        powerdown -r
+        
+8. Confirm the script has worked and that `authorized_keys` exists as we did in `Step 1`
+        
+        ls /root/.ssh
+
+9. Install and configure [SSH Config Tool](https://forums.unraid.net/topic/45586-ssh-and-denyhosts-updated-for-v61/) from the UnRaid community app store
 
 ![unraid](https://github.com/noodlemctwoodle/Hassio/blob/master/www/github/screenshots/unraid.png)
+
+        
