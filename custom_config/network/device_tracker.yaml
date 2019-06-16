@@ -22,7 +22,7 @@
     - oui
 
 # Hue Custom Component
-#  - platform: huesensor
+  - platform: huesensor
 
   
 #  - platform: google_maps
