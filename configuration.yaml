@@ -74,10 +74,6 @@ updater:
 # Enables configuration UI
 config:
 
-# LoveLace UI Configuration
-#lovelace:
-#  mode: yaml
-
 # Nabu Casa Cloud Component $5 per month - https://www.nabucasa.com/
 cloud:
 
@@ -161,13 +157,11 @@ notify:
   - name: android
     platform: fcm-android
 
-# Prometheus DB Comfiguration
-#prometheus:
-#  namespace: !secret prometheus_scrape_name
-
-# MQTT Binary Sensors
+# Binary Sensors
 binary_sensor:
-#  - platform: huesensor
+# Hue Custom Component
+  - platform: huesensor
+# NodeMCU Door Sensor
   - platform: mqtt
     state_topic:  "/doorsensors/bathroom/state"
     availability_topic: "/doorsensors/status/LWT"
@@ -175,6 +169,7 @@ binary_sensor:
     payload_on: "1"
     payload_off: "0"
     device_class: opening
+# NodeMCU Door Sensor
   - platform: mqtt
     state_topic:  "/doorsensors/livingroom/state"
     availability_topic: "/doorsensors/status/LWT"
@@ -182,13 +177,13 @@ binary_sensor:
     payload_on: "1"
     payload_off: "0"
     device_class: opening
+# Unifi Protect Motion to MQTT
   - platform: mqtt
     name: Garden Motion
     state_topic: "/camera/motion/back_gate/#"
     payload_on: "ON"
     payload_off: "OFF"
     device_class: motion
-
 # Google Ping
   - platform: ping
     name: Google DNS Ping
@@ -281,8 +276,6 @@ image_processing:
             # Exclude right 15% of image
             right: 0.85
         - car
-#        - truck
-
 
 # Dark Sky Weather API for LoveLaceUI
 weather:
