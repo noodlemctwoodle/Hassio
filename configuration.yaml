@@ -154,8 +154,8 @@ notify:
       - name: HA Main
 
 # HANotify Ariela 
-  - name: android
-    platform: fcm-android
+#  - name: android
+#    platform: fcm-android
 
 # Binary Sensors
 binary_sensor:

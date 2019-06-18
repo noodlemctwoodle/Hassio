@@ -8,3 +8,14 @@
 #    server: !secret plex_server_name
 #    token: !secret plex_token
 #    ssl: !secret plex_ssl
+
+  - platform: plex_recently_added
+    token: !secret plex_token
+    server_name: !secret plex_server_name
+    ssl: false
+    ssl_cert: false
+    download_images: false
+    max: 5
+    section_types:
+    - movie
+    - show
