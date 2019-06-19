@@ -57,8 +57,8 @@
 
 # Docker Host Sensors
   - platform: netdata
-    host: '10.0.20.5'
-    port: '19999'
+    host: !secret docker_ip
+    port: !secret docker_port
     name: chsdoc01
     resources:    
       core0_freq:
@@ -152,8 +152,8 @@
 
 # PFSense Sensors
   - platform: netdata
-    host: '10.0.10.1'
-    port: '19999'
+    host: !secret pfsense_ip
+    port: !secret pfsense_port
     name: chspfs01
     resources:    
       system_load:
@@ -263,8 +263,8 @@
 
 # Unifi Cloud Key Gen 2 Plus Sensors
   - platform: netdata
-    host: '10.0.10.6'
-    port: '19999'
+    host: !secret cloud_key_ip
+    port: !secret cloud_key_port
     name: chsuni01
     resources:    
       core0_freq:
