@@ -6,6 +6,44 @@
     display_options:
       - 'time'
 
+# Unifi Gateway
+  - platform: unifigateway
+    host: !secret unifi_host
+    username: !secret unifi_username
+    password: !secret unifi_password
+    monitored_conditions:
+      - lan
+      - wlan
+      - alerts
+      - firmware
+
+## Wireless Template
+  - platform: template
+    sensors:
+      unifi_gateway_connected_wifi_users:
+        friendly_name: 'Wireless Clients'
+        value_template: "{{ state_attr('sensor.unifi_gateway_wlan', 'num_user')}}"
+
+  - platform: template
+    sensors:
+      unifi_gateway_connected_wifi_guests:
+        friendly_name: 'Wireless Clients'
+        value_template: "{{ state_attr('sensor.unifi_gateway_wlan', 'num_guest')}}"
+
+## LAN Tamplate
+  - platform: template
+    sensors:
+      unifi_gateway_tx_lan:
+        friendly_name: 'Send'
+        value_template: "{{ state_attr('sensor.unifi_gateway_lan', 'tx_bytes-r') | filesizeformat()}}" 
+
+
+  - platform: template
+    sensors:
+      unifi_gateway_rx_lan:
+        friendly_name: 'Receive'
+        value_template: "{{ state_attr('sensor.unifi_gateway_lan', 'rx_bytes-r') | filesizeformat()}}" 
+
 
 # Google Ping Sensor
   - platform: template

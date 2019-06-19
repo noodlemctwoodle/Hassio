@@ -15,6 +15,7 @@ node-red
 custom_components
 tensorflow
 www/community
+www/upcoming-media-card
 # Ignore yaml
 ip_bans.yaml
 known_devices.yaml
