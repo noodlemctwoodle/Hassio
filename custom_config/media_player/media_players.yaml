@@ -1,9 +1,9 @@
 # Plex Media Player Component
   - platform: samsungtv
-    host: 10.0.20.58
+    host: !secret bedroom_tv_ip
 
   - platform: denonavr
-    host: 10.0.20.31
+    host: !secret denon_avr_ip
     name: Denon AVRX2300w
     show_all_sources: True
     zones:
@@ -12,15 +12,16 @@
 
   - platform: webostv
     name: Living Room TV
-    host: 10.0.20.19
+    host: !secret living_room_tv_ip
     timeout: 5
     turn_on_action:
       service: wake_on_lan.send_magic_packet
       data:
-        mac: "a8-23-fe-8c-2c-2e"
+        mac: !secret living_room_tv_mac
+        message: "Turn on action"
 
 #  - platform: androidtv
-#    host: 10.0.20.12
+#    host: !secret shield_tv_ip
 #    name: "NVidia Shield"
 #    adb_server_ip: 127.0.0.1
 #    adb_server_port: 5037
